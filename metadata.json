@@ -1,0 +1,6 @@
+{
+  "name": "GUSTI. Visual Creative Platform",
+  "description": "Premium B2B portfolio-pitching website for GUSTI., a human-led AI creative production specialist.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
