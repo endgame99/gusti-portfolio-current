@@ -1,7 +1,7 @@
-import React from 'react';
+
 import { ChevronRight } from 'lucide-react';
 import { Language, ServiceItem } from '../types';
-import { dictionary } from '../i18n';
+
 import { worksData } from '../data';
 
 interface ServicesProps {
@@ -11,7 +11,7 @@ interface ServicesProps {
 }
 
 export function Services({ lang, services, searchQuery }: ServicesProps) {
-  const d = dictionary[lang];
+
 
   const filteredServices = services.filter(s => {
     const query = searchQuery.toLowerCase();
@@ -31,11 +31,34 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
 
   return (
     <div className="py-6">
+      {/* Services Hero */}
       {!searchQuery && (
-        <div className="mb-8 mt-2 text-center">
-          <h2 className="text-3xl font-normal text-neutral-900 dark:text-white mb-1">
-            {d.services_headline}
-          </h2>
+        <div className="mb-12 mt-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Left — Text */}
+            <div className="flex flex-col justify-center">
+              <h2 className="text-3xl md:text-[2.5rem] md:leading-[1.15] font-semibold text-neutral-900 dark:text-white tracking-tight">
+                More visual content.{' '}
+                <span className="text-neutral-400 dark:text-neutral-500">Lower production costs.</span>
+              </h2>
+              <p className="mt-4 md:mt-5 text-[15px] md:text-base leading-relaxed text-neutral-600 dark:text-neutral-400 max-w-md">
+                Create product images, ecommerce assets, videos, and campaign materials faster — without starting from scratch every time.
+              </p>
+            </div>
+
+            {/* Right — Video */}
+            <div className="w-full">
+              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800/60 shadow-sm">
+                <iframe
+                  src="https://www.youtube.com/embed/KUyRq7szZsM?rel=0"
+                  title="GUSTI Services showreel"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
