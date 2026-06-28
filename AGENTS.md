@@ -204,7 +204,38 @@ After editing:
 
 ---
 
-## 7. Forbidden Files Unless Explicitly Requested
+## 7. UI Task Rules — UI_GUIDELINES.md Compliance
+
+For any task involving UI, layout, spacing, typography, visual hierarchy, responsive behavior, media sizing, cards, grids, CTA placement, or section presentation, the agent must read `UI_GUIDELINES.md` before proposing or making changes.
+
+Core principle:
+
+**Preserve first. Align second. Redesign never, unless explicitly requested by the user.**
+
+The agent must NOT:
+
+- Redesign existing layouts.
+- Introduce a new visual style.
+- Add CTA without a defined function.
+- Change global navigation/sidebar/header.
+- Edit unrelated sections.
+- Create new design systems or component libraries.
+- Invent missing UI decisions.
+
+The agent must report:
+
+- Exact file/component inspected.
+- Exact file/component changed.
+- What existing pattern was preserved.
+- What was adjusted.
+- Why the adjustment was necessary.
+- Whether the change came from code evidence, user reference, or explicit user instruction.
+
+Full UI preservation rules, allowed/forbidden adjustments, spacing rules, CTA rules, evidence requirements, and Services section rules are defined in `UI_GUIDELINES.md`.
+
+---
+
+## 8. Forbidden Files Unless Explicitly Requested
 
 Do not edit these unless the user explicitly asks:
 
@@ -223,7 +254,7 @@ Do not edit these unless the user explicitly asks:
 
 ---
 
-## 8. First Recommended Architecture Task
+## 9. First Recommended Architecture Task
 
 Before major visual polishing, isolate Project Detail rendering.
 
@@ -253,7 +284,7 @@ The goal is not to redesign. The goal is to make future page-by-page finishing s
 
 ---
 
-## 9. Branch Discipline
+## 10. Branch Discipline
 
 Use small branches.
 
@@ -273,7 +304,7 @@ Do not work directly on `main` for risky visual changes.
 
 ---
 
-## 10. User Communication Style
+## 11. User Communication Style
 
 The user wants direct, practical instructions.
 
