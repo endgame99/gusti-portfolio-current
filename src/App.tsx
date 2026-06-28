@@ -11,9 +11,16 @@ import { Services } from './components/Services';
 import { Library } from './components/Library';
 
 import { ProjectDetail } from './components/ProjectDetail';
+import { PdpVisualsPage } from './components/services/PdpVisualsPage';
 import { dictionary } from './i18n';
 
 export default function App() {
+  // Standalone service pages — rendered without the main app shell
+  const pathname = window.location.pathname;
+  if (pathname === '/services/pdp-visuals') {
+    return <PdpVisualsPage />;
+  }
+
   const [lang, setLang] = useState<Language>('en');
   const [theme, setTheme] = useState<Theme>('light');
   const [activeTab, setActiveTab] = useState<'recommended' | 'services' | 'library'>('recommended');

@@ -83,8 +83,11 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {service.includes.slice(0, 4).map((inc, i) => (
-                  <div key={i} className="group cursor-pointer">
+                {service.includes.slice(0, 4).map((inc, i) => {
+                  // Only PDP Visuals card links to its standalone page
+                  const isPdpVisuals = service.id === 's3' && inc === 'PDP Visuals';
+
+                  const cardContent = (
                     <div className="w-full aspect-[4/5] rounded-md overflow-hidden bg-neutral-100 dark:bg-[#1c1c1c] border border-transparent dark:border-neutral-800 relative">
                        <img 
                           src={getThumbnail(i, service.id)} 
@@ -97,8 +100,28 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
                           </p>
                        </div>
                     </div>
-                  </div>
-                ))}
+                  );
+
+                  if (isPdpVisuals) {
+                    return (
+                      <a
+                        key={i}
+                        href="/services/pdp-visuals"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group cursor-pointer"
+                      >
+                        {cardContent}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <div key={i} className="group cursor-pointer">
+                      {cardContent}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           );
