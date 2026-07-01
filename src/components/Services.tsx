@@ -35,7 +35,18 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
     return aIdx - bIdx;
   });
 
+  // E-commerce Visual Creative (s3) card covers — real uploaded images
+  const ecommerceCovers: Record<number, string> = {
+    0: '/service-covers/ecommerce-visual/pdp-visuals.jpg',
+    1: '/service-covers/ecommerce-visual/marketplace-display.jpg',
+    2: '/service-covers/ecommerce-visual/promo-banner.jpg',
+    3: '/service-covers/ecommerce-visual/mega-sale-poster.jpg',
+  };
+
   const getThumbnail = (index: number, serviceId: string) => {
+    if (serviceId === 's3' && index in ecommerceCovers) {
+      return ecommerceCovers[index];
+    }
     const num = (serviceId.charCodeAt(1) + index) % worksData.length;
     return worksData[num]?.image || 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80';
   };

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Lock, Wand2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // --- SKU data model ---
-// MISSING_DATA_REQUIRED: Replace all placeholder images and prompt previews with real final assets
 
 interface SkuSet {
   id: string;
@@ -13,173 +12,105 @@ interface SkuSet {
   slides: string[];
 }
 
+// Real uploaded gallery images — used only for the active SKU slide set
+const skuGalleryImages = [
+  '/sku-pdp/sku-01.jpg',
+  '/sku-pdp/sku-02.jpg',
+  '/sku-pdp/sku-03.jpg',
+  '/sku-pdp/sku-04.jpg',
+  '/sku-pdp/sku-05.jpg',
+  '/sku-pdp/sku-06.jpg',
+  '/sku-pdp/sku-07.jpg',
+  '/sku-pdp/sku-08.jpg',
+  '/sku-pdp/sku-09.jpg',
+];
+
+// Neutral placeholder cover for SKUs without uploaded assets
+// MISSING_DATA_REQUIRED: Replace with real product cover images per SKU
+const PLACEHOLDER_COVER = 'data:image/svg+xml,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" fill="none">' +
+  '<rect width="400" height="400" fill="%23f5f5f5"/>' +
+  '<text x="200" y="192" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="%23a3a3a3">Cover image</text>' +
+  '<text x="200" y="214" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="%23d4d4d4">Coming soon</text>' +
+  '</svg>'
+);
+
 const skuSets: SkuSet[] = [
   {
     id: 'sku-1',
     title: 'White Cream Jar — Clean Background',
-    coverImage: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
+    coverImage: '/sku-pdp/sku-01.jpg',
     promptPreview: 'Master prompt set for white cream jar PDP production. Includes scene direction for pure white background, soft studio lighting setup with dual key lights, centered product placement with clean shadow underneath, high-key commercial photography style, sharp focus on product label, ecommerce-ready composition...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-    ],
+    slides: skuGalleryImages,
   },
   {
     id: 'sku-2',
     title: 'Serum Bottle — Gradient Backdrop',
-    coverImage: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
+    coverImage: PLACEHOLDER_COVER,
     promptPreview: 'Master prompt set for serum bottle PDP production. Includes soft pastel gradient background direction, professional studio lighting with rim light, centered glass bottle composition with clean reflection on glossy surface, gold accent highlight treatment, ecommerce PDP style output...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-    ],
+    slides: [PLACEHOLDER_COVER],
   },
   {
     id: 'sku-3',
     title: 'Face Wash Tube — Lifestyle Scene',
-    coverImage: 'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
+    coverImage: PLACEHOLDER_COVER,
     promptPreview: 'Master prompt set for face wash tube lifestyle PDP production. Includes natural daylight scene direction, fresh green leaves and water droplet props, marble surface placement, bright exposure with soft bokeh background, ecommerce marketplace banner composition, clean product label readability...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-    ],
+    slides: [PLACEHOLDER_COVER],
   },
   {
     id: 'sku-4',
     title: 'Lip Tint Set — Flat Lay',
-    coverImage: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
+    coverImage: PLACEHOLDER_COVER,
     promptPreview: 'Master prompt set for lip tint flat lay PDP production. Includes overhead camera angle, diagonal arrangement of five tubes on blush pink surface, scattered flower petal props, soft even lighting setup, beauty product catalog style, PDP-ready layout with clean product isolation...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-    ],
+    slides: [PLACEHOLDER_COVER],
   },
   {
     id: 'sku-5',
     title: 'Moisturizer — On-Model Hands',
-    coverImage: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
+    coverImage: PLACEHOLDER_COVER,
     promptPreview: 'Master prompt set for moisturizer on-model PDP production. Includes elegant hand model direction, premium jar holding composition, minimal beige background, shallow depth of field focus on product, warm soft lighting setup, commercial beauty photography style, social media selling asset format...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-    ],
+    slides: [PLACEHOLDER_COVER],
   },
   {
     id: 'sku-6',
     title: 'Toner Mist — Studio Spray',
-    coverImage: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
+    coverImage: PLACEHOLDER_COVER,
     promptPreview: 'Master prompt set for toner mist studio PDP production. Includes spray action freeze-frame direction, controlled mist particle capture, studio backlight setup for spray visibility, dark contrast background option, product label sharp focus, ecommerce hero image composition...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-    ],
+    slides: [PLACEHOLDER_COVER],
   },
   {
     id: 'sku-7',
     title: 'Eye Cream — Minimal White',
-    coverImage: 'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
+    coverImage: PLACEHOLDER_COVER,
     promptPreview: 'Master prompt set for eye cream minimal PDP production. Includes pure white infinite background, single product hero shot, precise center placement, soft diffused overhead lighting, clean shadow control, premium skincare brand aesthetic, multiple angle variants for marketplace listing...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
-    ],
+    slides: [PLACEHOLDER_COVER],
   },
   {
     id: 'sku-8',
     title: 'Sunscreen — Outdoor Scene',
-    coverImage: 'https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?w=900&q=80',
+    coverImage: PLACEHOLDER_COVER,
     promptPreview: 'Master prompt set for sunscreen outdoor PDP production. Includes bright outdoor scene direction with natural sunlight, beach or poolside environment, product placement on towel or sand surface, warm golden hour lighting, lifestyle product photography style, summer campaign visual format...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?w=900&q=80',
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-    ],
+    slides: [PLACEHOLDER_COVER],
   },
   {
     id: 'sku-9',
     title: 'Body Lotion — Texture Close-up',
-    coverImage: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
+    coverImage: PLACEHOLDER_COVER,
     promptPreview: 'Master prompt set for body lotion texture PDP production. Includes macro close-up texture direction, cream swatch on skin surface, product bottle in background with shallow depth of field, clinical beauty photography style, clean scientific lighting, dermatology-grade product presentation...',
     tools: 'GPT-image2 · Nano Banana 2',
-    slides: [
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=900&q=80',
-      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=900&q=80',
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=80',
-      'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=900&q=80',
-      'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=900&q=80',
-      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=80',
-      'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&q=80',
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=80',
-      'https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=900&q=80',
-    ],
+    slides: [PLACEHOLDER_COVER],
   },
 ];
 
 const WHATSAPP_NUMBER = '6283897317974';
-const SLIDE_COUNT = 9;
 
 function buildWhatsAppUrl(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -191,6 +122,7 @@ export function PdpVisualsPage() {
   const [fullscreenOpen, setFullscreenOpen] = useState(false);
 
   const activeSku = skuSets[activeSkuIndex];
+  const slideCount = activeSku.slides.length;
   const activeSlideImage = activeSku.slides[activeSlideIndex];
 
   // Navigate slides within the active SKU
@@ -199,11 +131,11 @@ export function PdpVisualsPage() {
   };
 
   const goPrevSlide = () => {
-    setActiveSlideIndex((prev) => (prev - 1 + SLIDE_COUNT) % SLIDE_COUNT);
+    setActiveSlideIndex((prev) => (prev - 1 + slideCount) % slideCount);
   };
 
   const goNextSlide = () => {
-    setActiveSlideIndex((prev) => (prev + 1) % SLIDE_COUNT);
+    setActiveSlideIndex((prev) => (prev + 1) % slideCount);
   };
 
   // Switch to a different SKU, reset slide to 0
@@ -213,17 +145,17 @@ export function PdpVisualsPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Other SKUs (excluding active) for bottom cards
-  const otherSkus = skuSets
+  // Product selector items (excluding active SKU) for bottom cards
+  const productSelectorItems = skuSets
     .map((sku, idx) => ({ sku, idx }))
     .filter(({ idx }) => idx !== activeSkuIndex);
 
   const unlockPromptUrl = buildWhatsAppUrl(
-    `Hi GUSTI,\n\nI'd like to unlock the prompt set for:\n\nService: PDP Visuals\nSKU: ${activeSku.title}\nSlide: ${activeSlideIndex + 1}/${SLIDE_COUNT}\nTools: GPT-image2, Nano Banana 2\n\nRequest: Prompt access only`
+    `Hi GUSTI,\n\nI'd like to unlock the prompt set for:\n\nService: PDP Visuals\nSKU: ${activeSku.title}\nSlide: ${activeSlideIndex + 1}/${slideCount}\nTools: GPT-image2, Nano Banana 2\n\nRequest: Prompt access only`
   );
 
   const makeVisualUrl = buildWhatsAppUrl(
-    `Hi GUSTI,\n\nI'd like to request a custom visual:\n\nService: PDP Visuals\nSKU: ${activeSku.title}\nSlide: ${activeSlideIndex + 1}/${SLIDE_COUNT}\nTools: GPT-image2, Nano Banana 2\n\nRequest: Custom visual production`
+    `Hi GUSTI,\n\nI'd like to request a custom visual:\n\nService: PDP Visuals\nSKU: ${activeSku.title}\nSlide: ${activeSlideIndex + 1}/${slideCount}\nTools: GPT-image2, Nano Banana 2\n\nRequest: Custom visual production`
   );
 
   return (
@@ -291,7 +223,7 @@ export function PdpVisualsPage() {
 
               {/* Pagination badge */}
               <div className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded-full backdrop-blur-sm">
-                {activeSlideIndex + 1} / {SLIDE_COUNT}
+                {activeSlideIndex + 1} / {slideCount}
               </div>
             </div>
 
@@ -333,7 +265,7 @@ export function PdpVisualsPage() {
               </h3>
               {/* Metadata */}
               <p className="text-xs text-neutral-400 mb-4">
-                Image Set · 9 Slides · GPT-image2 · Nano Banana 2
+                Image Set · {slideCount} {slideCount === 1 ? 'Slide' : 'Slides'} · GPT-image2 · Nano Banana 2
               </p>
 
               {/* Blurred prompt preview — per active SKU */}
@@ -379,13 +311,13 @@ export function PdpVisualsPage() {
           </div>
         </div>
 
-        {/* Bottom section: other 8 SKU/product cards */}
+        {/* Bottom section: product selector grid */}
         <div className="mt-10 md:mt-14">
           <h2 className="text-lg font-bold text-neutral-900 mb-4">
             Other Products
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
-            {otherSkus.map(({ sku, idx }) => (
+            {productSelectorItems.map(({ sku, idx }) => (
               <button
                 key={sku.id}
                 onClick={() => selectSku(idx)}
@@ -416,7 +348,7 @@ export function PdpVisualsPage() {
           {/* Top bar */}
           <div className="flex items-center justify-between px-4 md:px-8 py-4">
             <span className="text-white/70 text-sm">
-              {activeSlideIndex + 1} / {SLIDE_COUNT}
+              {activeSlideIndex + 1} / {slideCount}
             </span>
             <button
               onClick={() => setFullscreenOpen(false)}
