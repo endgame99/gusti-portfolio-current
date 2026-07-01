@@ -37,10 +37,10 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
 
   // E-commerce Visual Creative (s3) card covers — real uploaded images
   const ecommerceCovers: Record<number, string> = {
-    0: '/service-covers/ecommerce-visual/pdp-visuals.jpg',
-    1: '/service-covers/ecommerce-visual/marketplace-display.jpg',
-    2: '/service-covers/ecommerce-visual/promo-banner.jpg',
-    3: '/service-covers/ecommerce-visual/mega-sale-poster.jpg',
+    0: '/service-covers/ecommerce-visual/pdp-visuals.webp',
+    1: '/service-covers/ecommerce-visual/marketplace-display.webp',
+    2: '/service-covers/ecommerce-visual/promo-banner.webp',
+    3: '/service-covers/ecommerce-visual/mega-sale-poster.webp',
   };
 
   const getThumbnail = (index: number, serviceId: string) => {
