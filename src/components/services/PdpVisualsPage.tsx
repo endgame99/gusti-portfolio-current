@@ -1,5 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Lock, Wand2, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { GustiSidebar } from '../GustiSidebar';
+import { GustiTopHeader } from '../GustiTopHeader';
+import { WHATSAPP_LINK } from '../../data';
+import { Language, Theme } from '../../types';
 
 // --- SKU data model ---
 
@@ -106,10 +110,159 @@ function buildWhatsAppUrl(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
+interface SkuProductCardProps {
+  sku: SkuSet;
+  idx: number;
+  isActive: boolean;
+  onSelectSku: (skuIdx: number, slideIdx: number) => void;
+}
+
+function SkuProductCard({ sku, idx, isActive, onSelectSku }: SkuProductCardProps) {
+  const [localSlideIndex, setLocalSlideIndex] = useState(0);
+
+  const currentMainImage = sku.slides[localSlideIndex];
+
+  const handleScrollRight = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const container = document.getElementById(`sku-items-${sku.id}`);
+    if (container) {
+      container.scrollBy({ left: 160, behavior: 'smooth' });
+    }
+  };
+
+  const handleScrollLeft = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const container = document.getElementById(`sku-items-${sku.id}`);
+    if (container) {
+      container.scrollBy({ left: -160, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <article
+      className={`sku-product-card overflow-hidden rounded-[18px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-all duration-200 select-none ${
+        isActive ? 'outline-[2px] outline outline-neutral-900 dark:outline-white outline-offset-[3px] is-active' : ''
+      }`}
+    >
+      <button
+        className="mainImage main-image block w-full p-0 border-0 bg-[#eeeeee] aspect-square cursor-pointer"
+        type="button"
+        aria-label={`Select ${sku.title}`}
+        onClick={() => {
+          onSelectSku(idx, localSlideIndex);
+        }}
+      >
+        <img
+          src={currentMainImage}
+          alt={`${sku.title} cover`}
+          className="w-full h-full block object-cover"
+          loading="lazy"
+        />
+      </button>
+
+      <div className="scrollerWrapper scroller-wrapper relative py-[10px] pl-[10px] bg-white">
+        {/* Left Arrow Container */}
+        <button
+          className="leftArrowContainer left-arrow-container absolute top-1/2 left-2 z-10 w-[30px] h-[30px] grid place-items-center -translate-y-1/2 border-0 rounded-full bg-white/96 shadow-[0_6px_14px_rgba(0,0,0,0.14)] text-[#111111] text-[25px] leading-none cursor-pointer"
+          type="button"
+          aria-label={`Scroll ${sku.title} thumbnails left`}
+          onClick={handleScrollLeft}
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+
+        <div className="skuSelector sku-selector overflow-hidden w-full" aria-label={`${sku.title} thumbnail strip`}>
+          <div
+            id={`sku-items-${sku.id}`}
+            className="skuItems sku-items flex gap-2 overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pl-[28px] pr-[42px]"
+          >
+            {sku.slides.map((thumbImg, slideIdx) => {
+              return (
+                <button
+                  key={slideIdx}
+                  className={`skuItemImage sku-item-image shrink-0 w-11 h-11 p-0 overflow-hidden border rounded-[10px] bg-[#f2f2f2] cursor-pointer transition-all duration-200 ${
+                    localSlideIndex === slideIdx ? 'border-neutral-900 ring-1 ring-neutral-900' : 'border-[#e6e6e6]'
+                  }`}
+                  type="button"
+                  aria-label={`${sku.title} thumbnail ${slideIdx + 1}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLocalSlideIndex(slideIdx);
+                  }}
+                >
+                  <img
+                    src={thumbImg}
+                    alt={`${sku.title} thumbnail ${slideIdx + 1}`}
+                    className="w-full h-full block object-cover"
+                    loading="lazy"
+                  />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Right Arrow Container */}
+        <button
+          className="rightArrowContainer right-arrow-container absolute top-1/2 right-2 z-10 w-[30px] h-[30px] grid place-items-center -translate-y-1/2 border-0 rounded-full bg-white/96 shadow-[0_6px_14px_rgba(0,0,0,0.14)] text-[#111111] text-[25px] leading-none cursor-pointer"
+          type="button"
+          aria-label={`Scroll ${sku.title} thumbnails`}
+          onClick={handleScrollRight}
+        >
+          <span aria-hidden="true">›</span>
+        </button>
+
+        <div className="mask-left absolute top-0 left-0 w-[58px] h-full pointer-events-none bg-gradient-to-l from-transparent to-white/72" aria-hidden="true"></div>
+        <div className="mask absolute top-0 right-0 w-[58px] h-full pointer-events-none bg-gradient-to-r from-transparent to-white/72" aria-hidden="true"></div>
+      </div>
+
+      <div className="descContainer desc-container px-3.5 pb-4 bg-white">
+        <h3 className="sku-title m-0 mb-1.5 text-[#111111] text-[14px] font-bold leading-[1.35] line-clamp-2">
+          {sku.title}
+        </h3>
+        <p className="sku-subtitle m-0 text-[#777777] text-[12px] font-medium leading-[1.35]">
+          {sku.subtitle}
+        </p>
+      </div>
+    </article>
+  );
+}
+
 export function PdpVisualsPage() {
+  const [lang, setLang] = useState<Language>('en');
+  const [theme, setTheme] = useState<Theme>('light');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [activeNav, setActiveNav] = useState<'home' | 'work' | 'services' | 'library'>('services');
+  const [activeTab, setActiveTab] = useState<'recommended' | 'services' | 'library'>('services');
+
   const [activeSkuIndex, setActiveSkuIndex] = useState(0);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [fullscreenOpen, setFullscreenOpen] = useState(false);
+
+  // Sync theme to root class
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
+  // Handle escape key to close fullscreen lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setFullscreenOpen(false);
+      }
+    };
+    if (fullscreenOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [fullscreenOpen]);
 
   const activeSku = skuSets[activeSkuIndex];
   const slideCount = activeSku.slides.length;
@@ -128,18 +281,11 @@ export function PdpVisualsPage() {
     setActiveSlideIndex((prev) => (prev + 1) % slideCount);
   };
 
-  // Switch to a different SKU, reset slide to 0
-  const selectSku = (skuIdx: number) => {
+  // Switch to a different SKU, set slide index
+  const selectSku = (skuIdx: number, slideIdx: number = 0) => {
     setActiveSkuIndex(skuIdx);
-    setActiveSlideIndex(0);
+    setActiveSlideIndex(slideIdx);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleArrowClick = (skuId: string) => {
-    const container = document.getElementById(`sku-items-${skuId}`);
-    if (container) {
-      container.scrollBy({ left: 160, behavior: 'smooth' });
-    }
   };
 
   const unlockPromptUrl = buildWhatsAppUrl(
@@ -151,38 +297,53 @@ export function PdpVisualsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header bar */}
-      <header className="sticky top-0 z-30 bg-white border-b border-neutral-200">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-          <a
-            href="/"
-            className="text-sm font-semibold text-neutral-900 hover:text-neutral-600 transition-colors"
-          >
-            ← GUSTI
-          </a>
-          <span className="text-xs text-neutral-400">
-            Services / PDP Visuals
-          </span>
-        </div>
-      </header>
+    <div className="min-h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-white font-sans transition-colors duration-300 flex">
+      <GustiSidebar
+        activeNav={activeNav}
+        setActiveNav={(nav) => {
+          setActiveNav(nav);
+          if (window.location.pathname !== "/") {
+            window.location.href = `/?tab=${nav === 'work' ? 'recommended' : nav}`;
+          }
+        }}
+        setActiveTab={(tab) => {
+          setActiveTab(tab);
+          if (window.location.pathname !== "/") {
+            window.location.href = `/?tab=${tab}`;
+          }
+        }}
+        collapsed={sidebarCollapsed}
+        setCollapsed={setSidebarCollapsed}
+        whatsappUrl={WHATSAPP_LINK}
+      />
 
-      {/* Page content */}
-      <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-8 md:py-12">
+      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${sidebarCollapsed ? 'md:pl-[56px]' : 'md:pl-[164px]'}`}>
+        <GustiTopHeader
+          collapsed={sidebarCollapsed}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          theme={theme}
+          setTheme={setTheme}
+          language={lang.toUpperCase() as "ID" | "EN" | "CN"}
+          setLanguage={(l) => setLang(l.toLowerCase() as Language)}
+          whatsappUrl={WHATSAPP_LINK}
+        />
+
+        <main className="px-4 md:px-8 w-full max-w-[1200px] mx-auto pb-24 md:pb-12 pt-16">
         {/* Title area */}
-        <div className="mb-8 md:mb-10">
-          <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 tracking-tight">
+        <div className="mb-10 md:mb-14 max-w-5xl mx-auto w-full">
+          <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white tracking-tight">
             E-commerce Visual Creative — PDP Visuals
           </h1>
-          <p className="mt-3 text-sm md:text-base leading-relaxed text-neutral-500 max-w-2xl">
+          <p className="mt-3 text-sm md:text-base leading-relaxed text-neutral-500 dark:text-neutral-400 max-w-2xl">
             Prompt-based ecommerce visual system for product detail pages, marketplace assets, and sales-ready content.
           </p>
         </div>
 
         {/* Top section: main gallery + prompt panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,640px)_340px] gap-6 lg:gap-8 xl:gap-12 max-w-5xl mx-auto justify-center items-stretch">
           {/* Left: main image + thumbnail row */}
-          <div>
+          <div className="flex flex-col max-w-[640px] w-full mx-auto lg:mx-0">
             {/* Main image with prev/next arrows */}
             <div
               className="w-full aspect-square rounded-lg overflow-hidden bg-neutral-100 cursor-pointer relative group"
@@ -242,44 +403,64 @@ export function PdpVisualsPage() {
               </div>
             </div>
 
-            {/* Active SKU title below thumbnails */}
-            <p className="mt-3 text-sm font-medium text-neutral-700">
-              {activeSku.title}
-            </p>
+            {/* Active SKU caption block */}
+            <div className="mt-4 text-left w-full">
+              <h2 className="text-lg font-bold text-neutral-900 dark:text-white leading-tight">
+                {activeSku.title}
+              </h2>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-medium">
+                {activeSku.subtitle}
+              </p>
+            </div>
           </div>
 
           {/* Right: locked prompt panel */}
-          <div className="lg:sticky lg:top-[80px] lg:self-start">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-5 md:p-6">
-              {/* Panel title */}
-              <h3 className="text-base font-bold text-neutral-900 mb-1">
-                Master Prompt Set
-              </h3>
-              {/* Metadata */}
-              <p className="text-xs text-neutral-400 mb-4">
-                Image Set · {slideCount} {slideCount === 1 ? 'Slide' : 'Slides'} · GPT-image2 · Nano Banana 2
-              </p>
-
-              {/* Blurred prompt preview — per active SKU */}
-              <div className="relative mb-5">
-                <div
-                  className="text-sm text-neutral-600 leading-relaxed select-none"
-                  style={{ filter: 'blur(4px)' }}
-                >
-                  {activeSku.promptPreview}
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-white/80 backdrop-blur-sm border border-neutral-200 rounded-lg px-4 py-2 shadow-sm">
-                    <span className="text-xs font-medium text-neutral-500 flex items-center gap-1.5">
-                      <Lock className="w-3.5 h-3.5" />
-                      Prompt locked
+          <div className="lg:h-full">
+            <div className="bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800/80 rounded-xl p-5 md:p-6 lg:h-full flex flex-col justify-between">
+              <div className="flex-1 flex flex-col">
+                {/* Panel title & metadata */}
+                <div className="text-center mb-4 flex-shrink-0">
+                  <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-2">
+                    Master Prompt Set
+                  </h3>
+                  {/* Tool chips */}
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+                      GPT-image2
+                    </span>
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+                      Nano Banana 2
                     </span>
                   </div>
                 </div>
-              </div>
 
+                {/* Blurred prompt preview — per active SKU */}
+                <div className="relative mb-5 bg-white/40 dark:bg-neutral-950/20 border border-neutral-100 dark:border-neutral-900 rounded-lg p-4 flex-1 min-h-0 flex items-center justify-center overflow-hidden">
+                  <div
+                    className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed select-none w-full text-left space-y-3 py-1"
+                    style={{ filter: 'blur(4px)' }}
+                  >
+                    <p className="font-bold text-[10px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500">System Prompt & Parameters</p>
+                    <p>{activeSku.promptPreview}</p>
+                    <p>{activeSku.promptPreview}</p>
+                    <p className="hidden sm:block">{activeSku.promptPreview}</p>
+                    <p className="hidden md:block opacity-80">{activeSku.promptPreview}</p>
+                    <p className="hidden lg:block opacity-60">{activeSku.promptPreview}</p>
+                    <p className="hidden xl:block opacity-45">{activeSku.promptPreview}</p>
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/5 dark:bg-black/10 pointer-events-none">
+                    <div className="bg-white/90 dark:bg-neutral-800/95 backdrop-blur-sm border border-neutral-200 dark:border-neutral-700 rounded-lg px-4 py-2 shadow-sm pointer-events-auto">
+                      <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-300 flex items-center gap-1.5">
+                        <Lock className="w-3.5 h-3.5" />
+                        Prompt locked
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+ 
               {/* Action buttons */}
-              <div className="space-y-2.5">
+              <div className="space-y-2.5 mt-auto flex-shrink-0">
                 <a
                   href={unlockPromptUrl}
                   target="_blank"
@@ -304,137 +485,83 @@ export function PdpVisualsPage() {
         </div>
 
         {/* Bottom section: SKU Selector Section */}
-        <section className="sku-selector-section mt-10 md:mt-14" aria-labelledby="sku-selector-title">
-          <div className="sku-selector-header mb-[18px]">
-            <p className="sku-selector-eyebrow text-[#767676] text-[12px] font-semibold tracking-[0.08em] uppercase mb-2">
-              SKU Selector Section
+        <section className="sku-selector-section mt-20 md:mt-28 border-t border-neutral-100 pt-16 md:pt-20 max-w-5xl mx-auto w-full" aria-labelledby="sku-selector-title">
+          <div className="sku-selector-header mb-8">
+            <p className="sku-selector-eyebrow text-neutral-400 text-xs font-semibold tracking-[0.08em] uppercase mb-2">
+              Interactive Catalog
             </p>
-            <h2 id="sku-selector-title" className="sku-selector-title text-[#111111] text-[28px] font-bold tracking-[-0.03em] leading-[1.1]">
+            <h2 id="sku-selector-title" className="sku-selector-title text-neutral-900 dark:text-white text-2xl md:text-3xl font-bold tracking-tight mb-3">
               Other SKU Visual Sets
             </h2>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-2xl">
+              Select any SKU cover below to preview and load its corresponding master prompt templates, asset slide decks, and fullscreen visual sets.
+            </p>
           </div>
 
           <div className="sku-product-grid grid grid-cols-1 min-[520px]:grid-cols-2 min-[980px]:grid-cols-4 gap-[18px]">
             {skuSets.map((sku, idx) => {
               const isActive = idx === activeSkuIndex;
               return (
-                <article
+                <SkuProductCard
                   key={sku.id}
-                  className={`sku-product-card overflow-hidden rounded-[18px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)] cursor-pointer transition-all duration-200 select-none ${
-                    isActive ? 'outline-[2px] outline outline-neutral-900 outline-offset-[3px] is-active' : ''
-                  }`}
-                  onClick={() => selectSku(idx)}
-                >
-                  <button
-                    className="mainImage main-image block w-full p-0 border-0 bg-[#eeeeee] aspect-square cursor-pointer"
-                    type="button"
-                    aria-label={`Select ${sku.title}`}
-                  >
-                    <img
-                      src={sku.coverImage}
-                      alt={`${sku.title} cover`}
-                      className="w-full h-full block object-cover"
-                      loading="lazy"
-                    />
-                  </button>
-
-                  <div className="scrollerWrapper scroller-wrapper relative py-[10px] pl-[10px] bg-white">
-                    <div className="skuSelector sku-selector overflow-hidden w-full" aria-label={`${sku.title} thumbnail strip`}>
-                      <div
-                        id={`sku-items-${sku.id}`}
-                        className="skuItems sku-items flex gap-2 overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-[42px]"
-                      >
-                        {sku.slides.slice(1).map((thumbImg, tIdx) => (
-                          <button
-                            key={tIdx}
-                            className="skuItemImage sku-item-image shrink-0 w-11 h-11 p-0 overflow-hidden border border-[#e6e6e6] rounded-[10px] bg-[#f2f2f2] cursor-pointer"
-                            type="button"
-                            aria-label={`${sku.title} thumbnail ${tIdx + 1}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              selectSku(idx);
-                            }}
-                          >
-                            <img
-                              src={thumbImg}
-                              alt={`${sku.title} thumbnail ${tIdx + 1}`}
-                              className="w-full h-full block object-cover"
-                              loading="lazy"
-                            />
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <button
-                      className="rightArrowContainer right-arrow-container absolute top-1/2 right-2 z-10 w-[30px] h-[30px] grid place-items-center -translate-y-1/2 border-0 rounded-full bg-white/96 shadow-[0_6px_14px_rgba(0,0,0,0.14)] text-[#111111] text-[25px] leading-none cursor-pointer"
-                      type="button"
-                      aria-label={`Scroll ${sku.title} thumbnails`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleArrowClick(sku.id);
-                      }}
-                    >
-                      <span aria-hidden="true">›</span>
-                    </button>
-
-                    <div className="mask absolute top-0 right-0 w-[58px] h-full pointer-events-none bg-gradient-to-r from-transparent to-white/72" aria-hidden="true"></div>
-                  </div>
-
-                  <div className="descContainer desc-container px-3.5 pb-4 bg-white">
-                    <h3 className="sku-title m-0 mb-1.5 text-[#111111] text-[14px] font-bold leading-[1.35] line-clamp-2">
-                      {sku.title}
-                    </h3>
-                    <p className="sku-subtitle m-0 text-[#777777] text-[12px] font-medium leading-[1.35]">
-                      {sku.subtitle}
-                    </p>
-                  </div>
-                </article>
+                  sku={sku}
+                  idx={idx}
+                  isActive={isActive}
+                  onSelectSku={selectSku}
+                />
               );
             })}
           </div>
         </section>
+        </main>
       </div>
 
       {/* Fullscreen lightbox — navigates slides within active SKU */}
       {fullscreenOpen && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex flex-col">
+        <div className="fixed inset-0 z-[200] bg-black/95 flex flex-col">
+          {/* Close button at the top-right */}
+          <button
+            onClick={() => setFullscreenOpen(false)}
+            className="absolute top-4 right-4 md:top-6 md:right-6 z-50 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white transition-colors cursor-pointer"
+            aria-label="Close fullscreen view"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
           {/* Top bar */}
           <div className="flex items-center justify-between px-4 md:px-8 py-4">
             <span className="text-white/70 text-sm">
               {activeSlideIndex + 1} / {slideCount}
             </span>
-            <button
-              onClick={() => setFullscreenOpen(false)}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
-            >
-              <X className="w-5 h-5" />
-            </button>
           </div>
 
           {/* Main image area */}
-          <div className="flex-1 flex items-center justify-center px-4 md:px-16 relative min-h-0">
-            {/* Prev button */}
-            <button
-              onClick={goPrevSlide}
-              className="absolute left-3 md:left-6 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
+          <div className="flex-1 flex items-center justify-center relative min-h-0 px-12 md:px-20">
+            <div className="relative flex items-center justify-center max-w-full max-h-[calc(100vh-200px)]">
+              {/* Prev button */}
+              <button
+                onClick={(e) => { e.stopPropagation(); goPrevSlide(); }}
+                className="absolute left-2 md:left-0 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 border border-white/10 text-white cursor-pointer top-1/2 -translate-y-1/2 md:-translate-x-12 transition-all"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
 
-            <img
-              src={activeSlideImage}
-              alt={`${activeSku.title} — Slide ${activeSlideIndex + 1}`}
-              className="max-h-[calc(100vh-200px)] max-w-full object-contain rounded-md"
-            />
+              <img
+                src={activeSlideImage}
+                alt={`${activeSku.title} — Slide ${activeSlideIndex + 1}`}
+                className="max-h-[calc(100vh-200px)] max-w-full object-contain rounded-md select-none"
+              />
 
-            {/* Next button */}
-            <button
-              onClick={goNextSlide}
-              className="absolute right-3 md:right-6 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+              {/* Next button */}
+              <button
+                onClick={(e) => { e.stopPropagation(); goNextSlide(); }}
+                className="absolute right-2 md:right-0 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 border border-white/10 text-white cursor-pointer top-1/2 -translate-y-1/2 md:translate-x-12 transition-all"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </div>
 
           {/* Fullscreen thumbnail strip — 9 slides of active SKU */}

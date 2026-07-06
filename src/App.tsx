@@ -12,6 +12,7 @@ import { Library } from './components/Library';
 
 import { ProjectDetail } from './components/ProjectDetail';
 import { PdpVisualsPage } from './components/services/PdpVisualsPage';
+import { MarketplaceDisplayPage } from './components/services/MarketplaceDisplayPage';
 import { dictionary } from './i18n';
 
 export default function App() {
@@ -20,11 +21,29 @@ export default function App() {
   if (pathname === '/services/pdp-visuals') {
     return <PdpVisualsPage />;
   }
+  if (pathname === '/services/marketplace-display') {
+    return <MarketplaceDisplayPage />;
+  }
 
   const [lang, setLang] = useState<Language>('en');
   const [theme, setTheme] = useState<Theme>('light');
-  const [activeTab, setActiveTab] = useState<'recommended' | 'services' | 'library'>('recommended');
-  const [activeNav, setActiveNav] = useState<'home' | 'work' | 'services' | 'library'>('home');
+  
+  // Initialize tab/nav from URL query parameters
+  const [activeTab, setActiveTab] = useState<'recommended' | 'services' | 'library'>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    if (tab === 'services' || tab === 'library') return tab;
+    return 'recommended';
+  });
+  
+  const [activeNav, setActiveNav] = useState<'home' | 'work' | 'services' | 'library'>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    if (tab === 'services' || tab === 'library') return tab as any;
+    if (tab === 'recommended') return 'work';
+    return 'home';
+  });
+
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   

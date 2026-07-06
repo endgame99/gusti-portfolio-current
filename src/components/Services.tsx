@@ -97,6 +97,7 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
                 {service.includes.slice(0, 4).map((inc, i) => {
                   // Only PDP Visuals card links to its standalone page
                   const isPdpVisuals = service.id === 's3' && inc === 'PDP Visuals';
+                  const isMarketplaceDisplay = service.id === 's3' && inc === 'Marketplace Display';
 
                   const cardContent = (
                     <div className="w-full aspect-[4/5] rounded-md overflow-hidden bg-neutral-100 dark:bg-[#1c1c1c] border border-transparent dark:border-neutral-800 relative">
@@ -118,6 +119,20 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
                       <a
                         key={i}
                         href="/services/pdp-visuals"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group cursor-pointer"
+                      >
+                        {cardContent}
+                      </a>
+                    );
+                  }
+
+                  if (isMarketplaceDisplay) {
+                    return (
+                      <a
+                        key={i}
+                        href="/services/marketplace-display"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group cursor-pointer"
