@@ -11,12 +11,34 @@ interface ServicesProps {
 
 export function Services({ lang, services, searchQuery }: ServicesProps) {
 
+  // Display overrides for section titles and descriptions
+  const sectionOverrides: Record<string, { title: string; subtitle: string }> = {
+    s3: {
+      title: 'E-commerce Visual Creative',
+      subtitle: 'Create high-converting visual assets for every stage of the e-commerce customer journey.',
+    },
+    s4: {
+      title: 'Brand & Marketing Design',
+      subtitle: 'Build a consistent brand presence through social media, packaging, identity, and print design.',
+    },
+  };
+
+  // Display overrides for card labels (first 4 cards only)
+  const cardLabelOverrides: Record<string, string[]> = {
+    s3: ['Product Visuals', 'Product Detail Pages', 'Live Commerce Assets', 'Campaign Creatives'],
+    s4: ['Social Media Design', 'Packaging Design', 'Brand Identity', 'Print Collateral'],
+  };
 
   const filteredServices = services.filter(s => {
     const query = searchQuery.toLowerCase();
     if (!query) return true;
-    return s.title.toLowerCase().includes(query) || 
-           s.subtitle.toLowerCase().includes(query) || 
+    // Search against both original and overridden labels
+    const overriddenTitle = sectionOverrides[s.id]?.title || s.title;
+    const overriddenSubtitle = sectionOverrides[s.id]?.subtitle || s.subtitle;
+    const overriddenIncludes = cardLabelOverrides[s.id] || s.includes;
+    return overriddenTitle.toLowerCase().includes(query) || 
+           overriddenSubtitle.toLowerCase().includes(query) || 
+           overriddenIncludes.some(inc => inc.toLowerCase().includes(query)) ||
            s.includes.some(inc => inc.toLowerCase().includes(query));
   });
 
@@ -86,29 +108,38 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
 
       <div className="space-y-10">
         {displayedServices.map((service) => {
+          const titleOverride = sectionOverrides[service.id];
+          const displayTitle = titleOverride?.title || service.title;
+          const displaySubtitle = titleOverride?.subtitle || service.subtitle;
+          const labelOverrides = cardLabelOverrides[service.id];
+
           return (
             <div key={service.id} className="w-full">
               <div className="mb-3.5">
-                <h3 className="text-base font-bold text-neutral-900 dark:text-white">{service.title}</h3>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{service.subtitle}</p>
+                <h3 className="text-base font-bold text-neutral-900 dark:text-white">{displayTitle}</h3>
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{displaySubtitle}</p>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {service.includes.slice(0, 4).map((inc, i) => {
-                  // Only PDP Visuals card links to its standalone page
-                  const isPdpVisuals = service.id === 's3' && inc === 'PDP Visuals';
-                  const isMarketplaceDisplay = service.id === 's3' && inc === 'Marketplace Display';
+                {service.includes.slice(0, 4).map((_inc, i) => {
+                  // Use overridden label if available, otherwise use original
+                  const displayLabel = labelOverrides?.[i] ?? _inc;
+
+                  // PDP Visuals route: s3 index 0 (was "PDP Visuals", now "Product Visuals")
+                  const isPdpVisuals = service.id === 's3' && i === 0;
+                  // Marketplace Display route: s3 index 1 (was "Marketplace Display", now "Product Detail Pages")
+                  const isMarketplaceDisplay = service.id === 's3' && i === 1;
 
                   const cardContent = (
                     <div className="w-full aspect-[4/5] rounded-md overflow-hidden bg-neutral-100 dark:bg-[#1c1c1c] border border-transparent dark:border-neutral-800 relative">
                        <img 
                           src={getThumbnail(i, service.id)} 
-                          alt={inc} 
+                          alt={displayLabel} 
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
                        />
                        <div className="absolute inset-x-0 bottom-0 py-2 px-2 bg-gradient-to-t from-black/60 to-transparent">
                           <p className="text-[11px] font-medium text-white leading-tight">
-                            {inc}
+                            {displayLabel}
                           </p>
                        </div>
                     </div>
