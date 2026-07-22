@@ -1,59 +1,296 @@
-/* CARD */
-.gusti-card {
-  background: var(--be-surface);
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(25,25,25,.2);
-  overflow: hidden;
-  transition: 0.25s;
+/* ── GUSTI Portfolio Design System — Foundation & Core Components ── */
+/* Source: Behance Production CSS (BEHANCE.networki-main.css cleaned evidence) */
+
+:root {
+  /* Colors */
+  --gusti-color-accent: #0057ff;
+  --gusti-color-accent-hover: #0046cc;
+  --gusti-color-text-primary: #191919;
+  --gusti-color-text-secondary: #555555;
+  --gusti-color-text-subtle: #959595;
+  --gusti-color-background: #f9f9f9;
+  --gusti-color-surface: #ffffff;
+  --gusti-color-surface-hover: #f0f0f0;
+  --gusti-color-border: #e8e8e8;
+  --gusti-color-border-dark: #d5d5d5;
+  --gusti-color-disabled-bg: #e8e8e8;
+  --gusti-color-disabled-text: #959595;
+  --gusti-color-danger: #d00d00;
+  --gusti-color-danger-hover: #b00b00;
+  --gusti-color-success: #058900;
+  --gusti-color-focus-outline: #0057ff;
+
+  /* Typography */
+  --gusti-font-family: "acumin-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Radii */
+  --gusti-radius-pill: 50px;
+  --gusti-radius-card: 12px;
+  --gusti-radius-input: 8px;
+  --gusti-radius-small: 6px;
+
+  /* Shadows */
+  --gusti-shadow-card: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --gusti-shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --gusti-shadow-overlay: 0 12px 36px rgba(0, 0, 0, 0.2);
+
+  /* Transitions */
+  --gusti-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --gusti-transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.gusti-card:hover {
-  box-shadow: 0 2px 5px rgba(0,0,0,.25);
-}
-
-/* CARD IMAGE */
-.gusti-card-media {
-  position: relative;
-  aspect-ratio: 4/3;
-  overflow: hidden;
-}
-
-.gusti-card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* TITLE */
-.gusti-card-title {
-  font-size: 13px;
+/* ── Typography Hierarchy ── */
+.gusti-ui-title-xl {
+  font-family: var(--gusti-font-family);
+  font-size: 2.25rem;
   font-weight: 700;
-  color: var(--be-text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--gusti-color-text-primary);
 }
 
-/* META */
-.gusti-card-meta {
-  font-size: 11px;
-  color: var(--be-text-subtle);
+.gusti-ui-title-lg {
+  font-family: var(--gusti-font-family);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--gusti-color-text-primary);
 }
 
-/* INPUT */
-.gusti-input {
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 13px;
-  padding: 6px;
+.gusti-ui-title-md {
+  font-family: var(--gusti-font-family);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--gusti-color-text-primary);
 }
 
-.gusti-input:focus {
-  border-color: var(--be-accent);
+.gusti-ui-body-md {
+  font-family: var(--gusti-font-family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--gusti-color-text-secondary);
 }
 
-/* TAG / CHIP */
-.gusti-chip {
-  background: #191919;
-  color: #fff;
-  font-size: 10px;
-  padding: 4px 8px;
-  border-radius: 4px;
+.gusti-ui-body-sm {
+  font-family: var(--gusti-font-family);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gusti-color-text-subtle);
+}
+
+.gusti-ui-eyebrow {
+  font-family: var(--gusti-font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gusti-color-text-subtle);
+}
+
+/* ── Buttons ── */
+.gusti-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background-color: var(--gusti-color-accent);
+  color: #ffffff;
+  font-family: var(--gusti-font-family);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--gusti-radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--gusti-transition-fast), transform var(--gusti-transition-fast);
+  text-decoration: none;
+}
+
+.gusti-button-primary:hover {
+  background-color: var(--gusti-color-accent-hover);
+}
+
+.gusti-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background-color: var(--gusti-color-surface-hover);
+  color: var(--gusti-color-text-primary);
+  font-family: var(--gusti-font-family);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--gusti-radius-pill);
+  border: 1px solid var(--gusti-color-border);
+  cursor: pointer;
+  transition: background-color var(--gusti-transition-fast), border-color var(--gusti-transition-fast);
+  text-decoration: none;
+}
+
+.gusti-button-secondary:hover {
+  background-color: var(--gusti-color-border);
+}
+
+.gusti-button-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: transparent;
+  color: var(--gusti-color-accent);
+  font-family: var(--gusti-font-family);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  transition: color var(--gusti-transition-fast);
+}
+
+.gusti-button-inline:hover {
+  color: var(--gusti-color-accent-hover);
+  text-decoration: underline;
+}
+
+.gusti-button-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  background-color: var(--gusti-color-danger);
+  color: #ffffff;
+  font-family: var(--gusti-font-family);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--gusti-radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--gusti-transition-fast);
+}
+
+.gusti-button-danger:hover {
+  background-color: var(--gusti-color-danger-hover);
+}
+
+.gusti-button-disabled,
+.gusti-button-primary:disabled,
+.gusti-button-secondary:disabled {
+  background-color: var(--gusti-color-disabled-bg) !important;
+  color: var(--gusti-color-disabled-text) !important;
+  border-color: transparent !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gusti-color-focus-outline);
+  outline-offset: 2px;
+}
+
+/* ── Cards ── */
+.gusti-card-surface {
+  background-color: var(--gusti-color-surface);
+  border-radius: var(--gusti-radius-card);
+  border: 1px solid var(--gusti-color-border);
+  box-shadow: var(--gusti-shadow-card);
+  overflow: hidden;
+  transition: box-shadow var(--gusti-transition-normal), transform var(--gusti-transition-normal);
+}
+
+.gusti-card-surface:hover {
+  box-shadow: var(--gusti-shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.gusti-card-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.75) 100%);
+  opacity: 0;
+  transition: opacity var(--gusti-transition-normal);
+  pointer-events: none;
+}
+
+.gusti-card-surface:hover .gusti-card-media-overlay {
+  opacity: 1;
+}
+
+/* ── Form Inputs ── */
+.gusti-input-field {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  font-family: var(--gusti-font-family);
+  font-size: 0.875rem;
+  color: var(--gusti-color-text-primary);
+  background-color: var(--gusti-color-surface);
+  border: 1px solid var(--gusti-color-border);
+  border-radius: var(--gusti-radius-input);
+  transition: border-color var(--gusti-transition-fast), box-shadow var(--gusti-transition-fast);
+}
+
+.gusti-input-field:focus {
+  outline: none;
+  border-color: var(--gusti-color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.15);
+}
+
+.gusti-input-field::placeholder {
+  color: var(--gusti-color-text-subtle);
+}
+
+/* ── Navigation Strip & Search ── */
+.gusti-nav-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--gusti-color-border);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.gusti-nav-search {
+  display: flex;
+  align-items: center;
+  background-color: var(--gusti-color-surface-hover);
+  border: 1px solid var(--gusti-color-border);
+  border-radius: var(--gusti-radius-pill);
+  padding: 0.375rem 0.875rem;
+  transition: border-color var(--gusti-transition-fast);
+}
+
+.gusti-nav-search:focus-within {
+  border-color: var(--gusti-color-accent);
+}
+
+/* ── Overlay & Backdrop ── */
+.gusti-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gusti-overlay-panel {
+  background-color: var(--gusti-color-surface);
+  border-radius: 16px;
+  box-shadow: var(--gusti-shadow-overlay);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
 }

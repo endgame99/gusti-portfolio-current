@@ -1,65 +1,71 @@
-:root {
-  --be-accent: #0057ff;
-  --be-text-primary: #191919;
-  --be-bg: #f9f9f9;
-  --be-surface: #ffffff;
+/* ── GUSTI Portfolio Design System — Visual Gallery & Masonry Patterns ── */
+/* Source: Behance Production CSS (BEHANCE.activity.css cleaned evidence) */
 
-  --be-text-muted: dimgray;
-  --be-text-subtle: #959595;
-
-  --be-border: #e8e8e8;
-  --be-border-light: #e1e1e1;
-
-  --be-hover: #f0f0f0;
-  --be-disabled: #e8e8e8;
-
-  --be-danger: #d00d00;
-  --be-success: #058900;
-
-  --be-radius-pill: 50px;
-  --be-radius-sm: 4px;
-
-  --be-transition: 300ms;
+/* ── Gallery Container & Layout ── */
+.gusti-gallery-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 0;
 }
 
-/* GLOBAL */
-html, body {
-  background: var(--be-bg);
-  color: var(--be-text-primary);
-  font-family:
-    "acumin-pro",
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    sans-serif;
+.gusti-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
 }
 
-/* BUTTON */
-.gusti-button {
-  background: var(--be-accent);
-  color: #fff;
-  border-radius: var(--be-radius-pill);
-  font-size: 14px;
-  font-weight: 600;
-  padding: 6px 15px 8px;
-  transition: var(--be-transition);
+/* ── Gallery Item Surface ── */
+.gusti-gallery-item {
+  position: relative;
+  background-color: var(--gusti-color-surface, #ffffff);
+  border-radius: var(--gusti-radius-card, 12px);
+  border: 1px solid var(--gusti-color-border, #e8e8e8);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
 }
 
-.gusti-button:hover {
-  background: rgb(0, 62, 203);
+.gusti-gallery-hover-shadow:hover,
+.gusti-gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  border-color: var(--gusti-color-border-dark, #d5d5d5);
 }
 
-.gusti-button--secondary {
-  background: #fff;
-  border: 1px solid var(--be-border);
-  color: var(--be-text-primary);
+.gusti-gallery-item:focus-visible {
+  outline: 2px solid var(--gusti-color-accent, #0057ff);
+  outline-offset: 2px;
 }
 
-.gusti-button--danger {
-  background: var(--be-danger);
+/* ── Gallery Selection State ── */
+.gusti-gallery-selected,
+.gusti-card-selected {
+  border-color: var(--gusti-color-accent, #0057ff) !important;
+  box-shadow: 0 0 0 2px var(--gusti-color-accent, #0057ff) !important;
 }
 
-.gusti-button--disabled {
-  background: var(--be-disabled);
-  pointer-events: none;
+/* ── Full-Width Mobile Gallery Card ── */
+@media (max-width: 603px) {
+  .gusti-gallery-card-mobile {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+}
+
+/* ── Loading Skeleton State ── */
+.gusti-gallery-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: gusti-skeleton-shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes gusti-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

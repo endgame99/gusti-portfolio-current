@@ -1,33 +1,83 @@
-/* GALLERY GRID */
-.gusti-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+/* ── GUSTI Portfolio Design System — Responsive Layout & Media Queries ── */
+/* Source: Behance Production CSS (BEHANCE.responsive.css cleaned evidence) */
+
+/* ── Verified Breakpoints ──
+ * Phone:      up to 603px
+ * Tablet:     604px to 1024px
+ * Desktop/Nav: 1080px and above
+ */
+
+/* ── Phone Breakpoint (max-width: 603px) ── */
+@media (max-width: 603px) {
+  .gusti-hide-phone {
+    display: none !important;
+  }
+
+  .gusti-show-phone {
+    display: block !important;
+  }
+
+  /* Full-width responsive card layout on phone */
+  .gusti-card-surface {
+    border-radius: 8px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Mobile drawer slide-over width */
+  .gusti-nav-drawer {
+    width: 85vw;
+    max-width: 320px;
+  }
+
+  /* Responsive overlay padding */
+  .gusti-overlay-panel {
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  /* Full width grid columns */
+  .gusti-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
-/* GALLERY ITEM */
-.gusti-gallery-item {
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  overflow: hidden;
+/* ── Tablet Breakpoint (604px to 1024px) ── */
+@media (min-width: 604px) and (max-width: 1024px) {
+  .gusti-hide-tablet {
+    display: none !important;
+  }
+
+  .gusti-show-tablet {
+    display: block !important;
+  }
+
+  .gusti-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
 }
 
-/* SELECTED STATE */
-.gusti-gallery-item--active {
-  background: var(--be-accent);
-  color: #fff;
-}
+/* ── Desktop & Navigation Transition (1080px and above) ── */
+@media (min-width: 1080px) {
+  .gusti-hide-desktop {
+    display: none !important;
+  }
 
-/* FULLSCREEN OVERLAY */
-.gusti-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.75);
-  z-index: 9999;
-}
+  .gusti-show-desktop {
+    display: block !important;
+  }
 
-/* LOADING */
-.gusti-loading {
-  background: var(--be-bg);
+  .gusti-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Fixed navigation layout on desktop */
+  .gusti-nav-strip {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
