@@ -24,15 +24,15 @@ export function Tabs({ activeTab, onTabChange, lang }: TabsProps) {
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`py-2 text-[15px] font-bold whitespace-nowrap transition-colors relative ${
+            className={`py-2 type-tab tracking-wide whitespace-nowrap transition-colors relative ${
               activeTab === tab.id
-                ? 'text-neutral-900 dark:text-white'
-                : 'text-neutral-500 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
+                ? 'text-neutral-950 dark:text-white font-bold'
+                : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200'
             }`}
           >
             {tab.label}
             {activeTab === tab.id && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral-900 dark:bg-white rounded-t-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral-950 dark:bg-white rounded-full" />
             )}
           </button>
         ))}

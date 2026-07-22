@@ -37,6 +37,7 @@ export function GustiSidebar({
 }: GustiSidebarProps) {
   const goHome = () => {
     setActiveNav("home");
+    setActiveTab("recommended");
     if (onHomeClick) onHomeClick();
 
     if (window.location.pathname !== "/") {
@@ -124,7 +125,7 @@ export function GustiSidebar({
                 className="flex h-9 items-center justify-center rounded-xl text-neutral-950 transition hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800 px-2"
                 aria-label="Go to home"
               >
-                <span className="text-[15px] font-black tracking-[-0.06em]">GUSTI.</span>
+                <span className="font-display text-[15px] font-extrabold tracking-[-0.04em]">GUSTI.</span>
               </button>
 
               <button
@@ -154,7 +155,7 @@ export function GustiSidebar({
                 type="button"
                 onClick={item.action}
                 className={cx(
-                  "group relative flex h-10 items-center rounded-xl text-[13px] font-semibold transition",
+                  "group relative flex h-10 items-center rounded-xl type-nav transition",
                   collapsed ? "w-10 justify-center" : "w-full gap-3 px-3",
                   isActive
                     ? "bg-neutral-100 text-neutral-950 dark:bg-neutral-800 dark:text-white"
@@ -215,7 +216,7 @@ export function GustiSidebar({
               )}
             >
               <Icon size={18} strokeWidth={isActive ? 2.5 : 2.0} />
-              <span className="text-[9px] tracking-wide">{item.label}</span>
+              <span className="type-label-xs tracking-wide">{item.label}</span>
             </button>
           );
         })}

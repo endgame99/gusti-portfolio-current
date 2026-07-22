@@ -1,6 +1,6 @@
 import { WorkItem, ServiceItem, LibraryItem, SlideItem } from './types';
 
-export const WHATSAPP_LINK = 'https://wa.me/6200000000000?text=Halo%20Gusti%2C%20saya%20mau%20bahas%20project%20visual%20untuk%20brand%20saya.';
+export const WHATSAPP_LINK = 'https://wa.me/6283897317974?text=Halo%20Gusti%2C%20saya%20mau%20bahas%20project%20visual%20untuk%20brand%20saya.';
 
 export const SOCIAL_LINKS = {
   email: 'gustiansyaht@gmail.com',
@@ -9,17 +9,17 @@ export const SOCIAL_LINKS = {
 };
 
 export const worksData: WorkItem[] = [
-  { id: 'w1', title: 'STARMAP', label: 'Client Work / Product Commerce Visuals', image: '/starmap.jpg', tags: ['fashion', 'ecommerce', 'PDP', 'AI photography'], type: 'project' },
-  { id: 'w2', title: 'Alfas Fragrance', label: 'Client Work / Fragrance Creative Assets', image: '/alfas fragrance.jpeg', tags: ['fragrance', 'packaging', 'campaign', 'ecommerce'], type: 'project' },
-  { id: 'w3', title: 'Fabil Natural', label: 'Client Work / Beauty & Skincare Visuals', image: '/fabil natural.jpg', tags: ['skincare', 'beauty', 'PDP', 'campaign'], type: 'project' },
-  { id: 'w4', title: 'FATSPORT.ID', label: 'Client Work / Sports Product Creative', image: '/fatsport.id.jpg', tags: ['sports', 'campaign', 'AI video', 'product visual'], type: 'project' },
-  { id: 'w5', title: 'PALESUN', label: 'Client Work / Eyewear Visual Assets', image: '/palesun.jpg', tags: ['eyewear', 'catalog', 'ecommerce', 'fashion'], type: 'project' },
-  { id: 'w6', title: 'CONTOURA', label: 'Client Work / Shapewear Product Visuals', image: '/contoura.jpg', tags: ['apparel', 'shapewear', 'PDP', 'catalog'], type: 'project' },
-  { id: 'w7', title: 'BOSIE', label: 'Client Work / Fashion Product Creative', image: '/bosie.jpg', tags: ['fashion', 'product visual', 'catalog'], type: 'project' },
-  { id: 'w8', title: 'PDP Visual System', label: 'Ecommerce Asset / Product Display', image: '/pdp visual system.jpg', tags: ['PDP', 'ecommerce', 'marketplace'], type: 'asset' },
-  { id: 'w9', title: 'AI UGC Video Direction', label: 'Video Asset / Product Storytelling', image: '/ai ugc video direction.jpg', tags: ['video', 'AI video', 'ads'], type: 'asset' },
+  { id: 'w1', title: 'STARMAP', label: 'Client Work / Product Commerce Visuals', image: '/starmap.jpg', tags: ['fashion', 'ecommerce', 'PDP', 'AI photography'], type: 'project', clientName: 'STARMAP Wear', mediaType: 'comparison', beforeImage: '/starmap.jpg', afterImage: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80' },
+  { id: 'w2', title: 'Alfas Fragrance', label: 'Client Work / Fragrance Creative Assets', image: '/alfas fragrance.jpeg', tags: ['fragrance', 'packaging', 'campaign', 'ecommerce'], type: 'project', clientName: 'Alfas Fragrance' },
+  { id: 'w3', title: 'Fabil Natural', label: 'Client Work / Beauty & Skincare Visuals', image: '/fabil natural.jpg', tags: ['skincare', 'beauty', 'PDP', 'campaign'], type: 'project', clientName: 'Fabil Natural' },
+  { id: 'w4', title: 'FATSPORT.ID', label: 'Client Work / Sports Product Creative', image: '/fatsport.id.jpg', tags: ['sports', 'campaign', 'AI video', 'product visual'], type: 'project', clientName: 'FATSPORT.ID', mediaType: 'video', videoSrc: 'https://assets.mixkit.co/videos/preview/mixkit-opening-a-metal-makeup-canister-41584-large.mp4' },
+  { id: 'w5', title: 'PALESUN', label: 'Client Work / Eyewear Visual Assets', image: '/palesun.jpg', tags: ['eyewear', 'catalog', 'ecommerce', 'fashion'], type: 'project', clientName: 'PALESUN' },
+  { id: 'w6', title: 'CONTOURA', label: 'Client Work / Shapewear Product Visuals', image: '/contoura.jpg', tags: ['apparel', 'shapewear', 'PDP', 'catalog'], type: 'project', clientName: 'CONTOURA' },
+  { id: 'w7', title: 'BOSIE', label: 'Client Work / Fashion Product Creative', image: '/bosie.jpg', tags: ['fashion', 'product visual', 'catalog'], type: 'project', clientName: 'BOSIE' },
+  { id: 'w8', title: 'PDP Visual System', label: 'Ecommerce Asset / Product Display', image: '/pdp visual system.jpg', tags: ['PDP', 'ecommerce', 'marketplace'], type: 'asset', clientName: 'GUSTI. Studio' },
+  { id: 'w9', title: 'AI UGC Video Direction', label: 'Video Asset / Product Storytelling', image: '/ai ugc video direction.jpg', tags: ['video', 'AI video', 'ads'], type: 'asset', clientName: 'GUSTI. Studio' },
   { id: 'w10', title: 'Upcoming Project', label: 'Client Work / Creative Production', image: '/upcoming project.jpg', tags: ['production', 'creative', 'campaign'], type: 'project' },
-  { id: 'w11', title: 'XIONGJIAN Active', label: 'Client Work / Activewear Campaign', image: 'https://img.zcool.cn/community/6832f33ff2253xxxhm4hh04653.JPG?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp', tags: ['fashion', 'activewear', 'campaign'], type: 'project' },
+  { id: 'w11', title: 'XIONGJIAN Active', label: 'Client Work / Activewear Campaign', image: 'https://img.zcool.cn/community/6832f33ff2253xxxhm4hh04653.JPG?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp', tags: ['fashion', 'activewear', 'campaign'], type: 'project', clientName: 'GUSTI. X 草本初色', mediaType: 'video', videoSrc: 'https://assets.mixkit.co/videos/preview/mixkit-fashion-woman-with-silver-makeup-41611-large.mp4' },
   { id: 'w12', title: 'Daisy Essence', label: 'Client Work / Creative Perfume Shot', image: '/alfas fragrance.jpeg', tags: ['fragrance', 'creative', 'commercial'], type: 'project' },
   { id: 'w13', title: 'Fabil Sunscreen', label: 'Client Work / Cosmetics Art Direction', image: '/fabil natural.jpg', tags: ['beauty', 'skincare', 'PDP'], type: 'project' },
   { id: 'w14', title: 'Track & Field Visuals', label: 'Client Work / Sports Content Production', image: '/fatsport.id.jpg', tags: ['sports', 'catalog', 'AI photography'], type: 'project' },

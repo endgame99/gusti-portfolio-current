@@ -118,7 +118,7 @@ export default function App() {
           whatsappUrl={WHATSAPP_LINK}
         />
 
-        <main className="px-4 md:px-8 w-full max-w-[1200px] mx-auto pb-24 md:pb-12 pt-16">
+        <main className="px-4 sm:px-6 lg:px-[clamp(1rem,4vw,3.5rem)] w-full max-w-[1400px] mx-auto pb-24 md:pb-12 pt-16">
           {activeProject ? (
             <ProjectDetail 
               work={activeProject} 
@@ -128,16 +128,16 @@ export default function App() {
           ) : (
             <>
               {!searchQuery && (
-                <div className="mb-4">
-                  <HeroCarousel />
+                <div className="mb-6 sm:mb-8">
+                  <HeroCarousel works={worksData} onSlideClick={setActiveProject} />
                 </div>
               )}
 
-              <div id="navigation-tabs" className="sticky top-12 z-20 bg-white dark:bg-[#121212] pt-2">
+              <div id="navigation-tabs" className="sticky top-12 z-20 bg-white dark:bg-[#121212] pt-3 pb-1">
                  <Tabs activeTab={activeTab} onTabChange={handleTabChange} lang={lang} />
               </div>
 
-              <div className="mt-2">
+              <div className="mt-4 sm:mt-6">
                 {(!searchQuery && activeTab === 'recommended') && (
                   <RecommendedWorks 
                     lang={lang} 

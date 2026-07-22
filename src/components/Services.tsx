@@ -81,18 +81,18 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left — Text */}
             <div className="flex flex-col justify-center">
-              <h2 className="text-3xl md:text-[2.5rem] md:leading-[1.15] font-semibold text-neutral-900 dark:text-white tracking-tight">
+              <h2 className="type-display-xl text-neutral-900 dark:text-white">
                 More visual content.{' '}
                 <span className="text-neutral-400 dark:text-neutral-500">Lower production costs.</span>
               </h2>
-              <p className="mt-4 md:mt-5 text-[15px] md:text-base leading-relaxed text-neutral-600 dark:text-neutral-400 max-w-md">
+              <p className="mt-4 md:mt-5 type-body-md text-neutral-600 dark:text-neutral-400 max-w-md">
                 Create product images, ecommerce assets, videos, and campaign materials faster — without starting from scratch every time.
               </p>
             </div>
 
             {/* Right — Video */}
             <div className="w-full">
-              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800/60 shadow-sm">
+              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-800/60 shadow-sm border border-neutral-200/50 dark:border-neutral-800/60">
                 <iframe
                   src="https://www.youtube.com/embed/KUyRq7szZsM?rel=0"
                   title="GUSTI Services showreel"
@@ -106,7 +106,7 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
         </div>
       )}
 
-      <div className="space-y-10">
+      <div className="section-gap">
         {displayedServices.map((service) => {
           const titleOverride = sectionOverrides[service.id];
           const displayTitle = titleOverride?.title || service.title;
@@ -116,11 +116,11 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
           return (
             <div key={service.id} className="w-full">
               <div className="mb-3.5">
-                <h3 className="text-base font-bold text-neutral-900 dark:text-white">{displayTitle}</h3>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{displaySubtitle}</p>
+                <h3 className="type-display-md text-neutral-900 dark:text-white">{displayTitle}</h3>
+                <p className="type-body-sm text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{displaySubtitle}</p>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 card-gap">
                 {service.includes.slice(0, 4).map((_inc, i) => {
                   // Use overridden label if available, otherwise use original
                   const displayLabel = labelOverrides?.[i] ?? _inc;
@@ -138,7 +138,7 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
                        />
                        <div className="absolute inset-x-0 bottom-0 py-2 px-2 bg-gradient-to-t from-black/60 to-transparent">
-                          <p className="text-[11px] font-medium text-white leading-tight">
+                          <p className="type-label-sm text-white leading-tight">
                             {displayLabel}
                           </p>
                        </div>

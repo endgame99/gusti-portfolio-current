@@ -1,0 +1,18 @@
+/* PHONE */
+@media (max-width: 603px) {
+  .gusti-hide-phone { display: none !important; }
+  .gusti-show-phone { display: block; }
+}
+
+/* TABLET */
+@media (min-width: 604px) and (max-width: 1024px) {
+  .gusti-hide-tablet { display: none !important; }
+  .gusti-show-tablet { display: block; }
+}
+
+/* NAV BREAKPOINT */
+@media (max-width: 1080px) {
+  .gusti-mobile-nav {
+    transform: translateX(-100%);
+  }
+}

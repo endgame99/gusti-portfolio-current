@@ -66,7 +66,7 @@ export function getLabel(key: string, lang: Language): string {
 }
 
 export function getCustomWhatsAppLink(work: WorkItem, lang: Language): string {
-  let baseUrl = 'https://wa.me/6200000000000';
+  let baseUrl = 'https://wa.me/6283897317974';
   if (WHATSAPP_LINK) {
     const match = WHATSAPP_LINK.match(/https:\/\/wa\.me\/([0-9]+)/);
     if (match && match[1]) {

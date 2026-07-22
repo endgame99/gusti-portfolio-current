@@ -8,6 +8,12 @@ export interface WorkItem {
   image: string;
   tags: string[];
   type: 'project' | 'asset';
+  clientName?: string;
+  clientLogo?: string;
+  mediaType?: 'image' | 'video' | 'comparison';
+  videoSrc?: string;
+  beforeImage?: string;
+  afterImage?: string;
 }
 
 export interface ServiceItem {

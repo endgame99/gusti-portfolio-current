@@ -24,7 +24,7 @@ export function Library({ lang, items, searchQuery }: LibraryProps) {
       <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-3 space-y-3">
         {filteredItems.map((item) => (
           <div key={item.id} className="break-inside-avoid group relative cursor-pointer font-sans bg-transparent">
-            <div className="rounded-lg overflow-hidden bg-neutral-100 dark:bg-[#1c1c1c] relative border border-transparent dark:border-neutral-800">
+            <div className="rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#1c1c1c] relative border border-neutral-200/50 dark:border-neutral-800/60">
               <img 
                 src={item.image} 
                 alt={item.title} 
@@ -34,9 +34,9 @@ export function Library({ lang, items, searchQuery }: LibraryProps) {
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
             </div>
             <div className="pt-2 pb-1">
-              <h3 className="text-[13px] font-bold text-neutral-900 dark:text-white line-clamp-1">{item.title}</h3>
+              <h3 className="type-heading-md text-neutral-900 dark:text-white line-clamp-1">{item.title}</h3>
               <div className="flex flex-wrap mt-0.5">
-                 <span className="text-[11px] text-neutral-500 dark:text-neutral-400">{item.category}</span>
+                 <span className="type-body-sm text-neutral-500 dark:text-neutral-400">{item.category}</span>
               </div>
             </div>
           </div>

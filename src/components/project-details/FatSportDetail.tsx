@@ -6,13 +6,11 @@ import {
   Play,
   Pause,
   Volume2,
-  VolumeX,
-  Eye
+  VolumeX
 } from 'lucide-react';
 import { ProjectDetailPageProps, getLabel, getCustomWhatsAppLink } from './SharedTypes';
 
 export function FatSportDetail({ work, lang, detail, onBack }: ProjectDetailPageProps) {
-  const [followed, setFollowed] = useState<boolean>(false);
   const [videoPlaying, setVideoPlaying] = useState<boolean>(true);
   const [videoMuted, setVideoMuted] = useState<boolean>(true);
 
@@ -24,12 +22,12 @@ export function FatSportDetail({ work, lang, detail, onBack }: ProjectDetailPage
   return (
     <div id={`project-detail-${work.id}`} className="w-full min-h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-neutral-100 transition-colors duration-300 pb-20 relative font-sans">
       
-      <div className="max-w-4xl mx-auto px-4 pt-8 pb-12 space-y-6">
+      <div className="detail-container pt-8 pb-12 space-y-6">
         
         {/* Clean, Non-Sticky Back Link */}
         <button
           onClick={onBack}
-          className="group inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-neutral-400 hover:text-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-200 transition-all duration-300 pb-2"
+          className="group inline-flex items-center gap-2 type-label-sm tracking-wider uppercase text-neutral-400 hover:text-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-200 transition-all duration-300 pb-2"
         >
           <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
           <span>{getLabel('back', lang)}</span>
@@ -38,119 +36,61 @@ export function FatSportDetail({ work, lang, detail, onBack }: ProjectDetailPage
         {/* MAIN TITLE */}
         <div className="flex items-center gap-2.5 flex-wrap pt-2">
           <h1 
-            className="text-2xl md:text-3xl lg:text-3.2xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight font-sans"
+            className="type-display-xl text-neutral-900 dark:text-white"
             title={`${detail.client} X AI Production - ${work.label}`}
           >
             {detail.client} - {work.label}
           </h1>
-          
-          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/40 text-red-500 hover:scale-115 transition-transform duration-300 cursor-pointer shadow-xs border border-red-100/50 dark:border-red-900/30 shrink-0" title="Homepage recommendation">
-            <span className="text-base animate-pulse">🔥</span>
-          </div>
-
-          <div className="flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold tracking-widest uppercase border border-amber-500/20 shadow-xs shrink-0" title="Ranked Project">
-            <span>🏅</span>
-            <span>RANK</span>
-          </div>
         </div>
 
         {/* CREATOR ROW */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2 pb-6 border-b border-neutral-100 dark:border-neutral-800/60">
-          
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 pb-6 border-b border-neutral-100 dark:border-neutral-800/60">
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded bg-red-600 dark:bg-red-700 flex flex-col items-center justify-center font-bold text-white leading-none shrink-0 border border-red-500 shadow-sm select-none">
-              <span className="text-[10px] tracking-tighter font-extrabold font-sans">GUSTI</span>
+              <span className="type-label-xs tracking-tighter font-extrabold">GUSTI</span>
               <span className="text-[5px] tracking-widest font-mono scale-90 mt-0.5">STUDIO</span>
             </div>
 
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <h4 className="text-[13px] font-bold text-neutral-900 dark:text-neutral-100 font-sans tracking-tight">GUSTI. Visual Creative</h4>
-                <span className="w-3.5 h-3.5 rounded-full bg-amber-500 text-neutral-950 font-mono font-extrabold flex items-center justify-center text-[8.5px] shadow-xs" title="Verified Creator Pro">z</span>
-                <span className="text-xs">🔥</span>
-                <span className="text-[8px] font-sans font-extrabold tracking-widest bg-neutral-900 dark:bg-neutral-800 text-neutral-100 dark:text-neutral-200 px-1 py-0.5 rounded uppercase scale-90 origin-left">
-                  {lang === 'cn' ? '机构' : 'PRO OPERATOR'}
-                </span>
-              </div>
-              
-              <div className="flex flex-wrap items-center gap-x-2 text-[10.5px] text-neutral-400 dark:text-neutral-500 font-sans">
-                <span>Guangzhou</span>
-                <span className="text-neutral-300 dark:text-neutral-800 font-light">/</span>
-                <span>{lang === 'id' ? 'Desainer Web' : lang === 'cn' ? '网页设计师' : 'Web Designer'}</span>
-                <span className="text-neutral-300 dark:text-neutral-800 font-light">/</span>
-                <span>{lang === 'id' ? '1 hari yang lalu' : lang === 'cn' ? '1天前发布' : '1 day ago'}</span>
-                <span className="text-neutral-300 dark:text-neutral-800 font-light">/</span>
-                <span className="flex items-center gap-0.5">
-                  <Eye className="w-3 h-3 text-neutral-400 dark:text-neutral-500" />
-                  <span>67,594 {lang === 'cn' ? '浏览' : 'views'}</span>
-                </span>
-                <span className="text-neutral-300 dark:text-neutral-800 font-light">/</span>
-                <span className="text-[10px]">© {lang === 'id' ? 'Hak Cipta' : lang === 'cn' ? '版权所有' : 'Copyright'}</span>
-              </div>
+            <div>
+              <h4 className="type-nav text-neutral-900 dark:text-neutral-100 font-bold">GUSTI. Visual Creative</h4>
+              <p className="type-label-sm text-neutral-400 dark:text-neutral-500">Visual Production & Commercial Direction</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 self-start md:self-auto">
+          <div className="flex items-center gap-2 self-start sm:self-auto">
             <a
               href={getCustomWhatsAppLink(work, lang)}
               target="_blank"
               referrerPolicy="no-referrer"
-              className="px-4 py-1.5 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300 rounded text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center min-h-[30px]"
+              className="px-4 py-1.5 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300 rounded type-label-md font-bold transition-all duration-300 flex items-center justify-center min-h-[30px]"
             >
               <span>{lang === 'id' ? 'Kirim Pesan' : lang === 'cn' ? 'Message' : 'Message'}</span>
             </a>
-
-            <div className="inline-flex rounded overflow-hidden shadow-xs shrink-0">
-              <button
-                onClick={() => setFollowed(!followed)}
-                className={`px-4.5 py-1.5 text-xs font-extrabold transition-all duration-300 min-h-[30px] flex items-center gap-1.5 ${
-                  followed 
-                    ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200' 
-                    : 'bg-[#ff5134] hover:bg-[#e0452a] text-white'
-                }`}
-              >
-                {followed ? (
-                  <span>{lang === 'id' ? 'Mengikuti' : lang === 'cn' ? '已关注' : 'Following'}</span>
-                ) : (
-                  <span>{lang === 'id' ? 'Ikuti' : lang === 'cn' ? 'Follow' : 'Follow'}</span>
-                )}
-              </button>
-              
-              <button 
-                className={`px-1.5 border-l min-h-[30px] flex items-center justify-center transition-all duration-300 ${
-                  followed 
-                    ? 'bg-neutral-100 dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700 text-neutral-500' 
-                    : 'bg-[#ff5134] hover:bg-[#e0452a] border-[#ff6950] text-white'
-                }`}
-              >
-                <span className="text-[8px] transform translate-y-px">▼</span>
-              </button>
-            </div>
           </div>
         </div>
 
         {/* SECTION 1: CAMPAIGN INFO GRID */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-b border-neutral-100 dark:border-neutral-800/60 text-sm">
           <div>
-            <h4 className="text-[11px] font-extrabold tracking-wider text-neutral-400 dark:text-neutral-500 uppercase">{getLabel('client', lang)}</h4>
+            <h4 className="type-eyebrow">{getLabel('client', lang)}</h4>
             <p className="mt-1 font-bold text-neutral-800 dark:text-neutral-200">{detail.client}</p>
           </div>
           <div>
-            <h4 className="text-[11px] font-extrabold tracking-wider text-neutral-400 dark:text-neutral-500 uppercase">{getLabel('year', lang)}</h4>
+            <h4 className="type-eyebrow">{getLabel('year', lang)}</h4>
             <p className="mt-1 font-bold text-neutral-800 dark:text-neutral-200">{detail.year}</p>
           </div>
           <div className="col-span-2">
-            <h4 className="text-[11px] font-extrabold tracking-wider text-neutral-400 dark:text-neutral-500 uppercase">{getLabel('role', lang)}</h4>
+            <h4 className="type-eyebrow">{getLabel('role', lang)}</h4>
             <p className="mt-1 font-bold text-neutral-800 dark:text-neutral-200">{detail.role[lang] || detail.role['en']}</p>
           </div>
         </div>
 
         {/* SECTION 1B: APPLIED SPECIALTIES */}
         <div className="py-4 border-b border-neutral-100 dark:border-neutral-800/60">
-          <h4 className="text-[11px] font-extrabold tracking-wider text-neutral-400 dark:text-neutral-500 uppercase mb-2">{getLabel('services', lang)}</h4>
+          <h4 className="type-eyebrow mb-2">{getLabel('services', lang)}</h4>
           <div className="flex flex-wrap gap-1.5">
             {(detail.services[lang] || detail.services['en'] || []).map((srv, idx) => (
-              <span key={idx} className="text-[11px] font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-3 py-1 rounded">
+              <span key={idx} className="type-label-sm font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-3 py-1 rounded">
                 {srv}
               </span>
             ))}
@@ -158,7 +98,7 @@ export function FatSportDetail({ work, lang, detail, onBack }: ProjectDetailPage
         </div>
 
         {/* SECTION 2: THE STRATEGIC NARRATIVE */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-b border-neutral-100 dark:border-neutral-800/60 leading-relaxed text-[13px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-b border-neutral-100 dark:border-neutral-800/60 leading-relaxed type-body-md">
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200 font-extrabold tracking-tight">
               <span className="w-1.5 h-3 bg-red-500 rounded-sm"></span>
@@ -272,10 +212,10 @@ export function FatSportDetail({ work, lang, detail, onBack }: ProjectDetailPage
         {/* SECTION 6: CREDITS ROLL */}
         {detail.credits && detail.credits.length > 0 && (
           <div className="py-8 border-t border-b border-neutral-100 dark:border-neutral-800/60 bg-[#F5F6F8]/50 dark:bg-[#161616]/30 px-6 rounded-2xl space-y-5">
-            <h4 className="text-xs font-mono font-bold tracking-widest text-neutral-400 dark:text-neutral-500 uppercase text-center">
+            <h4 className="type-eyebrow text-center">
               —— {lang === 'id' ? 'KREDIT TIM PRODUKSI' : lang === 'cn' ? '项目制作群' : 'PRODUCTION CREDITS'} ——
             </h4>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-[11.5px] font-sans">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 type-label-sm">
               {detail.credits.map((credit, cidx) => (
                 <div key={cidx} className="flex flex-col gap-0.5">
                   <span className="text-neutral-400 dark:text-neutral-500 font-medium">
@@ -298,16 +238,16 @@ export function FatSportDetail({ work, lang, detail, onBack }: ProjectDetailPage
             <div className="absolute -bottom-16 -left-16 w-36 h-36 rounded-full bg-red-500/10 blur-[60px]" />
 
             <div className="relative z-10 space-y-4 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 bg-red-600/10 text-[#FF5134] px-3 py-1 rounded-full text-[10px] font-mono font-extrabold tracking-widest uppercase border border-red-500/20 shadow-xs mb-1">
+              <div className="inline-flex items-center gap-1.5 bg-red-600/10 text-[#FF5134] px-3 py-1 rounded-full type-label-xs font-extrabold tracking-widest uppercase border border-red-500/20 shadow-xs mb-1">
                 <span>⚡</span>
                 <span>{lang === 'id' ? 'KONSULTASI GRATIS' : lang === 'cn' ? '免费视觉咨询' : 'FREE DIRECT SCOPING'}</span>
               </div>
               
-              <h3 className="text-xl md:text-2xl font-extrabold tracking-tight font-sans text-white uppercase">
+              <h3 className="type-display-lg text-white uppercase">
                 {getLabel('interest', lang)}
               </h3>
               
-              <p className="text-xs md:text-[13px] text-neutral-400 leading-relaxed font-sans font-medium">
+              <p className="type-body-sm text-neutral-400">
                 {lang === 'id' 
                   ? 'Gusti siap merancang visual produk fisik / aset komersial beralur tinggi yang disesuaikan khusus untuk target pasar Anda. Hubungi kami sekarang demi mendapatkan estimasi produksi.'
                   : lang === 'cn'

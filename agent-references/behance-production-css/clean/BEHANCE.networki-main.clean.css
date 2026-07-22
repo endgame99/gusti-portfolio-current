@@ -1,0 +1,59 @@
+/* CARD */
+.gusti-card {
+  background: var(--be-surface);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(25,25,25,.2);
+  overflow: hidden;
+  transition: 0.25s;
+}
+
+.gusti-card:hover {
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+}
+
+/* CARD IMAGE */
+.gusti-card-media {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.gusti-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TITLE */
+.gusti-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--be-text-primary);
+}
+
+/* META */
+.gusti-card-meta {
+  font-size: 11px;
+  color: var(--be-text-subtle);
+}
+
+/* INPUT */
+.gusti-input {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 6px;
+}
+
+.gusti-input:focus {
+  border-color: var(--be-accent);
+}
+
+/* TAG / CHIP */
+.gusti-chip {
+  background: #191919;
+  color: #fff;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}

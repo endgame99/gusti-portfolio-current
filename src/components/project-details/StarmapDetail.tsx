@@ -54,10 +54,10 @@ export function StarmapDetail({ work, lang, detail, onBack }: ProjectDetailPageP
     >
 
       {/* ── 1. Top navigation ── */}
-      <div className="max-w-5xl mx-auto px-6 pt-8">
+      <div className="detail-container pt-8">
         <button
           onClick={onBack}
-          className="group inline-flex items-center gap-2 text-xs font-medium tracking-wide text-neutral-400 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-neutral-200 transition-colors duration-200"
+          className="group inline-flex items-center gap-2 type-label-sm tracking-wide text-neutral-400 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-neutral-200 transition-colors duration-200"
         >
           <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
           <span>{getLabel('back', lang)}</span>
@@ -65,7 +65,7 @@ export function StarmapDetail({ work, lang, detail, onBack }: ProjectDetailPageP
       </div>
 
       {/* ── 2. Brand header ── */}
-      <div className="max-w-5xl mx-auto px-6 pt-10 pb-8">
+      <div className="detail-container pt-10 pb-8">
         <div className="flex items-center gap-4">
           <div className="w-11 h-11 rounded-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 shrink-0">
             <img
@@ -75,7 +75,7 @@ export function StarmapDetail({ work, lang, detail, onBack }: ProjectDetailPageP
             />
           </div>
           <div>
-            <h1 className="text-base font-semibold tracking-tight text-neutral-900 dark:text-white leading-tight">
+            <h1 className="type-display-lg text-neutral-900 dark:text-white">
               STARMAP
             </h1>
             <p className="text-sm text-neutral-400 dark:text-neutral-500 leading-tight">
@@ -86,13 +86,13 @@ export function StarmapDetail({ work, lang, detail, onBack }: ProjectDetailPageP
       </div>
 
       {/* ── 3. Tab navigation ── */}
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="detail-container">
         <nav className="flex border-b border-neutral-200 dark:border-neutral-800">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative px-5 py-3 text-sm transition-colors duration-200 ${
+              className={`relative px-5 py-3 type-tab transition-colors duration-200 ${
                 activeTab === tab.id
                   ? 'font-medium text-neutral-900 dark:text-white'
                   : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300'
@@ -108,7 +108,7 @@ export function StarmapDetail({ work, lang, detail, onBack }: ProjectDetailPageP
       </div>
 
       {/* ── Tab content ── */}
-      <div className="max-w-5xl mx-auto px-6 pt-12 pb-24">
+      <div className="detail-container pt-12 pb-16">
 
         {/* ── 4. Product Information tab ── */}
         {activeTab === 'product' && (

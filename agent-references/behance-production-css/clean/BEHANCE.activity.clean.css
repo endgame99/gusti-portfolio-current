@@ -1,0 +1,65 @@
+:root {
+  --be-accent: #0057ff;
+  --be-text-primary: #191919;
+  --be-bg: #f9f9f9;
+  --be-surface: #ffffff;
+
+  --be-text-muted: dimgray;
+  --be-text-subtle: #959595;
+
+  --be-border: #e8e8e8;
+  --be-border-light: #e1e1e1;
+
+  --be-hover: #f0f0f0;
+  --be-disabled: #e8e8e8;
+
+  --be-danger: #d00d00;
+  --be-success: #058900;
+
+  --be-radius-pill: 50px;
+  --be-radius-sm: 4px;
+
+  --be-transition: 300ms;
+}
+
+/* GLOBAL */
+html, body {
+  background: var(--be-bg);
+  color: var(--be-text-primary);
+  font-family:
+    "acumin-pro",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+/* BUTTON */
+.gusti-button {
+  background: var(--be-accent);
+  color: #fff;
+  border-radius: var(--be-radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 15px 8px;
+  transition: var(--be-transition);
+}
+
+.gusti-button:hover {
+  background: rgb(0, 62, 203);
+}
+
+.gusti-button--secondary {
+  background: #fff;
+  border: 1px solid var(--be-border);
+  color: var(--be-text-primary);
+}
+
+.gusti-button--danger {
+  background: var(--be-danger);
+}
+
+.gusti-button--disabled {
+  background: var(--be-disabled);
+  pointer-events: none;
+}

@@ -1,300 +1,467 @@
-# UI_GUIDELINES.md — GUSTI Portfolio UI/UX Preservation Guide
+# UI_GUIDELINES.md — GUSTI Portfolio Design System
 
-## 1. Purpose
+Primary Reference: [comfy.org/workflows](https://comfy.org/workflows/)
 
-This file is the source of truth for UI preservation and visual alignment on the existing GUSTI portfolio website.
-
-Its goal is to prevent unwanted redesign, enforce consistency, and ensure every future UI edit is safe, scoped, and evidence-based.
-
-This is NOT a design system.
-This is NOT a redesign brief.
-This is a preservation and alignment guideline.
+Adapted from the reference's UI/UX system. Does NOT copy Comfy branding, business terminology, company identity, logos, or content. Future tasks may use different references — this guideline adapts, not restricts.
 
 ---
 
-## 2. Source Usage
+## 0. REFERENCE PRIORITY
 
-`design-ui-designer.md` is used only as a methodology reference for:
+When making any UI decision, follow this priority order:
 
-- consistency discipline
-- visual hierarchy awareness
-- accessibility awareness
-- responsive behavior discipline
-- precise developer handoff discipline
+1. **Current Active Task** — The user's explicit instruction always wins.
+2. **Current Task Reference** — If the task provides a specific design reference (e.g., Apple, Stripe, Linear, Framer, Notion, Shopify, Comfy, etc.), that reference overrides this guideline for the scope of that task.
+3. **UI_GUIDELINES.md** — This document provides defaults when no task-specific reference exists.
+4. **Existing Implementation** — The current codebase is the fallback when no guideline or reference addresses the situation.
 
-`design-ui-designer.md` must NOT be used to:
+### Key Principles
 
-- create a new design system
-- create new color tokens
-- create new typography tokens
-- create global CSS variables
-- create a new component library
-- create a new button/card system
-- introduce dark mode systems
-- redesign the website
-
-Core principle:
-
-**Preserve first. Align second. Redesign never, unless explicitly requested by the user.**
+- This guideline is **not permanently bound to Comfy.org**. It was initially derived from that reference, but any task may introduce a different reference for a specific page or component.
+- A task-specific reference overrides this guideline **only for the scope of that task**. It does not retroactively change other pages or components.
+- Never force every page to follow the same reference forever.
+- Never reject a redesign request because it deviates from this document.
 
 ---
 
-## 3. Non-Redesign Rules
+## 1. TASK SCOPE PROTECTION
 
-Agents must NOT:
+### Core Rule
 
-- Redesign existing layouts.
-- Change section order.
-- Introduce a new visual style.
-- Change global navigation, sidebar, header, routing, or project detail architecture unless explicitly requested.
-- Add CTA elements unless the function is defined.
-- Create new global tokens or component systems.
-- Perform global cleanup unless explicitly requested.
-- Replace existing visual patterns with new ones without explicit user approval.
+Each task operates within its declared scope. Changes must not leak into unrelated areas.
 
----
+### Scope Boundary Examples
 
-## 4. Required Inspection Before UI Edits
+| If the task is about... | Do NOT also change... |
+|---|---|
+| Hero carousel | Library, Sidebar, Footer, Routing |
+| Services section | Project Detail, Homepage grid, Navigation |
+| Project Detail page | Homepage, Hero, Services, Library |
+| Card UI / grid | Data structure, Routing, Detail pages |
+| Navigation / Sidebar | Homepage content, Project data, Services |
+| Library section | Hero, Services, Card grid, Navigation |
+| Typography system | Individual component layouts (unless requested) |
 
-Before editing any UI, the agent must inspect the current component/file and report:
+### Exceptions
 
-1. **Current layout structure** — flex, grid, stacking order, container hierarchy.
-2. **Current spacing classes** — padding, margin, gap values currently in use.
-3. **Current typography classes** — font size, weight, line-height, letter-spacing currently in use.
-4. **Current media sizing** — image/video dimensions, aspect ratios, object-fit values.
-5. **Current responsive behavior** — breakpoint classes, stacking changes, visibility toggles.
-6. **Current CTA/link behavior** — what interactive elements exist, what they do, where they link.
-7. **Exact file/component that will be touched** — full path and component name.
+Scope expansion is allowed **only** when the user explicitly requests it. Example:
 
-This inspection must be included in the agent's pre-edit report before any code changes begin.
+> "Redesign the hero AND update the card grid to match."
+
+In this case, both hero and card grid are in scope.
 
 ---
 
-## 5. Allowed Adjustment Types
+## 2. REFERENCE ANALYSIS WORKFLOW
 
-Only inside the requested file/component scope, the agent may adjust:
+Before implementing any UI redesign that involves a visual reference, the agent must follow this workflow. Do not skip any step.
 
-- `padding`
-- `margin`
-- `gap`
-- `max-width`
-- `font-size`
-- `line-height`
-- `font-weight`
-- paragraph width (`max-w-*`, `max-width`)
-- image/video size (`w-*`, `h-*`, `max-w-*`, `max-h-*`)
-- `aspect-ratio`
-- `object-fit`
-- `border-radius`
-- responsive stacking (`flex-col`, `grid-cols-*`, breakpoint variants)
+### Step 1 — Analyze the Reference
 
-These adjustments are allowed only when they serve a clear purpose: improving readability, fixing alignment, fixing responsive issues, or matching a user-provided reference.
+Study the provided reference URL or screenshot. Identify what makes the reference effective.
 
----
+### Step 2 — Extract Design Patterns
 
-## 6. Forbidden Adjustment Types
+Identify and document:
 
-Agents must NOT:
+- Typography (fonts, sizes, weights, line-height, letter-spacing)
+- Visual hierarchy (information stack, emphasis, contrast)
+- Spacing & white space (section rhythm, padding, breathing room)
+- Grid & layout (columns, alignment, container behavior)
+- Components (cards, buttons, chips, forms, navigation)
+- Interaction (hover, focus, transitions, animations)
+- Responsive behavior (breakpoints, stacking, scaling)
+- Motion philosophy (speed, easing, purpose)
 
-- Redesign the full page.
-- Rewrite unrelated sections.
-- Create a new design language.
-- Add decorative elements (borders, gradients, shadows, icons) without explicit request.
-- Add CTA/buttons without a defined function.
-- Replace content with fake content.
-- Change the global font system.
-- Change navigation/sidebar/header.
-- Change routing.
-- Change project detail structure.
-- Use random images as service visuals.
-- Duplicate labels.
-- Perform broad cleanup outside requested files.
-- Add new npm dependencies for UI changes without explicit approval.
+### Step 3 — Separate Adoptable from Non-Adoptable
 
----
+**Adopt:** Design patterns, spacing rhythm, typography system, component architecture, interaction quality.
 
-## 7. Visual Hierarchy Rules
+**Do NOT copy:**
 
-Future UI edits must preserve or improve:
+- Business copy or marketing text
+- Brand identity (logos, brand colors, brand names)
+- Product names or terminology
+- Company-specific labels
+- Platform-specific UI that doesn't apply to a portfolio
 
-- Title-to-paragraph hierarchy (titles visually dominant over body text).
-- Paragraph readability (appropriate line length, line height, contrast).
-- Spacing between title and paragraph (clear separation, not cramped).
-- Spacing between content groups (sections breathe, groups are visually distinct).
-- Text/media priority (hero media leads, supporting text follows).
-- Clear section separation (sections do not bleed into each other).
+### Step 4 — Map to Existing Architecture
 
-Do not invent a new hierarchy.
+Identify which existing files, components, and data structures are affected. Plan the minimum changes needed.
 
-Match the existing website rhythm unless the user provides a new reference.
+### Step 5 — Implement Within Task Scope
 
-If the existing hierarchy has a clear issue (e.g., title smaller than body text), the agent may flag it and propose a fix, but must not apply it without user approval.
+Execute only within the boundaries of the current task. Do not redesign unrelated sections.
 
 ---
 
-## 8. Spacing and Typography Rule
+## 3. NEVER ASSUME DATA
 
-Do not invent arbitrary spacing or font sizes.
+### Rule
 
-Any spacing or typography adjustment must be based on at least one of these:
+Never invent, generate, or assume content that does not already exist in the project data files or is not explicitly provided by the user.
 
-1. Existing classes in the current component.
-2. Nearby section rhythm (what adjacent sections use).
-3. User-provided screenshot or reference.
-4. Explicit user instruction.
-5. Clear readability or accessibility issue (e.g., text too small to read, lines too long for comfortable reading).
+### Never Invent
 
-If the reason for a spacing or typography change cannot be proven by one of these sources, write:
+- Project names
+- Project descriptions
+- Client names
+- Client logos or images
+- Service categories
+- Statistics, metrics, or numbers
+- Testimonials or quotes
+- CTA text or marketing copy
+- Dates or timelines
+- Images or video URLs
+- Awards, badges, or rankings
+- Pricing or ROI claims
 
-`MISSING_DATA_REQUIRED`
+### Always Reuse
 
-Do not guess. Do not use "looks better" as justification without a reference.
+Use the existing project data from `src/data.ts` and `src/data/projectDetails.ts` unless the current task explicitly changes it.
 
----
+### If Data Is Missing
 
-## 9. CTA Rule
-
-Global CTA already exists in the header/sidebar (e.g., WhatsApp link, navigation).
-
-Do not add CTA inside sections by default.
-
-Section CTA is allowed only when it has a unique, defined function, such as:
-
-- Filtering content
-- Opening a modal
-- Scrolling to a specific section
-- Playing media
-- Selecting a service/category
-- Toggling a view mode
-
-Do not add generic CTA such as:
-
-- "Contact"
-- "Start Project"
-- "Request Pricing"
-- "More"
-- "Learn More"
-- "Get Started"
-
-unless the user explicitly defines its function and destination.
+State `MISSING_DATA_REQUIRED` and explain what data is needed. Do not fill gaps with plausible-sounding content. Refer to `AGENTS.md` anti-hallucination rules.
 
 ---
 
-## 10. Services Section Rules
+# PART A — GLOBAL DESIGN SYSTEM
 
-### Services Hero
-
-- **Function:** orientation / sales positioning.
-- **Not** a CTA area.
-- **Not** a gallery.
-- **Not** a pricing section.
-- **Not** a redesign area.
-
-Approved Services Hero copy:
-
-**Headline:**
-
-> More visual content. Lower production costs.
-
-**Paragraph:**
-
-> Create product images, ecommerce assets, videos, and campaign materials faster — without starting from scratch every time.
-
-Approved Services Hero media:
-
-- YouTube embed.
-- Aspect ratio: 4:3.
-- No CTA overlay on the video.
-
-### Service Category Showcase
-
-- **Function:** service menu / category listing.
-- Must help users understand service differences.
-- Must not look like a random work gallery.
-- Must not show duplicate labels.
-- "More" must not appear unless it has a real, defined function.
+The following sections define system-wide design principles. They apply across all pages and components unless a task-specific reference overrides them.
 
 ---
 
-## 11. Evidence Rule
+## 4. TYPOGRAPHY SYSTEM
 
-Every future UI edit must report:
+### Font Stack
 
-1. **Exact file touched** — full path.
-2. **Exact component/section touched** — component name, section name.
-3. **What existing pattern was preserved** — e.g., "kept existing `gap-6` between cards."
-4. **What was adjusted** — e.g., "changed `text-sm` to `text-base` on service descriptions."
-5. **Why the adjustment was necessary** — e.g., "text was too small for comfortable reading at desktop width."
-6. **Source of the decision** — one of: current code, user reference, user instruction, accessibility issue.
+| Role | Font | Fallback |
+|---|---|---|
+| **Global Font** | `acumin-pro` | `"Helvetica Neue", Helvetica, Arial, sans-serif` |
 
-If the agent cannot provide evidence for a change, the change must not be made.
+### Usage Rules
 
----
+**acumin-pro** — Used globally for ALL text elements across the entire website:
 
-## 12. Missing Data Rule
+- Headlines, hero titles, and section headers
+- Navigation, sidebar, header menus
+- Buttons, action elements, forms
+- Body paragraphs, descriptions, and strategic narrative
+- Project metadata, labels, chips, and tags
+- Card titles, card metadata, and credits roll
 
-If information is not available from:
+Hierarchy is driven by size, weight (400, 500, 600, 700, 800), line height, and letter spacing — not by splitting display and body fonts.
 
-- Current code
-- User instruction
-- User-provided reference (screenshot, URL, description)
+### Typography Scale
 
-Write:
-
-`MISSING_DATA_REQUIRED`
-
-Do not fill missing data with assumptions.
-
-Do not invent:
-
-- Fake client facts
-- Fake statistics
-- Fake testimonials
-- Fake pricing
-- Fake copy
-- Placeholder images presented as real content
-
-This rule applies to both content and visual decisions.
+| Level | Min (mobile) | Max (desktop) | Weight | Line Height | Letter Spacing |
+|---|---|---|---|---|---|
+| **Hero / Display XL** | `1.5rem` (24px) | `2.25rem` (36px) | Semibold (600) | `leading-tight` | `tracking-[-0.025em]` |
+| **Section Header / Display LG** | `1.25rem` (20px) | `1.5rem` (24px) | Semibold (600) | `leading-tight` | `tracking-[-0.025em]` |
+| **Card Title / Display MD** | `1.125rem` (18px) | `1.25rem` (20px) | Semibold (600) | `leading-snug` | `tracking-[-0.02em]` |
+| **Heading LG** | `1.125rem` (18px) | `1.125rem` (18px) | Bold (700) | `leading-snug` | `tracking-[-0.025em]` |
+| **Body (Base)** | `0.875rem` (14px) | `0.875rem` (14px) | Regular (400) | `leading-relaxed` | — |
+| **UI / Buttons / Nav** | `0.75rem` (12px) | `0.875rem` (14px) | Semibold (600) | `leading-none` | — |
+| **Metadata / Chips** | `0.625rem` (10px) | `0.6875rem` (11px) | Medium (500) | `leading-none` | `tracking-wide` |
 
 ---
 
-## 13. Build and Report Rule
+## 5. SPACING & WHITE SPACE
 
-After any future UI edit, the agent must:
+### Spacing Philosophy
 
-1. Run `npm.cmd run build` (or `npm run build` on non-Windows).
-2. Report exact files changed.
-3. Confirm forbidden files were not touched (see `AGENTS.md` Section 7).
-4. Confirm no unrelated redesign was done.
-5. Confirm what existing patterns were preserved.
-6. Mention any `MISSING_DATA_REQUIRED` items discovered during the edit.
+Spacing should create a premium, editorial rhythm. Follow the reference's proportions as a baseline, but allow individual components to define appropriate dimensions for their content.
+
+### Page Container
+
+- **Max width:** Use a wide container that occupies most of the viewport while maintaining comfortable reading proportions. The reference uses approximately 1600px.
+- **Alignment:** Horizontally centered.
+- **Horizontal padding:** Scale down on smaller viewports. Use clamped or responsive padding that tightens on mobile without collapsing.
+
+### Spacing Rhythm Principles
+
+| Context | Principle |
+|---|---|
+| **Section separation** | Generous vertical space between major sections. Sections should breathe. |
+| **Hero spacing** | Minimal top margin above hero. Comfortable bottom margin before the next section. |
+| **Grid gap** | Consistent gap between cards. Tight enough to feel cohesive, loose enough to feel clean. |
+| **Card inner padding** | Compact but not cramped. Content should not touch card edges. |
+| **Element gap** | Related elements (eyebrow + headline + paragraph) grouped tightly. Unrelated groups separated clearly. |
+
+### White Space Rules
+
+- **Headline breathing room:** Always separate major headlines from surrounding content with generous vertical space.
+- **Content grouping:** Keep related elements tightly stacked, then surround the group with white space.
+- **Reading width:** Body text should not span the full container width. Restrict paragraphs to a comfortable reading measure (~65–75 characters).
+- **Consistent gutters:** All sections should sit inside the same container alignment. Do not mix different container widths or padding values on the same page.
 
 ---
 
-## 14. Relationship to Other Control Files
+## 6. VISUAL HIERARCHY
+
+Sections follow a predictable information stack. Not every layer is required — use only what the content needs.
+
+1. **Eyebrow** — Small uppercase text, muted color, wide letter-spacing
+2. **Headline** — Large display text (acumin-pro), tight leading, slight negative letter-spacing
+3. **Supporting Paragraph** — Restrained width, regular weight, muted color
+4. **Filters / Tabs** — Sticky bar below the header, horizontally scrollable on mobile
+5. **Primary Content** — Cards, grids, or media blocks
+6. **Secondary Metadata** — Chips, pagination, or small labels
+
+---
+
+## 7. MOTION & INTERACTION
+
+### Motion Philosophy
+
+- Transitions should feel **swift and purposeful**, not decorative
+- Standard interactions (hover, focus, tab): fast response, no perceived delay
+- Content transitions (carousel slides, page changes): smooth but not slow
+- Never animate layout dimensions in a way that causes content to jump or reflow
+
+### Reduced Motion
+
+Respect `prefers-reduced-motion`. Provide instant state changes as fallback.
+
+### Layout Shift Prevention
+
+- All containers, buttons, and text elements must have stable dimensions
+- No size changes on hover/focus/active states
+- Use `object-cover` on all media to prevent reflow
+- Reserve space for lazy-loaded images with `aspect-ratio`
+
+---
+
+## 8. RESPONSIVE BEHAVIOR
+
+### Breakpoint Philosophy
+
+- **Mobile-first:** Base styles target small screens. Enhancements added via `sm:`, `md:`, `lg:` breakpoints.
+- **Fluid where possible:** Use `clamp()` for typography and padding to avoid hard jumps.
+- **Progressive disclosure:** Show fewer chips, shorter metadata, and simpler controls on mobile. Expand on desktop.
+
+### Responsive Principles by Element
+
+| Element | Desktop | Tablet | Mobile |
+|---|---|---|---|
+| Container | Wide max-width + clamped padding | Moderate padding | Compact padding |
+| Hero | Tall, immersive | Medium height | Compact, still readable |
+| Hero title | Largest clamp value | Mid | Smallest clamp value |
+| Hero controls | Larger, more spacing | Standard | Compact |
+| Hero chips | 2–3 visible | 1–2 visible | 1 visible |
+| Grid columns | 3–4 | 2 | 1 |
+| Card padding | Standard | Slightly reduced | Compact |
+| Sidebar | Visible (collapsible) | Visible (collapsible) | Bottom nav bar |
+
+---
+
+## 9. ACCESSIBILITY
+
+- All interactive elements must have visible focus indicators
+- Color contrast must meet WCAG AA minimum (4.5:1 for text, 3:1 for large text)
+- All images must have meaningful `alt` text
+- Videos should include `muted` and `playsinline` for autoplay compliance
+- Keyboard navigation must work for all interactive elements
+- Use semantic HTML elements (`<nav>`, `<main>`, `<section>`, `<button>`, `<a>`)
+
+---
+
+## 10. CONTENT CONSISTENCY
+
+### Data Integrity
+
+- **Factual content only.** No fake testimonials, statistics, awards, rankings, or creator badges. (See `AGENTS.md` anti-hallucination rules.)
+- **Missing data:** If content is needed but unavailable, write `MISSING_DATA_REQUIRED`. Do not invent.
+
+### Cross-Component Consistency
+
+- **Project title** must be identical in: Hero slide → Work card → Project detail page
+- **Service categories** must match exactly across all occurrences
+- **Client/company name** must be consistent everywhere it appears
+
+### Purposeful UI
+
+- Every text element must serve a purpose
+- No decorative-only labels
+- No duplicated information within the same view
+- No fake metadata or placeholder badges
+
+---
+
+# PART B — COMPONENT GUIDELINES
+
+The following sections define component-specific patterns. Each component may be redesigned independently as long as it follows the global design system above and the current task scope.
+
+---
+
+## 11. HERO CAROUSEL
+
+### Structure
+
+- Full container width, matching the page container
+- Large rounded corners with a thin visible border
+- Media fills the container with `object-cover`
+- Responsive height that scales proportionally (taller on desktop, compact on mobile)
+
+### Overlay
+
+- Dark transparent gradient from bottom upward, ensuring legible white text
+- **Bottom left:** Project title (large, acumin-pro), client/company circular avatar, service category chips
+- **Bottom right:** Previous/Next navigation buttons with semi-transparent backdrop
+
+### Carousel Behavior
+
+- Slides move horizontally, one full slide at a time
+- Autoplay on a timer interval
+- Pause on hover (optional)
+- After manual navigation, autoplay continues on the same interval
+- Entire slide clickable to the project detail page
+- No decorative badges
+
+### Clickable Slide
+
+- An invisible anchor covers the entire slide at a lower z-index
+- Overlay buttons and links use higher z-index with `pointer-events-auto`
+
+---
+
+## 12. NAVIGATION & SIDEBAR
+
+### Desktop Sidebar
+
+- Fixed left sidebar with collapse/expand toggle
+- Navigation items: icon + label when expanded, icon-only when collapsed
+- Active state visually distinct from inactive
+- Logo/brand mark at the top, doubles as home navigation
+
+### Mobile Bottom Navigation
+
+- Fixed bottom bar replacing the sidebar
+- Horizontal icon + label layout
+- Active state visually distinct
+- Same navigation items as the sidebar
+
+### Behavior
+
+- Navigation state is managed via application state, not URL routing
+- Clicking a nav item updates the active tab/section
+- Home click resets to homepage view and scrolls to top
+
+---
+
+## 13. PROJECT CARDS
+
+### Grid Independence
+
+The project card grid is independent of the hero. Redesigning the hero does not automatically require redesigning the cards, and vice versa.
+
+### Card Architecture
+
+- Subtle background color differentiation from the page
+- Large rounded corners matching the overall design language
+- Image container with consistent aspect ratio and `object-cover`
+- Hover: subtle shadow lift and image scale
+
+### Card Metadata Hierarchy
+
+1. **Title** — Semibold, primary text color
+2. **Label/Subtitle** — Smaller, muted text color
+3. **Tags (if shown)** — Small chips
+
+### Card Interaction
+
+- Card-wide clickability via `<button>` or `<a>` wrapper
+- Smooth hover transitions (shadow, scale, background)
+- No layout shift on hover
+
+---
+
+## 14. BUTTONS
+
+### Principles
+
+- Consistent height across the interface (standard and large variants)
+- Highly rounded or capsule-shaped
+- Clear hover, focus, and disabled states
+- Fast transitions
+- Disabled state: reduced opacity, no pointer events
+
+---
+
+## 15. CHIPS & FILTERS
+
+### Service/Category Chips
+
+- Capsule-shaped (`rounded-full`)
+- Compact sizing
+- Semi-transparent backgrounds on dark overlays, subtle fills on light backgrounds
+- Interactive chips have hover state transitions
+
+### Filter Tabs
+
+- Horizontally scrollable on mobile
+- Clear active/inactive states
+- Sticky positioning below the header when scrolling
+
+---
+
+## 16. PROJECT DETAIL PAGE
+
+### Structure
+
+- Long vertical scroll page
+- Visual-first: hero media at the top
+- Clean title and short intro
+- Flexible content blocks (images, videos, text)
+- Project narrative sections (overview, creative direction, scope)
+- Clean CTA at the bottom (if applicable)
+- Minimal UI chrome, premium spacing
+
+### Guidelines
+
+- Each project detail page can be independently customized
+- The `ProjectDetail.tsx` controller routes to per-project components
+- Detailed project data comes from `src/data/projectDetails.ts`
+
+---
+
+## 17. FORMS & INPUTS
+
+_(Reserved for future implementation)_
+
+Define styling for text inputs, selects, textareas, and form layouts when needed.
+
+---
+
+## 18. FOOTER
+
+_(Reserved for future implementation)_
+
+Define footer structure, spacing, links, and responsive behavior when needed.
+
+---
+
+## 19. FUTURE COMPONENTS
+
+New components should be added to Part B as they are designed. Each entry should define:
+
+- Structure and layout
+- Content hierarchy
+- Interaction behavior
+- Responsive adaptation
+- Relationship to the global design system
+
+---
+
+## 20. RELATIONSHIP TO OTHER FILES
 
 | File | Purpose |
 |---|---|
-| `AGENTS.md` | Agent behavior rules, forbidden files, workflow rules, anti-hallucination rules |
-| `PROJECT_CONTEXT.md` | Current tech stack, architecture, known issues, finishing priorities |
-| `TASK_QUEUE.md` | Task execution order, branch discipline, acceptance criteria |
-| `UI_GUIDELINES.md` (this file) | UI preservation rules, allowed/forbidden adjustments, evidence requirements |
-| `design-ui-designer.md` | Methodology reference only — not a design system to implement |
+| `AGENTS.md` | Agent behavior, forbidden files, workflow, anti-hallucination |
+| `UI_GUIDELINES.md` (this file) | Visual design system for consistency |
+| `UI_GUIDELINES.DISABLED.md` | Previous preservation-focused guideline (archived) |
 
-These files work together. None of them override each other.
+This guideline works alongside `AGENTS.md`. Neither overrides the other.
 
-If a conflict arises between files, the user's explicit instruction takes priority.
-
----
-
-## Summary
-
-This guideline exists to protect the existing GUSTI portfolio website from unwanted redesign.
-
-Every UI change must be:
-
-- **Scoped** — only the requested file/component.
-- **Evidenced** — based on current code, user reference, or user instruction.
-- **Reported** — with exact files, changes, and preserved patterns.
-- **Built** — verified with a passing build.
-- **Approved** — by the user before moving to the next task.
+**If a conflict arises between any guideline and an explicit user instruction, the user instruction wins.**

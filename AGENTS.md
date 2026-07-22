@@ -204,7 +204,11 @@ After editing:
 
 ---
 
-## 7. UI Task Rules — UI_GUIDELINES.md Compliance
+## 7. UI Task Rules — TEMPORARILY DISABLED
+
+<!-- UI_GUIDELINES.md compliance is temporarily disabled for redesign work.
+     Original file renamed to UI_GUIDELINES.DISABLED.md.
+     To re-enable: rename the file back and uncomment this section.
 
 For any task involving UI, layout, spacing, typography, visual hierarchy, responsive behavior, media sizing, cards, grids, CTA placement, or section presentation, the agent must read `UI_GUIDELINES.md` before proposing or making changes.
 
@@ -232,6 +236,7 @@ The agent must report:
 - Whether the change came from code evidence, user reference, or explicit user instruction.
 
 Full UI preservation rules, allowed/forbidden adjustments, spacing rules, CTA rules, evidence requirements, and Services section rules are defined in `UI_GUIDELINES.md`.
+-->
 
 ---
 

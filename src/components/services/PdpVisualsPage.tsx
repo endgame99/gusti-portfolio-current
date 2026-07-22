@@ -329,10 +329,10 @@ export function PdpVisualsPage() {
           whatsappUrl={WHATSAPP_LINK}
         />
 
-        <main className="px-4 md:px-8 w-full max-w-[1200px] mx-auto pb-24 md:pb-12 pt-16">
+        <main className="px-4 sm:px-6 lg:px-[clamp(1rem,4vw,3.5rem)] w-full max-w-[1400px] mx-auto pb-24 md:pb-12 pt-16">
         {/* Title area */}
         <div className="mb-10 md:mb-14 max-w-5xl mx-auto w-full">
-          <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white tracking-tight">
+          <h1 className="font-display text-2xl md:text-3xl font-normal text-neutral-900 dark:text-white tracking-tight">
             E-commerce Visual Creative — PDP Visuals
           </h1>
           <p className="mt-3 text-sm md:text-base leading-relaxed text-neutral-500 dark:text-neutral-400 max-w-2xl">
