@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Lock, Wand2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GustiSidebar } from '../GustiSidebar';
 import { GustiTopHeader } from '../GustiTopHeader';
@@ -111,10 +111,11 @@ function buildWhatsAppUrl(message: string): string {
 }
 
 interface SkuProductCardProps {
+  key?: string;
   sku: SkuSet;
   idx: number;
   isActive: boolean;
-  onSelectSku: (skuIdx: number, slideIdx: number) => void;
+  onSelectSku: (skuIdx: number, slideIdx?: number) => void;
 }
 
 function SkuProductCard({ sku, idx, isActive, onSelectSku }: SkuProductCardProps) {
@@ -232,7 +233,7 @@ export function PdpVisualsPage() {
   const [lang, setLang] = useState<Language>('en');
   const [theme, setTheme] = useState<Theme>('light');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [activeNav, setActiveNav] = useState<'home' | 'work' | 'services' | 'library'>('services');
   const [activeTab, setActiveTab] = useState<'recommended' | 'services' | 'library'>('services');
 
@@ -312,14 +313,13 @@ export function PdpVisualsPage() {
             window.location.href = `/?tab=${tab}`;
           }
         }}
-        collapsed={sidebarCollapsed}
-        setCollapsed={setSidebarCollapsed}
+        isSidebarExpanded={isSidebarExpanded}
+        setIsSidebarExpanded={setIsSidebarExpanded}
         whatsappUrl={WHATSAPP_LINK}
       />
 
-      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${sidebarCollapsed ? 'md:pl-[56px]' : 'md:pl-[164px]'}`}>
+      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-200 ${isSidebarExpanded ? 'pl-[160px]' : 'pl-[44px]'}`}>
         <GustiTopHeader
-          collapsed={sidebarCollapsed}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           theme={theme}

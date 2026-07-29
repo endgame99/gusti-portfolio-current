@@ -45,8 +45,7 @@ export default function App() {
   });
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [activeProject, setActiveProject] = useState<WorkItem | null>(null);
 
   // Sync tab clicks on the webpage with the sidebar activeNav
@@ -77,7 +76,7 @@ export default function App() {
   }, [searchQuery]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-white font-sans transition-colors duration-300 flex">
+    <div className="appShell min-h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-white font-sans transition-colors duration-300 flex">
       
       <GustiSidebar 
         activeNav={activeNav} 
@@ -89,8 +88,8 @@ export default function App() {
           setActiveTab(tab);
           setActiveProject(null);
         }} 
-        collapsed={sidebarCollapsed}
-        setCollapsed={setSidebarCollapsed}
+        isSidebarExpanded={isSidebarExpanded}
+        setIsSidebarExpanded={setIsSidebarExpanded}
         whatsappUrl={WHATSAPP_LINK}
         onHomeClick={() => {
           setActiveProject(null);
@@ -106,19 +105,18 @@ export default function App() {
         }}
       />
 
-      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${sidebarCollapsed ? 'md:pl-[56px]' : 'md:pl-[164px]'}`}>
-        <GustiTopHeader 
-          collapsed={sidebarCollapsed}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          theme={theme}
-          setTheme={setTheme}
-          language={lang.toUpperCase() as "ID" | "EN" | "CN"}
-          setLanguage={(l) => setLang(l.toLowerCase() as Language)}
-          whatsappUrl={WHATSAPP_LINK}
-        />
+      <main className={`mainArea flex-1 flex flex-col min-w-0 transition-all duration-200 ${isSidebarExpanded ? 'pl-[160px]' : 'pl-[44px]'}`}>
+        <div className="pageContainer pb-24 md:pb-12">
+          <GustiTopHeader 
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            theme={theme}
+            setTheme={setTheme}
+            language={lang.toUpperCase() as "ID" | "EN" | "CN"}
+            setLanguage={(l) => setLang(l.toLowerCase() as Language)}
+            whatsappUrl={WHATSAPP_LINK}
+          />
 
-        <main className="px-4 sm:px-6 lg:px-[clamp(1rem,4vw,3.5rem)] w-full max-w-[1400px] mx-auto pb-24 md:pb-12 pt-16">
           {activeProject ? (
             <ProjectDetail 
               work={activeProject} 
@@ -128,16 +126,16 @@ export default function App() {
           ) : (
             <>
               {!searchQuery && (
-                <div className="mb-6 sm:mb-8">
+                <div className="heroSection mb-6 sm:mb-10 pt-4 sm:pt-6">
                   <HeroCarousel works={worksData} onSlideClick={setActiveProject} />
                 </div>
               )}
 
-              <div id="navigation-tabs" className="sticky top-12 z-20 bg-white dark:bg-[#121212] pt-3 pb-1">
+              <div id="navigation-tabs" className="tabsRow sticky top-14 z-20 bg-white dark:bg-[#121212] pt-3 pb-1">
                  <Tabs activeTab={activeTab} onTabChange={handleTabChange} lang={lang} />
               </div>
 
-              <div className="mt-4 sm:mt-6">
+              <div className="workSection mt-4 sm:mt-6">
                 {(!searchQuery && activeTab === 'recommended') && (
                   <RecommendedWorks 
                     lang={lang} 
@@ -184,8 +182,8 @@ export default function App() {
 
             </>
           )}
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

@@ -14,7 +14,6 @@ type ThemeMode = "light" | "dark";
 type LanguageMode = "ID" | "EN" | "CN";
 
 type GustiTopHeaderProps = {
-  collapsed: boolean;
   searchQuery: string;
   setSearchQuery: (value: string) => void;
   theme: ThemeMode;
@@ -29,7 +28,6 @@ function cx(...classes: Array<string | false | null | undefined>) {
 }
 
 export function GustiTopHeader({
-  collapsed,
   searchQuery,
   setSearchQuery,
   theme,
@@ -47,15 +45,9 @@ export function GustiTopHeader({
   };
 
   return (
-    <header
-      className={cx(
-        "fixed top-0 right-0 z-[90] flex h-12 items-center bg-white/95 backdrop-blur-md transition-all duration-300 dark:bg-[#121212]/95",
-        collapsed ? "left-0 md:left-[56px]" : "left-0 md:left-[164px]"
-      )}
-    >
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[clamp(1rem,4vw,3.5rem)] flex items-center justify-between gap-3">
-        <div className="flex min-w-0 flex-1 items-center">
-          <div className="relative flex h-8 w-40 xs:w-52 sm:w-64 md:w-72 lg:w-80 items-center rounded-full bg-neutral-100 dark:bg-neutral-900 transition-all duration-300">
+    <header className="header sticky top-0 z-[90] flex h-14 w-full min-w-0 items-center justify-between gap-3 bg-white/95 backdrop-blur-md transition-colors duration-200 dark:bg-[#121212]/95 border-b border-neutral-100/80 dark:border-neutral-800/50">
+      <div className="flex min-w-0 flex-1 items-center">
+          <div className="relative flex h-8 w-40 min-[480px]:w-52 sm:w-64 md:w-72 lg:w-80 items-center rounded-full bg-neutral-100 dark:bg-neutral-900 transition-all duration-300">
             <Search size={13} className="absolute left-3 text-neutral-400 pointer-events-none" />
             <input
               value={searchQuery}
@@ -161,7 +153,6 @@ export function GustiTopHeader({
             )}
           </div>
         </div>
-      </div>
     </header>
   );
 }
