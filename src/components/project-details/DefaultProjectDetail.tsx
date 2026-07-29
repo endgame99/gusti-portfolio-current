@@ -22,7 +22,7 @@ export function DefaultProjectDetail({ work, lang, detail, onBack }: ProjectDeta
   return (
     <div id={`project-detail-${work.id}`} className="w-full min-h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-neutral-100 transition-colors duration-300 pb-20 relative font-sans">
       
-      <div className="detail-container pt-8 pb-12 space-y-6">
+      <div className="detail-container internalPageTop pb-12 space-y-6">
         
         {/* Clean, Non-Sticky Back Link */}
         <button
