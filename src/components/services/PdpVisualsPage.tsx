@@ -218,10 +218,10 @@ function SkuProductCard({ sku, idx, isActive, onSelectSku }: SkuProductCardProps
       </div>
 
       <div className="descContainer desc-container px-3.5 pb-4 bg-white">
-        <h3 className="sku-title m-0 mb-1.5 text-[#111111] text-[14px] font-bold leading-[1.35] line-clamp-2">
+        <h3 className="sku-title m-0 mb-1.5 type-heading-md font-semibold text-[#111111] leading-[1.35] line-clamp-2">
           {sku.title}
         </h3>
-        <p className="sku-subtitle m-0 text-[#777777] text-[12px] font-medium leading-[1.35]">
+        <p className="sku-subtitle m-0 type-body-sm font-medium text-[#777777] leading-[1.35]">
           {sku.subtitle}
         </p>
       </div>
@@ -332,10 +332,10 @@ export function PdpVisualsPage() {
         <main className="pageContainer internalPageTop pb-24 md:pb-12">
         {/* Title area */}
         <div className="mb-10 md:mb-14 max-w-5xl mx-auto w-full">
-          <h1 className="font-display text-2xl md:text-3xl font-normal text-neutral-900 dark:text-white tracking-tight">
+          <h1 className="type-display-xl font-bold text-neutral-900 dark:text-white tracking-tight">
             E-commerce Visual Creative — PDP Visuals
           </h1>
-          <p className="mt-3 text-sm md:text-base leading-relaxed text-neutral-500 dark:text-neutral-400 max-w-2xl">
+          <p className="mt-3 type-body-md font-normal leading-relaxed text-neutral-500 dark:text-neutral-400 max-w-2xl">
             Prompt-based ecommerce visual system for product detail pages, marketplace assets, and sales-ready content.
           </p>
         </div>
@@ -375,7 +375,7 @@ export function PdpVisualsPage() {
               </button>
 
               {/* Pagination badge */}
-              <div className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded-full backdrop-blur-sm">
+              <div className="absolute bottom-3 right-3 bg-black/60 text-white type-label-xs font-medium px-2.5 py-1 rounded-full backdrop-blur-sm">
                 {activeSlideIndex + 1} / {slideCount}
               </div>
             </div>
@@ -405,10 +405,10 @@ export function PdpVisualsPage() {
 
             {/* Active SKU caption block */}
             <div className="mt-4 text-left w-full">
-              <h2 className="text-lg font-bold text-neutral-900 dark:text-white leading-tight">
+              <h2 className="type-heading-lg font-bold text-neutral-900 dark:text-white leading-tight">
                 {activeSku.title}
               </h2>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-medium">
+              <p className="type-body-sm font-medium text-neutral-500 dark:text-neutral-400 mt-1">
                 {activeSku.subtitle}
               </p>
             </div>
@@ -420,15 +420,15 @@ export function PdpVisualsPage() {
               <div className="flex-1 flex flex-col">
                 {/* Panel title & metadata */}
                 <div className="text-center mb-4 flex-shrink-0">
-                  <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-2">
+                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white mb-2">
                     Master Prompt Set
                   </h3>
                   {/* Tool chips */}
                   <div className="flex items-center justify-center gap-1.5">
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+                    <span className="type-label-xs font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
                       GPT-image2
                     </span>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+                    <span className="type-label-xs font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
                       Nano Banana 2
                     </span>
                   </div>
@@ -437,10 +437,10 @@ export function PdpVisualsPage() {
                 {/* Blurred prompt preview — per active SKU */}
                 <div className="relative mb-5 bg-white/40 dark:bg-neutral-950/20 border border-neutral-100 dark:border-neutral-900 rounded-lg p-4 flex-1 min-h-0 flex items-center justify-center overflow-hidden">
                   <div
-                    className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed select-none w-full text-left space-y-3 py-1"
+                    className="type-body-sm font-normal text-neutral-600 dark:text-neutral-400 leading-relaxed select-none w-full text-left space-y-3 py-1"
                     style={{ filter: 'blur(4px)' }}
                   >
-                    <p className="font-bold text-[10px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500">System Prompt & Parameters</p>
+                    <p className="type-eyebrow text-neutral-400 dark:text-neutral-500">System Prompt & Parameters</p>
                     <p>{activeSku.promptPreview}</p>
                     <p>{activeSku.promptPreview}</p>
                     <p className="hidden sm:block">{activeSku.promptPreview}</p>
@@ -450,7 +450,7 @@ export function PdpVisualsPage() {
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center bg-black/5 dark:bg-black/10 pointer-events-none">
                     <div className="bg-white/90 dark:bg-neutral-800/95 backdrop-blur-sm border border-neutral-200 dark:border-neutral-700 rounded-lg px-4 py-2 shadow-sm pointer-events-auto">
-                      <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-300 flex items-center gap-1.5">
+                      <span className="type-label-sm font-medium text-neutral-600 dark:text-neutral-300 flex items-center gap-1.5">
                         <Lock className="w-3.5 h-3.5" />
                         Prompt locked
                       </span>
@@ -458,14 +458,14 @@ export function PdpVisualsPage() {
                   </div>
                 </div>
               </div>
- 
+
               {/* Action buttons */}
               <div className="space-y-2.5 mt-auto flex-shrink-0">
                 <a
                   href={unlockPromptUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white type-label-md font-semibold rounded-lg hover:bg-neutral-800 transition-colors"
                 >
                   <Lock className="w-4 h-4" />
                   Unlock Prompt
@@ -474,7 +474,7 @@ export function PdpVisualsPage() {
                   href={makeVisualUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white text-neutral-900 text-sm font-medium rounded-lg border border-neutral-300 hover:bg-neutral-50 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white text-neutral-900 type-label-md font-semibold rounded-lg border border-neutral-300 hover:bg-neutral-50 transition-colors"
                 >
                   <Wand2 className="w-4 h-4" />
                   Make This Visual
@@ -487,13 +487,13 @@ export function PdpVisualsPage() {
         {/* Bottom section: SKU Selector Section */}
         <section className="sku-selector-section mt-20 md:mt-28 border-t border-neutral-100 pt-16 md:pt-20 max-w-5xl mx-auto w-full" aria-labelledby="sku-selector-title">
           <div className="sku-selector-header mb-8">
-            <p className="sku-selector-eyebrow text-neutral-400 text-xs font-semibold tracking-[0.08em] uppercase mb-2">
+            <p className="sku-selector-eyebrow type-eyebrow text-neutral-400 mb-2">
               Interactive Catalog
             </p>
-            <h2 id="sku-selector-title" className="sku-selector-title text-neutral-900 dark:text-white text-2xl md:text-3xl font-bold tracking-tight mb-3">
+            <h2 id="sku-selector-title" className="sku-selector-title type-display-lg font-bold text-neutral-900 dark:text-white tracking-tight mb-3">
               Other SKU Visual Sets
             </h2>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-2xl">
+            <p className="type-body-sm font-normal text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-2xl">
               Select any SKU cover below to preview and load its corresponding master prompt templates, asset slide decks, and fullscreen visual sets.
             </p>
           </div>

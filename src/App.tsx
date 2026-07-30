@@ -158,7 +158,7 @@ export default function App() {
                 {searchQuery && (
                   <div className="space-y-10 mt-6">
                      <div>
-                        <h3 className="text-sm font-bold mb-3">{dictionary[lang].tab_recommended}</h3>
+                        <h3 className="type-heading-md font-bold mb-3">{dictionary[lang].tab_recommended}</h3>
                         <RecommendedWorks 
                           lang={lang} 
                           works={worksData} 
@@ -168,11 +168,11 @@ export default function App() {
                         />
                      </div>
                      <div className="border-t border-neutral-100 dark:border-neutral-800/50 pt-6">
-                        <h3 className="text-sm font-bold mb-3">{dictionary[lang].tab_services}</h3>
+                        <h3 className="type-heading-md font-bold mb-3">{dictionary[lang].tab_services}</h3>
                         <Services lang={lang} services={servicesData} searchQuery={searchQuery} />
                      </div>
                      <div className="border-t border-neutral-100 dark:border-neutral-800/50 pt-6">
-                        <h3 className="text-sm font-bold mb-3">{dictionary[lang].tab_library}</h3>
+                        <h3 className="type-heading-md font-bold mb-3">{dictionary[lang].tab_library}</h3>
                         <Library lang={lang} items={libraryData} searchQuery={searchQuery} />
                      </div>
                   </div>

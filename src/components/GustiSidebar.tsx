@@ -105,7 +105,7 @@ export function GustiSidebar({
         {/* Sidebar Header */}
         {isSidebarExpanded ? (
           <div className="sidebarHeaderExpanded flex h-12 w-full items-center justify-between px-3">
-            <div className="sidebarLogoExpanded font-display text-[15px] font-black tracking-[-0.04em] text-neutral-950 dark:text-white">
+            <div className="sidebarLogoExpanded font-display type-display-md font-bold tracking-[-0.04em] text-neutral-950 dark:text-white">
               GUSTI.
             </div>
 
@@ -126,7 +126,7 @@ export function GustiSidebar({
               aria-label="Buka sidebar"
               onClick={() => setIsSidebarExpanded(true)}
             >
-              <span className="font-display text-[15px] font-black tracking-[-0.04em]">G</span>
+              <span className="font-display type-display-md font-bold tracking-[-0.04em]">G</span>
             </button>
           </div>
         )}
@@ -143,10 +143,10 @@ export function GustiSidebar({
                 type="button"
                 onClick={item.action}
                 className={cx(
-                  "group relative flex items-center rounded-xl transition text-[13px] font-semibold",
+                  "group relative flex items-center rounded-xl transition type-nav font-semibold",
                   isSidebarExpanded ? "w-full h-9 gap-3 px-2.5 justify-start" : "w-8 h-8 justify-center mx-auto",
                   isActive
-                    ? "bg-neutral-100 text-neutral-950 dark:bg-neutral-800 dark:text-white font-bold"
+                    ? "bg-neutral-100 text-neutral-950 dark:bg-neutral-800 dark:text-white"
                     : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white"
                 )}
                 aria-label={item.label}
@@ -157,7 +157,7 @@ export function GustiSidebar({
 
                 {/* Hover Tooltip when compact */}
                 {!isSidebarExpanded && (
-                  <span className="pointer-events-none absolute left-[48px] top-1/2 z-[120] -translate-y-1/2 whitespace-nowrap rounded-lg bg-neutral-950 px-2 py-1 text-[11px] font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 dark:bg-white dark:text-neutral-950">
+                  <span className="pointer-events-none absolute left-[48px] top-1/2 z-[120] -translate-y-1/2 whitespace-nowrap rounded-lg bg-neutral-950 px-2 py-1 type-label-xs font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 dark:bg-white dark:text-neutral-950">
                     {item.label}
                   </span>
                 )}
@@ -170,7 +170,7 @@ export function GustiSidebar({
             target="_blank"
             rel="noreferrer"
             className={cx(
-              "group relative mt-auto mb-4 flex items-center rounded-xl text-[13px] font-semibold text-neutral-500 transition hover:bg-emerald-50 hover:text-emerald-600 dark:text-neutral-400 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-400",
+              "group relative mt-auto mb-4 flex items-center rounded-xl type-nav font-semibold text-neutral-500 transition hover:bg-emerald-50 hover:text-emerald-600 dark:text-neutral-400 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-400",
               isSidebarExpanded ? "w-full h-9 gap-3 px-2.5 justify-start" : "w-8 h-8 justify-center mx-auto"
             )}
             aria-label="WhatsApp"
@@ -180,7 +180,7 @@ export function GustiSidebar({
             <span className="sidebarLabel truncate">WhatsApp</span>
 
             {!isSidebarExpanded && (
-              <span className="pointer-events-none absolute left-[48px] top-1/2 z-[120] -translate-y-1/2 whitespace-nowrap rounded-lg bg-neutral-950 px-2 py-1 text-[11px] font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 dark:bg-white dark:text-neutral-950">
+              <span className="pointer-events-none absolute left-[48px] top-1/2 z-[120] -translate-y-1/2 whitespace-nowrap rounded-lg bg-neutral-950 px-2 py-1 type-label-xs font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 dark:bg-white dark:text-neutral-950">
                 WhatsApp
               </span>
             )}
@@ -200,14 +200,14 @@ export function GustiSidebar({
               type="button"
               onClick={item.action}
               className={cx(
-                "flex h-full flex-1 flex-col items-center justify-center gap-1 text-[10px] font-bold transition",
+                "flex h-full flex-1 flex-col items-center justify-center gap-1 transition",
                 isActive
                   ? "text-neutral-950 dark:text-white"
                   : "text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-400"
               )}
             >
               <Icon size={18} strokeWidth={isActive ? 2.5 : 2.0} />
-              <span className="type-label-xs tracking-wide">{item.label}</span>
+              <span className="type-label-xs font-semibold tracking-wide">{item.label}</span>
             </button>
           );
         })}
@@ -216,10 +216,10 @@ export function GustiSidebar({
           href={whatsappUrl}
           target="_blank"
           rel="noreferrer"
-          className="flex h-full flex-1 flex-col items-center justify-center gap-1 text-[10px] font-bold text-neutral-400 hover:text-emerald-600 dark:text-neutral-500 dark:hover:text-emerald-400 transition"
+          className="flex h-full flex-1 flex-col items-center justify-center gap-1 text-neutral-400 hover:text-emerald-600 dark:text-neutral-500 dark:hover:text-emerald-400 transition"
         >
           <MessageCircle size={18} strokeWidth={2.0} />
-          <span className="text-[9px] tracking-wide">WhatsApp</span>
+          <span className="type-label-xs font-semibold tracking-wide">WhatsApp</span>
         </a>
       </nav>
     </>

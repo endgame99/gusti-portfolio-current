@@ -36,7 +36,7 @@ export function FabilDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
         {/* MAIN TITLE */}
         <div className="flex items-center gap-2.5 flex-wrap pt-2">
           <h1 
-            className="type-display-xl text-neutral-900 dark:text-white"
+            className="type-display-xl font-bold text-neutral-900 dark:text-white"
             title={`${detail.client} X AI Production - ${work.label}`}
           >
             {detail.client} - {work.label}
@@ -52,8 +52,8 @@ export function FabilDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
             </div>
 
             <div>
-              <h4 className="type-nav text-neutral-900 dark:text-neutral-100 font-bold">GUSTI. Visual Creative</h4>
-              <p className="type-label-sm text-neutral-400 dark:text-neutral-500">Visual Production & Commercial Direction</p>
+              <h4 className="type-heading-md text-neutral-900 dark:text-neutral-100 font-bold">GUSTI. Visual Creative</h4>
+              <p className="type-label-sm font-medium text-neutral-400 dark:text-neutral-500">Visual Production & Commercial Direction</p>
             </div>
           </div>
 
@@ -62,7 +62,7 @@ export function FabilDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
               href={getCustomWhatsAppLink(work, lang)}
               target="_blank"
               referrerPolicy="no-referrer"
-              className="px-4 py-1.5 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300 rounded type-label-md font-bold transition-all duration-300 flex items-center justify-center min-h-[30px]"
+              className="px-4 py-1.5 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300 rounded type-label-md font-semibold transition-all duration-300 flex items-center justify-center min-h-[30px]"
             >
               <span>{lang === 'id' ? 'Kirim Pesan' : lang === 'cn' ? 'Message' : 'Message'}</span>
             </a>
@@ -70,18 +70,18 @@ export function FabilDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
         </div>
 
         {/* SECTION 1: CAMPAIGN INFO GRID */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-b border-neutral-100 dark:border-neutral-800/60 text-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-b border-neutral-100 dark:border-neutral-800/60 type-body-md">
           <div>
             <h4 className="type-eyebrow">{getLabel('client', lang)}</h4>
-            <p className="mt-1 font-bold text-neutral-800 dark:text-neutral-200">{detail.client}</p>
+            <p className="mt-1 font-medium text-neutral-800 dark:text-neutral-200">{detail.client}</p>
           </div>
           <div>
             <h4 className="type-eyebrow">{getLabel('year', lang)}</h4>
-            <p className="mt-1 font-bold text-neutral-800 dark:text-neutral-200">{detail.year}</p>
+            <p className="mt-1 font-medium text-neutral-800 dark:text-neutral-200">{detail.year}</p>
           </div>
           <div className="col-span-2">
             <h4 className="type-eyebrow">{getLabel('role', lang)}</h4>
-            <p className="mt-1 font-bold text-neutral-800 dark:text-neutral-200">{detail.role[lang] || detail.role['en']}</p>
+            <p className="mt-1 font-medium text-neutral-800 dark:text-neutral-200">{detail.role[lang] || detail.role['en']}</p>
           </div>
         </div>
 
@@ -90,7 +90,7 @@ export function FabilDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
           <h4 className="type-eyebrow mb-2">{getLabel('services', lang)}</h4>
           <div className="flex flex-wrap gap-1.5">
             {(detail.services[lang] || detail.services['en'] || []).map((srv, idx) => (
-              <span key={idx} className="type-label-sm font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-3 py-1 rounded">
+              <span key={idx} className="type-label-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-3 py-1 rounded">
                 {srv}
               </span>
             ))}
@@ -100,31 +100,31 @@ export function FabilDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
         {/* SECTION 2: THE STRATEGIC NARRATIVE */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-b border-neutral-100 dark:border-neutral-800/60 leading-relaxed type-body-md">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200 font-extrabold tracking-tight">
+            <div className="flex items-center gap-2 type-heading-md font-bold text-neutral-800 dark:text-neutral-200 tracking-tight">
               <span className="w-1.5 h-3 bg-red-500 rounded-sm"></span>
               <span>{getLabel('overview', lang)}</span>
             </div>
-            <p className="text-neutral-500 dark:text-neutral-400">
+            <p className="type-body-md font-normal text-neutral-500 dark:text-neutral-400">
               {detail.content[lang]?.overview || detail.content['en']?.overview}
             </p>
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200 font-extrabold tracking-tight">
+            <div className="flex items-center gap-2 type-heading-md font-bold text-neutral-800 dark:text-neutral-200 tracking-tight">
               <span className="w-1.5 h-3 bg-red-500 rounded-sm"></span>
               <span>{getLabel('direction', lang)}</span>
             </div>
-            <p className="text-neutral-500 dark:text-neutral-400 italic">
+            <p className="type-body-md font-normal text-neutral-500 dark:text-neutral-400 italic">
               "{detail.content[lang]?.creativeDirection || detail.content['en']?.creativeDirection}"
             </p>
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200 font-extrabold tracking-tight">
+            <div className="flex items-center gap-2 type-heading-md font-bold text-neutral-800 dark:text-neutral-200 tracking-tight">
               <span className="w-1.5 h-3 bg-red-500 rounded-sm"></span>
               <span>{getLabel('scope', lang)}</span>
             </div>
-            <p className="text-neutral-500 dark:text-neutral-400">
+            <p className="type-body-md font-normal text-neutral-500 dark:text-neutral-400">
               {detail.content[lang]?.scope || detail.content['en']?.scope}
             </p>
           </div>

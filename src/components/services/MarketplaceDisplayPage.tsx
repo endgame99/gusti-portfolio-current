@@ -119,10 +119,10 @@ export function MarketplaceDisplayPage() {
         <main className="pageContainer internalPageTop pb-24 md:pb-12">
           {/* Title area */}
           <div className="mb-10 md:mb-14 max-w-5xl mx-auto w-full">
-            <h1 className="font-display text-2xl md:text-3xl font-normal text-neutral-900 dark:text-white tracking-tight">
+            <h1 className="type-display-xl font-bold text-neutral-900 dark:text-white tracking-tight">
               Marketplace Display
             </h1>
-            <p className="mt-3 text-sm md:text-base leading-relaxed text-neutral-500 dark:text-neutral-400 max-w-2xl">
+            <p className="mt-3 type-body-md font-normal leading-relaxed text-neutral-500 dark:text-neutral-400 max-w-2xl">
               Prompt-based marketplace display visuals for product detail pages, campaign assets, and conversion-ready ecommerce layouts.
             </p>
           </div>
@@ -161,17 +161,17 @@ export function MarketplaceDisplayPage() {
                 </button>
 
                 {/* Pagination badge */}
-                <div className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded-full backdrop-blur-sm">
+                <div className="absolute bottom-3 right-3 bg-black/60 text-white type-label-xs font-medium px-2.5 py-1 rounded-full backdrop-blur-sm">
                   {activeIndex + 1} / 50
                 </div>
               </div>
 
               {/* Caption block */}
               <div className="mt-4 text-left w-full">
-                <h2 className="text-lg font-bold text-neutral-900 dark:text-white leading-tight">
+                <h2 className="type-heading-lg font-bold text-neutral-900 dark:text-white leading-tight">
                   {activeItem.title}
                 </h2>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-medium">
+                <p className="type-body-sm font-medium text-neutral-500 dark:text-neutral-400 mt-1">
                   E-commerce Display Visual
                 </p>
               </div>
@@ -183,15 +183,15 @@ export function MarketplaceDisplayPage() {
                 <div className="flex-1 flex flex-col">
                   {/* Panel title & metadata */}
                   <div className="text-center mb-4 flex-shrink-0">
-                    <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-2">
+                    <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white mb-2">
                       Master Prompt Set
                     </h3>
                     {/* Tool chips */}
                     <div className="flex items-center justify-center gap-1.5">
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+                      <span className="type-label-xs font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
                         GPT-image2
                       </span>
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+                      <span className="type-label-xs font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
                         Nano Banana 2
                       </span>
                     </div>
@@ -200,17 +200,17 @@ export function MarketplaceDisplayPage() {
                   {/* Blurred prompt preview */}
                   <div className="relative mb-5 bg-white/40 dark:bg-neutral-950/20 border border-neutral-100 dark:border-neutral-900 rounded-lg p-4 flex-1 min-h-0 flex items-center justify-center overflow-hidden">
                     <div
-                      className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed select-none w-full text-left space-y-3 py-1"
+                      className="type-body-sm font-normal text-neutral-600 dark:text-neutral-400 leading-relaxed select-none w-full text-left space-y-3 py-1"
                       style={{ filter: 'blur(4px)' }}
                     >
-                      <p className="font-bold text-[10px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500">System Prompt & Parameters</p>
+                      <p className="type-eyebrow text-neutral-400 dark:text-neutral-500">System Prompt & Parameters</p>
                       <p>Master prompt set for {activeItem.title}. Clean layout, vertical format optimized for mobile commerce, high contrast ambient backdrop, soft shadows, studio-quality product lighting, sharp focus.</p>
                       <p>Master prompt set for {activeItem.title}. Clean layout, vertical format optimized for mobile commerce, high contrast ambient backdrop, soft shadows, studio-quality product lighting, sharp focus.</p>
                       <p className="hidden sm:block">Master prompt set for {activeItem.title}. Clean layout, vertical format optimized for mobile commerce, high contrast ambient backdrop, soft shadows, studio-quality product lighting, sharp focus.</p>
                     </div>
                     <div className="absolute inset-0 flex items-center justify-center bg-black/5 dark:bg-black/10 pointer-events-none">
                       <div className="bg-white/90 dark:bg-neutral-800/95 backdrop-blur-sm border border-neutral-200 dark:border-neutral-700 rounded-lg px-4 py-2 shadow-sm pointer-events-auto">
-                        <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-300 flex items-center gap-1.5">
+                        <span className="type-label-sm font-medium text-neutral-600 dark:text-neutral-300 flex items-center gap-1.5">
                           <Lock className="w-3.5 h-3.5" />
                           Prompt locked
                         </span>
@@ -225,7 +225,7 @@ export function MarketplaceDisplayPage() {
                     href={unlockPromptUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white type-label-md font-semibold rounded-lg hover:bg-neutral-800 transition-colors"
                   >
                     <Lock className="w-4 h-4" />
                     Unlock Prompt
@@ -234,7 +234,7 @@ export function MarketplaceDisplayPage() {
                     href={makeVisualUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white text-neutral-900 text-sm font-medium rounded-lg border border-neutral-300 hover:bg-neutral-50 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white text-neutral-900 type-label-md font-semibold rounded-lg border border-neutral-300 hover:bg-neutral-50 transition-colors"
                   >
                     <Wand2 className="w-4 h-4" />
                     Make This Visual
@@ -247,13 +247,13 @@ export function MarketplaceDisplayPage() {
           {/* Selection section: Marketplace Display Gallery */}
           <section className="marketplace-display-section mt-20 md:mt-28 border-t border-neutral-100 dark:border-neutral-800/50 pt-16 md:pt-20 max-w-5xl mx-auto w-full" aria-labelledby="marketplace-gallery-title">
             <div className="mb-8">
-              <p className="text-neutral-400 text-xs font-semibold tracking-[0.08em] uppercase mb-2">
+              <p className="type-eyebrow text-neutral-400 mb-2">
                 Interactive Catalog
               </p>
-              <h2 id="marketplace-gallery-title" className="text-neutral-900 dark:text-white text-2xl md:text-3xl font-bold tracking-tight mb-3">
+              <h2 id="marketplace-gallery-title" className="type-display-lg font-bold text-neutral-900 dark:text-white tracking-tight mb-3">
                 Marketplace Display Gallery
               </h2>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-2xl">
+              <p className="type-body-sm font-normal text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-2xl">
                 Browse and select templates from the gallery below to update the preview and load individual prompt configurations.
               </p>
             </div>
@@ -289,7 +289,7 @@ export function MarketplaceDisplayPage() {
 
                           <div className="marketplace-card-actions absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto">
                             <button
-                              className="marketplace-card-action px-3.5 py-1.5 bg-white text-neutral-900 text-xs font-semibold rounded-full hover:bg-neutral-100 transition-colors shadow-md pointer-events-auto"
+                              className="marketplace-card-action px-3.5 py-1.5 bg-white text-neutral-900 type-label-sm font-semibold rounded-full hover:bg-neutral-100 transition-colors shadow-md pointer-events-auto"
                               type="button"
                               onClick={(e) => {
                                   e.stopPropagation();
@@ -303,7 +303,7 @@ export function MarketplaceDisplayPage() {
 
                         <div className="marketplace-card-meta flex items-center gap-1.5 mt-2 px-1">
                           <span className="marketplace-card-dot w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600" aria-hidden="true"></span>
-                          <span className="marketplace-card-title text-xs font-medium text-neutral-800 dark:text-neutral-200">
+                          <span className="marketplace-card-title type-body-sm font-medium text-neutral-800 dark:text-neutral-200">
                             {item.title}
                           </span>
                         </div>

@@ -81,11 +81,11 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left — Text */}
             <div className="flex flex-col justify-center">
-              <h2 className="type-display-xl text-neutral-900 dark:text-white">
+              <h2 className="type-display-xl font-bold text-neutral-900 dark:text-white">
                 More visual content.{' '}
-                <span className="text-neutral-400 dark:text-neutral-500">Lower production costs.</span>
+                <span className="text-neutral-400 dark:text-neutral-500 font-normal">Lower production costs.</span>
               </h2>
-              <p className="mt-4 md:mt-5 type-body-md text-neutral-600 dark:text-neutral-400 max-w-md">
+              <p className="mt-4 md:mt-5 type-body-md font-normal text-neutral-600 dark:text-neutral-400 max-w-md">
                 Create product images, ecommerce assets, videos, and campaign materials faster — without starting from scratch every time.
               </p>
             </div>
@@ -116,8 +116,8 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
           return (
             <div key={service.id} className="w-full">
               <div className="mb-3.5">
-                <h3 className="type-display-md text-neutral-900 dark:text-white">{displayTitle}</h3>
-                <p className="type-body-sm text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{displaySubtitle}</p>
+                <h3 className="type-display-md font-bold text-neutral-900 dark:text-white">{displayTitle}</h3>
+                <p className="type-body-sm font-normal text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{displaySubtitle}</p>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-4 card-gap">
@@ -138,7 +138,7 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
                        />
                        <div className="absolute inset-x-0 bottom-0 py-2 px-2 bg-gradient-to-t from-black/60 to-transparent">
-                          <p className="type-label-sm text-white leading-tight">
+                          <p className="type-label-sm font-semibold text-white leading-tight">
                             {displayLabel}
                           </p>
                        </div>
@@ -186,7 +186,7 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
       </div>
 
       {filteredServices.length === 0 && (
-         <div className="py-12 text-center text-sm text-neutral-500">No services found.</div>
+         <div className="py-12 text-center type-body-sm font-normal text-neutral-500">No services found.</div>
       )}
     </div>
   );

@@ -63,7 +63,7 @@ export function GustiTopHeader({
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="flex h-8 items-center rounded-full bg-neutral-950 px-4 type-label-sm font-bold text-white transition hover:scale-[1.03] active:scale-95 dark:bg-white dark:text-neutral-950"
+            className="flex h-8 items-center rounded-full bg-neutral-950 px-4 type-label-sm font-semibold text-white transition hover:scale-[1.03] active:scale-95 dark:bg-white dark:text-neutral-950"
           >
             Hire Me
           </a>
@@ -91,7 +91,7 @@ export function GustiTopHeader({
           <button
             type="button"
             onClick={nextLanguage}
-            className="hidden h-8 items-center gap-1 rounded-full px-2 type-label-sm text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white sm:flex"
+            className="hidden h-8 items-center gap-1 rounded-full px-2 type-label-sm font-medium text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white sm:flex"
             aria-label="Change language"
           >
             <Globe2 size={13} />
@@ -102,7 +102,7 @@ export function GustiTopHeader({
             <button
               type="button"
               onClick={() => setProfileOpen((value) => !value)}
-              className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-neutral-200 text-[11px] font-black text-neutral-700 ring-1 ring-neutral-300 transition hover:scale-105 dark:bg-neutral-800 dark:text-white dark:ring-neutral-700"
+              className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-neutral-200 type-label-xs font-semibold text-neutral-700 ring-1 ring-neutral-300 transition hover:scale-105 dark:bg-neutral-800 dark:text-white dark:ring-neutral-700"
               aria-label="Open profile"
             >
               G
@@ -111,15 +111,15 @@ export function GustiTopHeader({
             {profileOpen && (
               <div className="absolute right-0 top-10 z-[120] w-[280px] rounded-2xl border border-neutral-200 bg-white p-4 shadow-2xl dark:border-neutral-800 dark:bg-[#181818]">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-neutral-950 text-sm font-black text-white dark:bg-white dark:text-neutral-950">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-neutral-950 type-heading-md font-bold text-white dark:bg-white dark:text-neutral-950">
                     G
                   </div>
 
                   <div>
-                    <p className="text-sm font-black text-neutral-950 dark:text-white">
+                    <p className="type-heading-md font-bold text-neutral-950 dark:text-white">
                       Gustiansyah
                     </p>
-                    <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+                    <p className="type-body-sm font-medium text-neutral-500 dark:text-neutral-400">
                       Visual Creative / AI Creative Production
                     </p>
                   </div>
@@ -128,7 +128,7 @@ export function GustiTopHeader({
                 <div className="mt-4 grid grid-cols-2 gap-2">
                   <a
                     href={`mailto:${SOCIAL_LINKS.email}`}
-                    className="flex h-9 items-center gap-2 rounded-xl bg-neutral-100 px-3 text-xs font-bold text-neutral-700 transition hover:bg-neutral-200 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800"
+                    className="flex h-9 items-center gap-2 rounded-xl bg-neutral-100 px-3 type-label-sm font-semibold text-neutral-700 transition hover:bg-neutral-200 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800"
                   >
                     <Mail size={14} />
                     Email
@@ -138,14 +138,14 @@ export function GustiTopHeader({
                     href={whatsappUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-9 items-center gap-2 rounded-xl bg-emerald-500 px-3 text-xs font-bold text-white transition hover:bg-emerald-600"
+                    className="flex h-9 items-center gap-2 rounded-xl bg-emerald-500 px-3 type-label-sm font-semibold text-white transition hover:bg-emerald-600"
                   >
                     <MessageCircle size={14} />
                     WhatsApp
                   </a>
                 </div>
 
-                <p className="mt-3 text-[11px] leading-relaxed text-neutral-500 dark:text-neutral-400">
+                <p className="mt-3 type-body-sm font-normal text-neutral-500 dark:text-neutral-400">
                   Human-led AI creative production for product brands and
                   ecommerce teams.
                 </p>

@@ -34,9 +34,9 @@ export function Library({ lang, items, searchQuery }: LibraryProps) {
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
             </div>
             <div className="pt-2 pb-1">
-              <h3 className="type-heading-md text-neutral-900 dark:text-white line-clamp-1">{item.title}</h3>
+              <h3 className="type-heading-md font-semibold text-neutral-900 dark:text-white line-clamp-1">{item.title}</h3>
               <div className="flex flex-wrap mt-0.5">
-                 <span className="type-body-sm text-neutral-500 dark:text-neutral-400">{item.category}</span>
+                 <span className="type-body-sm font-normal text-neutral-500 dark:text-neutral-400">{item.category}</span>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@ export function Library({ lang, items, searchQuery }: LibraryProps) {
       </div>
       
       {filteredItems.length === 0 && (
-         <div className="py-12 text-center text-sm text-neutral-500">No library references found.</div>
+         <div className="py-12 text-center type-body-sm font-normal text-neutral-500">No library references found.</div>
       )}
     </div>
   );
