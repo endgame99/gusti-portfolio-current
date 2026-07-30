@@ -21,7 +21,7 @@ export function Library({ lang, items, searchQuery }: LibraryProps) {
 
   return (
     <div className="py-6">
-      <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-3 space-y-3">
+      <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
         {filteredItems.map((item) => (
           <div key={item.id} className="break-inside-avoid group relative cursor-pointer font-sans bg-transparent">
             <div className="rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#1c1c1c] relative border border-neutral-200/50 dark:border-neutral-800/60">

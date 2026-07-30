@@ -77,7 +77,7 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
     <div className="py-6">
       {/* Services Hero */}
       {!searchQuery && (
-        <div className="mb-12 mt-2">
+        <div className="mb-12 md:mb-16 mt-2">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left — Text */}
             <div className="flex flex-col justify-center">
@@ -115,7 +115,7 @@ export function Services({ lang, services, searchQuery }: ServicesProps) {
 
           return (
             <div key={service.id} className="w-full">
-              <div className="mb-3.5">
+              <div className="mb-4 md:mb-6">
                 <h3 className="type-display-md font-bold text-neutral-900 dark:text-white">{displayTitle}</h3>
                 <p className="type-body-sm font-normal text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{displaySubtitle}</p>
               </div>

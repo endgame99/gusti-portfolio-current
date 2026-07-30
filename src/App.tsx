@@ -106,7 +106,7 @@ export default function App() {
       />
 
       <main className={`mainArea flex-1 flex flex-col min-w-0 transition-all duration-200 ${isSidebarExpanded ? 'pl-[160px]' : 'pl-[44px]'}`}>
-        <div className="pageContainer pb-24 md:pb-12">
+        <div className="pageContainer page-bottom-pb">
           <GustiTopHeader 
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
@@ -126,7 +126,7 @@ export default function App() {
           ) : (
             <>
               {!searchQuery && (
-                <div className="heroSection mb-6 sm:mb-10 pt-4 sm:pt-6">
+                <div className="heroSection mb-8 md:mb-12 pt-4 sm:pt-6">
                   <HeroCarousel works={worksData} onSlideClick={setActiveProject} />
                 </div>
               )}
@@ -135,7 +135,7 @@ export default function App() {
                  <Tabs activeTab={activeTab} onTabChange={handleTabChange} lang={lang} />
               </div>
 
-              <div className="workSection mt-4 sm:mt-6">
+              <div className="workSection mt-6 md:mt-8">
                 {(!searchQuery && activeTab === 'recommended') && (
                   <RecommendedWorks 
                     lang={lang} 
@@ -156,7 +156,7 @@ export default function App() {
 
                 {/* Display all matching content when searching regardless of tabs */}
                 {searchQuery && (
-                  <div className="space-y-10 mt-6">
+                  <div className="space-y-12 mt-8">
                      <div>
                         <h3 className="type-heading-md font-bold mb-3">{dictionary[lang].tab_recommended}</h3>
                         <RecommendedWorks 

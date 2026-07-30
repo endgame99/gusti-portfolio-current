@@ -116,9 +116,9 @@ export function MarketplaceDisplayPage() {
           whatsappUrl={WHATSAPP_LINK}
         />
 
-        <main className="pageContainer internalPageTop pb-24 md:pb-12">
+        <main className="pageContainer internalPageTop page-bottom-pb">
           {/* Title area */}
-          <div className="mb-10 md:mb-14 max-w-5xl mx-auto w-full">
+          <div className="mb-8 md:mb-12 max-w-5xl mx-auto w-full">
             <h1 className="type-display-xl font-bold text-neutral-900 dark:text-white tracking-tight">
               Marketplace Display
             </h1>
@@ -128,7 +128,7 @@ export function MarketplaceDisplayPage() {
           </div>
 
           {/* Top section: main preview + prompt panel */}
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,380px)_340px] gap-6 lg:gap-8 xl:gap-12 max-w-5xl mx-auto justify-center items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,380px)_340px] gap-6 lg:gap-8 xl:gap-10 max-w-5xl mx-auto justify-center items-stretch">
             {/* Left: main image preview (9:16 aspect ratio, no thumbnail strip) */}
             <div className="flex flex-col max-w-[380px] w-full mx-auto lg:mx-0">
               <div
@@ -245,8 +245,8 @@ export function MarketplaceDisplayPage() {
           </div>
 
           {/* Selection section: Marketplace Display Gallery */}
-          <section className="marketplace-display-section mt-20 md:mt-28 border-t border-neutral-100 dark:border-neutral-800/50 pt-16 md:pt-20 max-w-5xl mx-auto w-full" aria-labelledby="marketplace-gallery-title">
-            <div className="mb-8">
+          <section className="marketplace-display-section mt-12 md:mt-16 border-t border-neutral-100 dark:border-neutral-800/50 pt-12 md:pt-16 max-w-5xl mx-auto w-full" aria-labelledby="marketplace-gallery-title">
+            <div className="mb-6 md:mb-8">
               <p className="type-eyebrow text-neutral-400 mb-2">
                 Interactive Catalog
               </p>

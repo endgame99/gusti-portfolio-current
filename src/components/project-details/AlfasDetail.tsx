@@ -20,9 +20,9 @@ export function AlfasDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
   }, [work.id]);
 
   return (
-    <div id={`project-detail-${work.id}`} className="w-full min-h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-neutral-100 transition-colors duration-300 pb-20 relative font-sans">
+    <div id={`project-detail-${work.id}`} className="w-full min-h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative font-sans">
       
-      <div className="detail-container internalPageTop pb-12 space-y-6">
+      <div className="detail-container internalPageTop page-bottom-pb space-y-6 md:space-y-8">
         
         {/* Clean, Non-Sticky Back Link */}
         <button

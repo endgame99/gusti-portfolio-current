@@ -329,9 +329,9 @@ export function PdpVisualsPage() {
           whatsappUrl={WHATSAPP_LINK}
         />
 
-        <main className="pageContainer internalPageTop pb-24 md:pb-12">
+        <main className="pageContainer internalPageTop page-bottom-pb">
         {/* Title area */}
-        <div className="mb-10 md:mb-14 max-w-5xl mx-auto w-full">
+        <div className="mb-8 md:mb-12 max-w-5xl mx-auto w-full">
           <h1 className="type-display-xl font-bold text-neutral-900 dark:text-white tracking-tight">
             E-commerce Visual Creative — PDP Visuals
           </h1>
@@ -341,7 +341,7 @@ export function PdpVisualsPage() {
         </div>
 
         {/* Top section: main gallery + prompt panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,640px)_340px] gap-6 lg:gap-8 xl:gap-12 max-w-5xl mx-auto justify-center items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,640px)_340px] gap-6 lg:gap-8 xl:gap-10 max-w-5xl mx-auto justify-center items-stretch">
           {/* Left: main image + thumbnail row */}
           <div className="flex flex-col max-w-[640px] w-full mx-auto lg:mx-0">
             {/* Main image with prev/next arrows */}
@@ -485,8 +485,8 @@ export function PdpVisualsPage() {
         </div>
 
         {/* Bottom section: SKU Selector Section */}
-        <section className="sku-selector-section mt-20 md:mt-28 border-t border-neutral-100 pt-16 md:pt-20 max-w-5xl mx-auto w-full" aria-labelledby="sku-selector-title">
-          <div className="sku-selector-header mb-8">
+        <section className="sku-selector-section mt-12 md:mt-16 border-t border-neutral-100 dark:border-neutral-800/50 pt-12 md:pt-16 max-w-5xl mx-auto w-full" aria-labelledby="sku-selector-title">
+          <div className="sku-selector-header mb-6 md:mb-8">
             <p className="sku-selector-eyebrow type-eyebrow text-neutral-400 mb-2">
               Interactive Catalog
             </p>
@@ -498,7 +498,7 @@ export function PdpVisualsPage() {
             </p>
           </div>
 
-          <div className="sku-product-grid grid grid-cols-1 min-[520px]:grid-cols-2 min-[980px]:grid-cols-4 gap-[18px]">
+          <div className="sku-product-grid grid grid-cols-1 min-[520px]:grid-cols-2 min-[980px]:grid-cols-4 gap-4 md:gap-5">
             {skuSets.map((sku, idx) => {
               const isActive = idx === activeSkuIndex;
               return (

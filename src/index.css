@@ -288,23 +288,61 @@ input {
   /* ── Spacing Scale ──────────────────────────────────── */
 
   .section-py {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
-  /* 24px */
+  /* Major Section Gap: 48px mobile -> 64px desktop */
   .section-gap {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
   }
 
-  /* 32px */
+  @media (min-width: 768px) {
+    .section-gap {
+      gap: 4rem;
+    }
+  }
+
+  /* Heading to Content Gap: 20px mobile -> 32px desktop */
+  .heading-to-content {
+    margin-bottom: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .heading-to-content {
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* Card Grid Gap: 16px mobile -> 24px desktop */
   .card-gap {
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
-  /* 20px */
+  @media (min-width: 640px) {
+    .card-gap {
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-gap {
+      gap: 1.5rem;
+    }
+  }
+
+  /* Page Bottom Spacing: 48px mobile -> 80px desktop */
+  .page-bottom-pb {
+    padding-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-bottom-pb {
+      padding-bottom: 5rem;
+    }
+  }
 
   .content-px {
     padding-left: 1rem;
