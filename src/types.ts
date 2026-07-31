@@ -10,6 +10,7 @@ export interface WorkItem {
   type: 'project' | 'asset';
   clientName?: string;
   clientLogo?: string;
+  projectSubtitle?: string;
   mediaType?: 'image' | 'video' | 'comparison';
   videoSrc?: string;
   beforeImage?: string;
@@ -36,5 +37,9 @@ export interface LibraryItem {
 
 export interface SlideItem {
   id: string;
-  image: string;
+  mediaType: 'image' | 'video';
+  src: string;
+  href?: string;
+  alt: string;
+  external?: boolean;
 }

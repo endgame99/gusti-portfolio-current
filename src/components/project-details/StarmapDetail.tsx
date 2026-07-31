@@ -1,13 +1,54 @@
-import { useEffect, useState } from 'react';
-import { ArrowLeft, Play, X } from 'lucide-react';
-import { ProjectDetailPageProps, getLabel } from './SharedTypes';
+import React, { useEffect, useState } from 'react';
+import { ArrowLeft, ArrowUp, Check, Play } from 'lucide-react';
+import { ProjectDetailPageProps } from './SharedTypes';
 
-// STARMAP detail page — new clean structure. Awaiting final visual assets.
+interface MediaItem {
+  id: string;
+  type: 'image' | 'video';
+  src: string;
+  thumbnail: string;
+  alt: string;
+}
 
 export function StarmapDetail({ work, lang, detail, onBack }: ProjectDetailPageProps) {
-  const [activeTab, setActiveTab] = useState('product');
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [activeVideo, setActiveVideo] = useState<number | null>(null);
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState<'overview' | 'specs' | 'details'>('overview');
+  const [activeMediaSwitch, setActiveMediaSwitch] = useState<'gallery' | 'video' | 'details'>('gallery');
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+  const [selectedSize, setSelectedSize] = useState('M');
+  const [quantity, setQuantity] = useState(1);
+
+  // Discover local media files inside /work-cards/Starmap/ in natural numeric order
+  const imageFiles = Array.from({ length: 30 }, (_, i) => `/work-cards/Starmap/${i + 1}.webp`);
+  const videoFile = detail.videoUrl || '/work-cards/Starmap/Video.mp4';
+
+  const mediaList: MediaItem[] = [
+    {
+      id: 'v1',
+      type: 'video',
+      src: videoFile,
+      thumbnail: imageFiles[0],
+      alt: 'CONTOURA AI Video Showcase',
+    },
+    ...imageFiles.map((src, idx) => ({
+      id: `img-${idx + 1}`,
+      type: 'image' as const,
+      src,
+      thumbnail: src,
+      alt: `CONTOURA product visual ${String(idx + 1).padStart(2, '0')}`,
+    })),
+  ];
+
+  // Local verified visual color variants
+  const colorVariants = [
+    { id: 'c1', label: 'Nude Comfort', image: imageFiles[0], mediaIndex: 1 },
+    { id: 'c2', label: 'Blush Rose', image: imageFiles[1], mediaIndex: 2 },
+    { id: 'c3', label: 'Onyx Black', image: imageFiles[2], mediaIndex: 3 },
+  ];
+
+  // Sizes present in project artwork
+  const sizeOptions = ['S', 'M', 'L', 'XL'];
 
   // Auto-scroll to top when project loads
   useEffect(() => {
@@ -19,7 +60,7 @@ export function StarmapDetail({ work, lang, detail, onBack }: ProjectDetailPageP
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 400);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -27,189 +68,386 @@ export function StarmapDetail({ work, lang, detail, onBack }: ProjectDetailPageP
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Reset to top when switching tabs
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [activeTab]);
+  const scrollToDetails = () => {
+    setActiveTab('details');
+    const el = document.getElementById('product-details');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-  const tabs = [
-    { id: 'product', label: 'Product Information' },
-    { id: 'ecommerce', label: 'E-commerce Visuals' },
-    { id: 'ai-influencer', label: 'AI Influencer' },
-  ];
-
-  // MISSING_DATA_REQUIRED: Real AI Influencer video files and thumbnail images needed.
-  // Using existing local STARMAP cover as temporary thumbnail placeholder.
-  const aiInfluencerItems = Array.from({ length: 6 }, (_, i) => ({
-    id: i,
-    // MISSING_DATA_REQUIRED: Replace with actual video URL per item
-    videoUrl: undefined as string | undefined,
-    thumbnail: work.image || '/starmap.jpg',
-  }));
+  const currentMedia = mediaList[activeMediaIndex] || mediaList[0];
 
   return (
     <div
       id={`project-detail-${work.id}`}
-      className="w-full min-h-screen bg-white dark:bg-[#0A0A0A] text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative font-sans"
+      className="contouraProductDetail w-full min-h-screen bg-white dark:bg-[#0A0A0A] text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative font-sans pb-24"
     >
-
-      {/* ── 1. Top navigation ── */}
-      <div className="detail-container pt-8">
-        <button
-          onClick={onBack}
-          className="group inline-flex items-center gap-2 type-label-sm tracking-wide text-neutral-400 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-neutral-200 transition-colors duration-200"
-        >
-          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-          <span>{getLabel('back', lang)}</span>
-        </button>
-      </div>
-
-      {/* ── 2. Brand header ── */}
-      <div className="detail-container pt-10 pb-8">
-        <div className="flex items-center gap-4">
-          <div className="w-11 h-11 rounded-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 shrink-0">
-            <img
-              src={work.image || '/starmap.jpg'}
-              alt="STARMAP"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <h1 className="type-display-lg text-neutral-900 dark:text-white">
-              STARMAP
-            </h1>
-            <p className="text-sm text-neutral-400 dark:text-neutral-500 leading-tight">
-              Retail Ecommerce
-            </p>
-          </div>
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
+        
+        {/* ── 1. Back to Gallery Control ── */}
+        <div className="mb-6">
+          <button
+            onClick={onBack}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+            aria-label="Back to gallery"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to gallery</span>
+          </button>
         </div>
-      </div>
 
-      {/* ── 3. Tab navigation ── */}
-      <div className="detail-container">
-        <nav className="flex border-b border-neutral-200 dark:border-neutral-800">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`relative px-5 py-3 type-tab transition-colors duration-200 ${
-                activeTab === tab.id
-                  ? 'font-medium text-neutral-900 dark:text-white'
-                  : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300'
-              }`}
-            >
-              {tab.label}
-              {activeTab === tab.id && (
-                <span className="absolute bottom-0 left-0 right-0 h-px bg-neutral-900 dark:bg-white" />
-              )}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      {/* ── Tab content ── */}
-      <div className="detail-container pt-12 pb-16">
-
-        {/* ── 4. Product Information tab ── */}
-        {activeTab === 'product' && (
-          <div className="flex flex-col items-center gap-8">
-            {detail.images.map((img, idx) => (
+        {/* ── 2. Clean CONTOURA Brand Header ── */}
+        <header className="brandHeader mb-8 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 shrink-0">
               <img
-                key={idx}
-                src={img}
-                alt=""
-                className="w-full max-w-3xl"
-                loading={idx === 0 ? 'eager' : 'lazy'}
+                src={work.image || '/starmap.jpg'}
+                alt="CONTOURA logo"
+                className="w-full h-full object-cover"
+                draggable={false}
               />
-            ))}
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-white leading-tight">
+                CONTOURA
+              </h2>
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 mt-0.5">
+                <span>Client Work</span>
+                <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-700">/</span>
+                <span>Product Commerce Visuals</span>
+              </div>
+            </div>
           </div>
-        )}
+        </header>
 
-        {/* ── 5. E-commerce Visuals tab ── */}
-        {activeTab === 'ecommerce' && (
-          <div className="flex flex-col items-center gap-8">
-            {/* MISSING_DATA_REQUIRED: Real e-commerce visual assets needed. Using existing local asset temporarily. */}
-            <img
-              src={work.image || '/starmap.jpg'}
-              alt=""
-              className="w-full max-w-3xl"
-            />
-          </div>
-        )}
+        {/* ── 3. Two-Column Desktop Showcase ── */}
+        <div className="contouraDetailMain">
+          
+          {/* ── Left Column: Media & Specs ── */}
+          <div className="contouraLeftColumn flex flex-col gap-8 min-w-0">
+            
+            {/* Gallery Section */}
+            <div className="contouraGalleryWrapper">
+              
+              {/* Vertical Thumbnail Strip */}
+              <div className="contouraThumbnailStrip">
+                {mediaList.map((media, idx) => (
+                  <button
+                    key={media.id}
+                    onClick={() => setActiveMediaIndex(idx)}
+                    className={`contouraThumbnailItem ${activeMediaIndex === idx ? 'is-active' : ''}`}
+                    aria-label={`View thumbnail ${idx + 1}`}
+                  >
+                    <img src={media.thumbnail} alt="" loading="lazy" draggable={false} />
+                    {media.type === 'video' && (
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white fill-white" />
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
 
-        {/* ── 6. AI Influencer tab ── */}
-        {activeTab === 'ai-influencer' && (
-          <div className="columns-2 md:columns-3 gap-4">
-            {aiInfluencerItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveVideo(item.id)}
-                className="relative w-full mb-4 break-inside-avoid group cursor-pointer block rounded-lg overflow-hidden"
-              >
-                <div className="aspect-[9/16] bg-neutral-100 dark:bg-neutral-800 overflow-hidden">
-                  <img
-                    src={item.thumbnail}
-                    alt=""
-                    className="w-full h-full object-cover"
-                    loading="lazy"
+              {/* Main Media Viewer (Square 1:1, object-fit: contain) */}
+              <div className="contouraMainMediaViewer">
+                {currentMedia.type === 'video' ? (
+                  <video
+                    src={currentMedia.src}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-full object-contain"
                   />
+                ) : (
+                  <img
+                    src={currentMedia.src}
+                    alt={currentMedia.alt}
+                    loading="eager"
+                    draggable={false}
+                    className="w-full h-full object-contain"
+                  />
+                )}
+
+                <div className="contouraMediaCounter">
+                  <span>{activeMediaIndex + 1} / {mediaList.length}</span>
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/0 group-hover:bg-black/20 transition-colors duration-200">
-                  <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <Play className="w-4 h-4 text-neutral-900 ml-0.5" />
+              </div>
+            </div>
+
+            {/* Media Switch Nav */}
+            <nav className="mediaSwitch flex items-center gap-2 p-1 bg-neutral-100 dark:bg-neutral-900 rounded-lg w-fit text-xs font-semibold">
+              <button
+                onClick={() => {
+                  setActiveMediaSwitch('gallery');
+                  setActiveMediaIndex(1);
+                }}
+                className={`px-3 py-1.5 rounded-md transition-colors ${
+                  activeMediaSwitch === 'gallery'
+                    ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                }`}
+              >
+                Gallery ({imageFiles.length})
+              </button>
+              <button
+                onClick={() => {
+                  setActiveMediaSwitch('video');
+                  setActiveMediaIndex(0);
+                }}
+                className={`px-3 py-1.5 rounded-md transition-colors ${
+                  activeMediaSwitch === 'video'
+                    ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                }`}
+              >
+                Video (1)
+              </button>
+              <button
+                onClick={scrollToDetails}
+                className="px-3 py-1.5 rounded-md text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              >
+                Product Details
+              </button>
+            </nav>
+
+            {/* Content Navigation Tabs */}
+            <div className="border-b border-neutral-200 dark:border-neutral-800">
+              <nav className="flex items-center gap-6 text-sm font-semibold">
+                <button
+                  onClick={() => setActiveTab('overview')}
+                  className={`py-3 border-b-2 transition-colors ${
+                    activeTab === 'overview'
+                      ? 'border-[#0057ff] text-[#0057ff]'
+                      : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Product Overview
+                </button>
+                <button
+                  onClick={() => setActiveTab('specs')}
+                  className={`py-3 border-b-2 transition-colors ${
+                    activeTab === 'specs'
+                      ? 'border-[#0057ff] text-[#0057ff]'
+                      : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Size &amp; Specifications
+                </button>
+                <button
+                  onClick={() => setActiveTab('details')}
+                  className={`py-3 border-b-2 transition-colors ${
+                    activeTab === 'details'
+                      ? 'border-[#0057ff] text-[#0057ff]'
+                      : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Product Details
+                </button>
+              </nav>
+            </div>
+
+            {/* Tab 1: Product Overview */}
+            {activeTab === 'overview' && (
+              <section className="space-y-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                <h3 className="text-base font-bold text-neutral-900 dark:text-white">Product Overview</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/60 dark:border-neutral-800/60">
+                  <div>
+                    <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider">Brand</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">CONTOURA</span>
+                  </div>
+                  <div>
+                    <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider">Project Type</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">Client Work</span>
+                  </div>
+                  <div>
+                    <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider">Category</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">Product Commerce Visuals</span>
                   </div>
                 </div>
-              </button>
-            ))}
+                <p>
+                  {detail.content[lang]?.overview || detail.content.en.overview}
+                </p>
+                <div className="pt-2">
+                  <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Creative Direction</h4>
+                  <p>{detail.content[lang]?.creativeDirection || detail.content.en.creativeDirection}</p>
+                </div>
+              </section>
+            )}
+
+            {/* Tab 2: Size & Specifications */}
+            {activeTab === 'specs' && (
+              <section className="space-y-4 text-sm text-neutral-700 dark:text-neutral-300">
+                <h3 className="text-base font-bold text-neutral-900 dark:text-white">Size &amp; Specifications</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between py-2 border-b border-neutral-100 dark:border-neutral-800">
+                    <span className="text-neutral-500">Brand</span>
+                    <span className="font-semibold text-neutral-900 dark:text-white">CONTOURA</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-neutral-100 dark:border-neutral-800">
+                    <span className="text-neutral-500">Category</span>
+                    <span className="font-semibold text-neutral-900 dark:text-white">Women's Underwear / Shapewear</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-neutral-100 dark:border-neutral-800">
+                    <span className="text-neutral-500">Production Workflow</span>
+                    <span className="font-semibold text-neutral-900 dark:text-white">Human-Led AI Production</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-neutral-100 dark:border-neutral-800">
+                    <span className="text-neutral-500">Deliverables</span>
+                    <span className="font-semibold text-neutral-900 dark:text-white">PDP Visuals, Commercial Video, Catalog Images</span>
+                  </div>
+                </div>
+                <p className="text-xs text-neutral-400 italic mt-2">Sizes shown in project artwork</p>
+              </section>
+            )}
+
+            {/* Tab 3 & Long-Form Sequence Container */}
+            <section id="product-details" className="space-y-6 pt-4">
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Product Details</h3>
+              
+              {/* Seamless Long-Form Media Stack (All 30 webp images in natural numeric order) */}
+              <div className="contouraLongformSequence">
+                {videoFile && (
+                  <video
+                    src={videoFile}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-auto mb-4"
+                  />
+                )}
+                {imageFiles.map((imgSrc, idx) => (
+                  <img
+                    key={idx}
+                    src={imgSrc}
+                    alt={`CONTOURA detail image ${idx + 1}`}
+                    loading={idx < 2 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    draggable={false}
+                  />
+                ))}
+              </div>
+            </section>
+
           </div>
-        )}
+
+          {/* ── Right Column: Product Panel ── */}
+          <aside className="contouraPurchasePanel">
+            <div className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900/70 border border-neutral-200/80 dark:border-neutral-800 space-y-6">
+              
+              {/* Title & Metadata Block */}
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-white leading-snug">
+                  Curves in Comfort - Women's Underwear - Ecommerce
+                </h1>
+                <div className="flex items-center gap-2 text-xs font-semibold text-neutral-500 dark:text-neutral-400 mt-2">
+                  <span>Client Work</span>
+                  <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-700">/</span>
+                  <span>Product Commerce Visuals</span>
+                </div>
+              </div>
+
+              {/* Verified Color Selector */}
+              <div className="space-y-3">
+                <label className="block text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                  Color: <span className="font-normal text-neutral-500">{colorVariants[selectedColorIndex].label}</span>
+                </label>
+                <div className="flex items-center gap-2.5">
+                  {colorVariants.map((variant, idx) => (
+                    <button
+                      key={variant.id}
+                      onClick={() => {
+                        setSelectedColorIndex(idx);
+                        setActiveMediaIndex(variant.mediaIndex);
+                      }}
+                      className={`relative flex items-center gap-2 p-1.5 rounded-lg border text-xs font-semibold transition-all ${
+                        selectedColorIndex === idx
+                          ? 'border-[#0057ff] bg-blue-50/50 dark:bg-blue-950/30 text-[#0057ff]'
+                          : 'border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 text-neutral-700 dark:text-neutral-300'
+                      }`}
+                    >
+                      <img src={variant.image} alt="" className="w-7 h-7 rounded object-cover" />
+                      <span className="pr-1">{variant.label}</span>
+                      {selectedColorIndex === idx && <Check className="w-3.5 h-3.5" />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Verified Size Selector */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center text-xs">
+                  <label className="font-bold text-neutral-900 dark:text-white uppercase tracking-wider">Size</label>
+                  <span className="text-neutral-400">Sizes shown in project artwork</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  {sizeOptions.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`w-10 h-10 rounded-lg text-xs font-bold border transition-all ${
+                        selectedSize === size
+                          ? 'border-[#0057ff] bg-[#0057ff] text-white shadow-sm'
+                          : 'border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-neutral-400'
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quantity Control (Visual Interaction) */}
+              <div className="space-y-3">
+                <label className="block text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                  Quantity
+                </label>
+                <div className="inline-flex items-center rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 overflow-hidden">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    disabled={quantity <= 1}
+                    className="w-10 h-10 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 disabled:opacity-40 transition-colors"
+                    aria-label="Decrease quantity"
+                  >
+                    -
+                  </button>
+                  <span className="w-12 text-center text-sm font-bold text-neutral-900 dark:text-white">
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="w-10 h-10 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Single Portfolio CTA */}
+              <div className="pt-2">
+                <button
+                  onClick={scrollToDetails}
+                  className="w-full py-3.5 px-6 rounded-xl bg-[#0057ff] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-sm tracking-wide shadow-lg shadow-blue-500/20 transition-all duration-200 text-center"
+                >
+                  View Full Visual Story
+                </button>
+              </div>
+
+            </div>
+          </aside>
+
+        </div>
       </div>
 
-      {/* ── Video modal ── */}
-      {activeVideo !== null && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6"
-          onClick={() => setActiveVideo(null)}
-        >
-          <div
-            className="relative w-full max-w-sm rounded-xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setActiveVideo(null)}
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            {/* MISSING_DATA_REQUIRED: Real video source needed for AI Influencer content */}
-            {aiInfluencerItems[activeVideo]?.videoUrl ? (
-              <video
-                src={aiInfluencerItems[activeVideo].videoUrl}
-                controls
-                playsInline
-                className="w-full aspect-[9/16] bg-black object-contain"
-              />
-            ) : (
-              <div className="aspect-[9/16] bg-neutral-900 overflow-hidden">
-                <img
-                  src={aiInfluencerItems[activeVideo]?.thumbnail || '/starmap.jpg'}
-                  alt=""
-                  className="w-full h-full object-cover opacity-50"
-                />
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* ── 7. Back to top button ── */}
+      {/* ── Scroll to Top Button ── */}
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-40 w-9 h-9 rounded-full bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-transform"
+          className="fixed bottom-8 right-8 z-40 w-10 h-10 rounded-full bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-transform"
           aria-label="Back to top"
         >
-          <span className="text-xs font-medium">↑</span>
+          <ArrowUp className="w-4 h-4" />
         </button>
       )}
     </div>

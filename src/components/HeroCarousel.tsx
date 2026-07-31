@@ -1,196 +1,259 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { WorkItem } from '../types';
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { SlideItem } from '../types';
+import { heroSlidesData } from '../data';
 
 interface HeroCarouselProps {
-  works: WorkItem[];
-  onSlideClick: (work: WorkItem) => void;
+  slidesData?: SlideItem[];
+  works?: any[];
+  onSlideClick?: (work: any) => void;
 }
 
-const AUTOPLAY_INTERVAL = 5000;
-const FEATURED_COUNT = 5;
+const AUTOPLAY_INTERVAL = 4000;
+const TRANSITION_MS = 600;
 
-export function HeroCarousel({ works, onSlideClick }: HeroCarouselProps) {
-  const featuredWorks = works.slice(0, FEATURED_COUNT);
+export function HeroCarousel({ slidesData }: HeroCarouselProps) {
+  const slides: SlideItem[] =
+    slidesData && slidesData.length > 0 ? slidesData : heroSlidesData;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [isTabHidden, setIsTabHidden] = useState(false);
 
-  const total = featuredWorks.length;
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const carouselRef = useRef<HTMLElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const fallbackFired = useRef<Set<number>>(new Set());
 
-  const resetAutoplay = useCallback(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-    if (!isHovered) {
-      timerRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % total);
-      }, AUTOPLAY_INTERVAL);
-    }
-  }, [isHovered, total]);
+  const total = slides.length;
 
-  // Autoplay management
+  // ── Tab visibility listener ──
   useEffect(() => {
-    resetAutoplay();
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [resetAutoplay]);
+    const handler = () => setIsTabHidden(document.hidden);
+    document.addEventListener('visibilitychange', handler);
+    return () => document.removeEventListener('visibilitychange', handler);
+  }, []);
 
+  // ── Autoplay Effect (4000ms interval, auto-reset on slide change, pause on hover/hidden tab) ──
+  useEffect(() => {
+    if (isHovered || isTabHidden || total <= 1) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % total);
+    }, AUTOPLAY_INTERVAL);
+
+    return () => clearInterval(timer);
+  }, [activeIndex, isHovered, isTabHidden, total]);
+
+  // ── Video playback management ──
+  useEffect(() => {
+    slides.forEach((slide, idx) => {
+      const video = videoRefs.current[idx];
+      if (video && slide.mediaType === 'video') {
+        if (idx === activeIndex) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      }
+    });
+  }, [activeIndex, slides]);
+
+  // ── Navigation ──
   const goNext = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
+    if (total === 0) return;
     setActiveIndex((prev) => (prev + 1) % total);
-    resetAutoplay();
-    setTimeout(() => setIsTransitioning(false), 600);
-  }, [total, resetAutoplay, isTransitioning]);
+  }, [total]);
 
   const goPrev = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
+    if (total === 0) return;
     setActiveIndex((prev) => (prev - 1 + total) % total);
-    resetAutoplay();
-    setTimeout(() => setIsTransitioning(false), 600);
-  }, [total, resetAutoplay, isTransitioning]);
+  }, [total]);
+
+  // ── Keyboard navigation ──
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        goPrev();
+      } else if (e.key === 'ArrowRight') {
+        goNext();
+      }
+    };
+    el.addEventListener('keydown', handler);
+    return () => el.removeEventListener('keydown', handler);
+  }, [goPrev, goNext]);
+
+  // ── Touch swipe navigation ──
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (delta < -40) {
+      goNext();
+    } else if (delta > 40) {
+      goPrev();
+    }
+    touchStartX.current = null;
+  };
+
+  // ── Card click handler ──
+  const handleCardClick = (e: React.MouseEvent, index: number, slide: SlideItem) => {
+    if (index === activeIndex) {
+      if (slide.href) {
+        if (slide.external !== false) {
+          window.open(slide.href, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = slide.href;
+        }
+      }
+    } else {
+      e.preventDefault();
+      e.stopPropagation();
+      setActiveIndex(index);
+    }
+  };
+
+  // ── Determine card role per ZCOOL 3D stacked model ──
+  const getCardRole = (index: number): 'active' | 'left' | 'right' | 'hidden' => {
+    if (total <= 0) return 'hidden';
+    const diff = ((index - activeIndex) % total + total) % total;
+    if (diff === 0) return 'active';
+    if (total === 1) return 'hidden';
+    if (total === 2) {
+      return diff === 1 ? 'right' : 'hidden';
+    }
+    const leftDiff = ((activeIndex - index) % total + total) % total;
+    if (diff === 1) return 'right';
+    if (leftDiff === 1) return 'left';
+    return 'hidden';
+  };
+
+  // ── Image Fallback handler ──
+  const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>, index: number) => {
+    if (fallbackFired.current.has(index)) return;
+    fallbackFired.current.add(index);
+    const target = e.currentTarget;
+    if (target.src.includes('maxresdefault.jpg')) {
+      target.src = target.src.replace('maxresdefault.jpg', 'hqdefault.jpg');
+    }
+  };
 
   if (total === 0) return null;
 
-  const currentWork = featuredWorks[activeIndex];
-
-  // Extract display categories from tags — capitalize first letter
-  const categories = currentWork.tags.map(
-    (tag) => tag.charAt(0).toUpperCase() + tag.slice(1)
-  );
-
   return (
-    <div
-      className="relative w-full overflow-hidden rounded-[1.75rem] sm:rounded-3xl border border-neutral-200/80 dark:border-neutral-800/80 shadow-xs"
-      style={{ isolation: 'isolate' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Slides Container */}
-      <div
-        className="relative h-[clamp(250px,50vw,500px)] w-full cursor-pointer"
-        onClick={() => onSlideClick(currentWork)}
+    <div className="heroBannerArea bannerArea">
+      <section
+        ref={carouselRef}
+        tabIndex={0}
+        role="region"
+        aria-label="Highlight Carousel"
+        aria-roledescription="carousel"
+        className="heroCarousel bannerCarousel"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
-        {/* Slide Track */}
-        <div
-          className="flex h-full transition-transform duration-600 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
-          style={{
-            width: `${total * 100}%`,
-            transform: `translateX(-${(activeIndex * 100) / total}%)`,
-          }}
-        >
-          {featuredWorks.map((work) => (
-            <div
-              key={work.id}
-              className="relative h-full flex-shrink-0"
-              style={{ width: `${100 / total}%` }}
-            >
-              <img
-                src={work.image}
-                alt={work.title}
-                className="h-full w-full object-cover"
-                loading="lazy"
-                draggable={false}
-              />
-            </div>
-          ))}
-        </div>
+        <div className="heroViewport viewport">
+          {slides.map((slide, index) => {
+            const role = getCardRole(index);
+            const isActive = role === 'active';
+            const isLeft = role === 'left';
+            const isRight = role === 'right';
+            const isHidden = role === 'hidden';
 
-        {/* Bottom gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            const cardClasses = [
+              'heroCard',
+              'card',
+              isActive && 'heroActiveCard activeCard',
+              isLeft && 'heroSideCard heroLeftSideCard leftSideCard',
+              isRight && 'heroSideCard heroRightSideCard rightSideCard',
+              isHidden && 'heroHiddenCard hiddenCard',
+            ]
+              .filter(Boolean)
+              .join(' ');
 
-        {/* Bottom content overlay */}
-        <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-4 p-4 sm:p-6 lg:p-8">
-          {/* Left: Title + client info + categories */}
-          <div className="min-w-0 flex-1 pr-16 sm:pr-24 lg:pr-32">
-            {/* Project title */}
-            <h2 className="type-display-xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-              {currentWork.title}
-            </h2>
-
-            {/* Client row: circular thumbnail + categories */}
-            <div className="mt-2 sm:mt-3 flex flex-wrap items-center gap-2 sm:gap-3">
-              {/* Circular client thumbnail */}
-              <div className="h-6 w-6 flex-shrink-0 overflow-hidden rounded-full border border-white/40 shadow-sm sm:h-7 sm:w-7">
-                <img
-                  src={currentWork.image}
-                  alt={currentWork.title}
-                  className="h-full w-full object-cover"
+            return (
+              <div
+                key={slide.id}
+                className={cardClasses}
+                aria-hidden={!isActive}
+                tabIndex={isActive ? 0 : -1}
+                style={{ pointerEvents: isHidden ? 'none' : 'auto' }}
+              >
+                <a
+                  className="heroCardLink"
+                  href={isActive ? slide.href : undefined}
+                  target={isActive && slide.external !== false ? '_blank' : undefined}
+                  rel={isActive && slide.external !== false ? 'noopener noreferrer' : undefined}
+                  onClick={(e) => {
+                    if (!isActive) {
+                      e.preventDefault();
+                    }
+                    handleCardClick(e as unknown as React.MouseEvent, index, slide);
+                  }}
+                  tabIndex={-1}
                   draggable={false}
-                />
-              </div>
+                >
+                  <span className="heroSurface relative group/card">
+                    {slide.mediaType === 'video' ? (
+                      <video
+                        ref={(el) => { videoRefs.current[index] = el; }}
+                        src={slide.src}
+                        autoPlay={isActive}
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        className="heroImage"
+                      />
+                    ) : (
+                      <img
+                        src={slide.src}
+                        alt={slide.alt || `Highlight ${index + 1}`}
+                        className="heroImage"
+                        draggable={false}
+                        loading={isActive ? 'eager' : 'lazy'}
+                        onError={(e) => handleImgError(e, index)}
+                      />
+                    )}
 
-              {/* Category pills */}
-              <div className="flex flex-wrap items-center gap-1.5">
-                {categories.map((cat, i) => (
-                  <span
-                    key={i}
-                    className="rounded-full bg-white/15 px-3 py-1 type-label-xs text-white/95 backdrop-blur-md"
-                  >
-                    {cat}
+                    {/* Play Badge Overlay — Only on active front card with 70% opacity */}
+                    {isActive && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-all duration-300 group-hover/card:bg-black/35 pointer-events-none">
+                        <Play className="h-10 w-10 sm:h-12 sm:w-12 fill-white text-white opacity-70 drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover/card:scale-115 group-hover/card:opacity-95" />
+                      </div>
+                    )}
                   </span>
-                ))}
+                </a>
               </div>
-            </div>
-          </div>
-
-          {/* Right: Navigation arrows */}
-          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 flex items-center gap-2">
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                goPrev();
-              }}
-              className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-white/10 text-white backdrop-blur-md transition-all hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 cursor-pointer"
-              aria-label="Previous slide"
-            >
-              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
-            </button>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                goNext();
-              }}
-              className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-white/10 text-white backdrop-blur-md transition-all hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 cursor-pointer"
-              aria-label="Next slide"
-            >
-              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
-            </button>
-          </div>
+            );
+          })}
         </div>
 
-        {/* Slide indicators */}
-        <div className="absolute bottom-1.5 inset-x-0 z-20 flex justify-center gap-1.5">
-          {featuredWorks.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (i !== activeIndex) {
-                  setIsTransitioning(true);
-                  setActiveIndex(i);
-                  resetAutoplay();
-                  setTimeout(() => setIsTransitioning(false), 600);
-                }
-              }}
-              className={`h-[3px] rounded-full transition-all duration-300 ${
-                i === activeIndex
-                  ? 'w-6 bg-white/90'
-                  : 'w-2.5 bg-white/30 hover:bg-white/50'
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
-      </div>
+        <button
+          type="button"
+          className="heroNavButton heroPrevButton prevButton"
+          onClick={(e) => { e.stopPropagation(); goPrev(); }}
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="heroNavIcon" />
+        </button>
+
+        <button
+          type="button"
+          className="heroNavButton heroNextButton nextButton"
+          onClick={(e) => { e.stopPropagation(); goNext(); }}
+          aria-label="Next slide"
+        >
+          <ChevronRight className="heroNavIcon" />
+        </button>
+      </section>
     </div>
   );
 }

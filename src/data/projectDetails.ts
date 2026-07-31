@@ -42,7 +42,7 @@ export interface DetailedProject {
 export const detailedProjectsData: Record<string, DetailedProject> = {
   w1: {
     id: 'w1',
-    client: 'STARMAP Wear',
+    client: 'CONTOURA',
     year: '2025',
     role: {
       id: 'Sutradara Kreatif & Produser AI Utama',
@@ -56,27 +56,23 @@ export const detailedProjectsData: Record<string, DetailedProject> = {
     },
     content: {
       id: {
-        overview: 'STARMAP Wear adalah proyek percontohan yang memindahkan seluruh biaya pemotretan lokasi fisik ke dalam workflow human-led AI production. Kampanye ini dirancang khusus untuk memposisikan lini jaket kasual premium ke tingkat estetika fungsional kelas atas.',
-        creativeDirection: 'Konsep penggabungan "Stardust & Streetwear". Mengawinkan pakaian luar fungsional bergaya urban dengan lanskap kosmik sunyi di gurun luar angkasa, memanfaatkan kontras pencahayaan sinematik dan warna dingin (cool tones) untuk menonjolkan fitur kain metalik.',
-        scope: 'Generasi model virtual berbasis etnis lokal, sintesis lingkungan kosmik 3D, restrukturisasi visual listing produk (PDP), dan optimasi aspek rasio untuk efisiensi penjelajahan layaknya e-commerce global.'
+        overview: 'CONTOURA adalah proyek percontohan yang memindahkan seluruh biaya pemotretan lokasi fisik ke dalam workflow human-led AI production. Kampanye ini dirancang khusus untuk memposisikan lini produk intim & pakaian wanita ke tingkat estetika komersial kelas atas.',
+        creativeDirection: 'Konsep penggabungan "Curves & Comfort". Mengawinkan pakaian intim wanita bergaya kontemporer dengan tata cahaya sinematik yang lembut dan pencahayaan studio bersih untuk menonjolkan tekstur kain premium dan kontur tubuh secara presisi.',
+        scope: 'Generasi model virtual berbasis etnis lokal, sintesis lingkungan studio 3D, restrukturisasi visual listing produk (PDP), dan optimasi aspek rasio untuk efisiensi penjelajahan layaknya e-commerce global.'
       },
       en: {
-        overview: 'STARMAP Wear is a pilot campaign that replaces traditional physical location shoots with a high-end, human-led AI production workflow, positioning premium functional streetwear at an elite, celestial level.',
-        creativeDirection: 'A conceptual fusion of "Stardust & Streetwear". We paired urban functional outerwear with desolate, high-contrast cosmic desert landscapes, utilizing cinematic backlighting and cool ambient tones to accentuate metallic fabric textures.',
-        scope: 'Demographically targeted virtual model synthesis, custom 3D cosmic background generation, PDP listing card optimization, and high-fidelity texture stitching to maintain 100% material integrity.'
+        overview: 'CONTOURA is a pilot campaign that replaces traditional physical location shoots with a high-end, human-led AI production workflow, positioning premium intimates and shapewear at an elite commercial level.',
+        creativeDirection: 'A conceptual fusion of "Curves & Comfort". We paired modern women intimates with soft cinematic backlighting and clean studio ambient tones to accentuate seamless fabric textures and silhouette contouring.',
+        scope: 'Demographically targeted virtual model synthesis, custom 3D studio background generation, PDP listing card optimization, and high-fidelity texture stitching to maintain 100% material integrity.'
       },
       cn: {
-        overview: 'STARMAP Wear 是一项试点活动，它用高端、由人主导的 AI 制作工作流取代了传统的实体外景拍摄，将高档功能性街头服饰定位在精英、天体级别。',
-        creativeDirection: '“星尘与街头服饰”的概念融合。我们将都市功能性外套与荒凉、高对比度的宇宙沙漠景观结合在一起，利用电影般的逆光和冷调环境光来突出金属织物的质感。',
-        scope: '特定人群虚拟模特合成、定制 3D 宇宙背景生成、详情页列表卡片优化，以及高保真材质缝合，以保持 100% 的面料真实性。'
+        overview: 'CONTOURA 是一项试点活动，它用高端、由人主导的 AI 制作工作流取代了传统的实体外景拍摄，将高档女性贴身衣物定位在精英商业级别。',
+        creativeDirection: '“曲线与舒适”的概念融合。我们将现代女性内衣与柔和的电影感逆光和干净的影棚光结合，以突出无缝面料纹理与廓形。',
+        scope: '特定人群虚拟模特合成、定制 3D 影棚背景生成、详情页列表卡片优化，以及高保真材质缝合，以保持 100% 的面料真实性。'
       }
     },
-    images: [
-      'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&q=90', // Techwear model on cold wind
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=90', // Luxurious metal fluid waves
-      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=90', // Cyber star space
-      'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=1200&q=90'  // Urban casual posing
-    ]
+    videoUrl: '/work-cards/Starmap/Video.mp4',
+    images: Array.from({ length: 30 }, (_, i) => `/work-cards/Starmap/${i + 1}.webp`)
   },
   w2: {
     id: 'w2',

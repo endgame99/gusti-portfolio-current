@@ -712,3 +712,170 @@ input {
     height: 20px;
   }
 }
+
+/* ── CONTOURA Desktop Product Detail Showcase ── */
+.contouraDetailShell {
+  width: 100%;
+}
+
+.contouraDetailMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.85fr);
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .contouraDetailMain {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.contouraGalleryWrapper {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 767px) {
+  .contouraGalleryWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contouraThumbnailStrip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+}
+
+@media (max-width: 767px) {
+  .contouraThumbnailStrip {
+    flex-direction: row;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 6px;
+    order: 2;
+  }
+}
+
+.contouraThumbnailItem {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dark .contouraThumbnailItem {
+  background: #1e1e1e;
+}
+
+@media (max-width: 767px) {
+  .contouraThumbnailItem {
+    width: 68px;
+  }
+}
+
+.contouraThumbnailItem.is-active {
+  border-color: #0057ff;
+}
+
+.contouraThumbnailItem img,
+.contouraThumbnailItem video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contouraMainMediaViewer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f8f9fa;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark .contouraMainMediaViewer {
+  background: #161616;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.contouraMainMediaViewer img,
+.contouraMainMediaViewer video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.contouraMediaCounter {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.contouraPurchasePanel {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 1023px) {
+  .contouraPurchasePanel {
+    position: static;
+  }
+}
+
+.contouraLongformSequence {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.contouraLongformSequence img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.contouraLongformSequence video {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 16px 0;
+  border-radius: 12px;
+}

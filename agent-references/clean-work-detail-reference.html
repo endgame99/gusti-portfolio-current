@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clean Work Detail Reference</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #ffffff;
+    }
+
+    body {
+      font-family: "Acumin Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #111111;
+    }
+
+    .work-detail {
+      width: 100%;
+    }
+
+    .work-detail__content {
+      width: min(100%, 1300px);
+      margin-inline: auto;
+    }
+
+    .work-detail__video,
+    .work-detail__item {
+      margin: 0;
+      width: 100%;
+    }
+
+    .work-detail__video video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #000000;
+    }
+
+    .work-detail__gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .work-detail__item img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <main class="work-detail">
+    <div class="work-detail__content">
+      <section class="work-detail__video" aria-label="Project video">
+        <video controls preload="metadata" playsinline>
+          <source src="https://video.zcool.cn/alivod/6818b2f25597e883vub9ck6465_H264_1_2a2f7bc7464cf8.mp4?k=3fe85462eae5516036638b741120e7ef&amp;t=6a68fa69" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </section>
+
+      <section class="work-detail__gallery" aria-label="Project gallery">
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd6d4c7l5b499d4s387.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=9ac065deada9cb2a2654d45148edfbb1&amp;t=6a690171"
+          width="1300"
+          height="2261"
+          alt="Work detail image 01"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd6e9f1stfjhlrun7541.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=383e1a2bfa9e3c96231a9ed09e078d01&amp;t=6a690171"
+          width="1300"
+          height="2693"
+          alt="Work detail image 02"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd7259ahepliv7fa15.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=263d9400b7541f7782bfd3c375c86a15&amp;t=6a690171"
+          width="1300"
+          height="2034"
+          alt="Work detail image 03"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd68814e7xjusvkc2017.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=046d9388d64bf953f88c2b08dd6d7fc8&amp;t=6a690171"
+          width="1300"
+          height="2911"
+          alt="Work detail image 04"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd6d1283aoqpuulj9594.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=a9c169a64eb3cda0a662ff0a1becf8ed&amp;t=6a690171"
+          width="1300"
+          height="4067"
+          alt="Work detail image 05"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd6ea82p30v0rr951565.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=67cbd5fed2b39ecda0345673c776c4f1&amp;t=6a690171"
+          width="1300"
+          height="3380"
+          alt="Work detail image 06"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd9ba000d4g9exrd9411.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=7fd6d9eff9f7b8041c5fc3ed4c29e26c&amp;t=6a690171"
+          width="1300"
+          height="2124"
+          alt="Work detail image 07"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd5e3133hvwi8tct507.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=a904a35fb5c2dbd2d5e5171f3b7a9c8b&amp;t=6a690171"
+          width="1300"
+          height="4787"
+          alt="Work detail image 08"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd7a95dfybsa0ews1462.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=fdbd4ab6698561e863554200cfeeba55&amp;t=6a690171"
+          width="1300"
+          height="4904"
+          alt="Work detail image 09"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd8057aysnyloweb4486.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=9cf782f613dcc2606f45cf3f3a886614&amp;t=6a690171"
+          width="1300"
+          height="5599"
+          alt="Work detail image 10"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd8205ca3qcbxtog2798.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=469273bbd61a3a288d376c39df346473&amp;t=6a690171"
+          width="1300"
+          height="3591"
+          alt="Work detail image 11"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd85b68qskg61rmn3557.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=d5b2e423998d8f28490e497bafc65830&amp;t=6a690171"
+          width="1300"
+          height="2484"
+          alt="Work detail image 12"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd887a3e1purcbuw8455.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=eb04741cf334b155f0e3922d7dd2e6c5&amp;t=6a690171"
+          width="1300"
+          height="3626"
+          alt="Work detail image 13"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdb3988ooqkm5orl2289.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=92f3803d9970b3c1e65b03a444033dd6&amp;t=6a690171"
+          width="1300"
+          height="2632"
+          alt="Work detail image 14"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd89a38dnejwquuk8097.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=bf74a7e94fdf7e595deb912f1d072652&amp;t=6a690171"
+          width="1300"
+          height="3552"
+          alt="Work detail image 15"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd8fbf152dqqsd0f1211.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=0b7f362d67b547a71b026860a93ce517&amp;t=6a690171"
+          width="1300"
+          height="2484"
+          alt="Work detail image 16"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd96d837aenndj3d6479.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=11797ff881f50def6cf336e7c071594e&amp;t=6a690171"
+          width="1300"
+          height="3466"
+          alt="Work detail image 17"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd95d9ayize0vhkd8731.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=96a8c07c3a75e0a712d40075a7250502&amp;t=6a690171"
+          width="1300"
+          height="1853"
+          alt="Work detail image 18"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe1d3d0840tm973x9048.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=1fdb2a11b77d6bc9c3a72ea30d86d364&amp;t=6a690171"
+          width="1300"
+          height="2055"
+          alt="Work detail image 19"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdc8f01lli8a4is33718.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=e9bf6fb3615c5763fbf1cb170d6384fa&amp;t=6a690171"
+          width="1300"
+          height="1954"
+          alt="Work detail image 20"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd9d007k83q7liq41571.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=5a538da832411ba53f150d53be76e725&amp;t=6a690171"
+          width="1300"
+          height="3342"
+          alt="Work detail image 21"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fd9eace404j11jtq2911.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=435e433c40889c93913eaea9cd71c5de&amp;t=6a690171"
+          width="1300"
+          height="2992"
+          alt="Work detail image 22"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fda9f5ab1q31gd465525.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=b2ac610c5c282ea7a8dcf4777ad01d6d&amp;t=6a690171"
+          width="1300"
+          height="1462"
+          alt="Work detail image 23"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fda36b07awzpv6h56532.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=fe0a8b3f742ecfa536aa97b6287e8971&amp;t=6a690171"
+          width="1300"
+          height="3032"
+          alt="Work detail image 24"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdabcb51fwaayzlo5373.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=1fd19410879ba10c7e5561c84f1af1a5&amp;t=6a690171"
+          width="1300"
+          height="1462"
+          alt="Work detail image 25"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdaeef7w21rmylie3674.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=154cd3e2341aeffe89b87fd6b4258204&amp;t=6a690171"
+          width="1300"
+          height="2768"
+          alt="Work detail image 26"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdb38143oww4h8377564.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=ca976461dfd2bd4fc7438d44a3ed32b2&amp;t=6a690171"
+          width="1300"
+          height="2792"
+          alt="Work detail image 27"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdc13285ag93yx789058.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=2ed24085a0d8d9bbe767906a0960d07f&amp;t=6a690171"
+          width="1300"
+          height="6362"
+          alt="Work detail image 28"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdbb95c9eaimunmt6146.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=f6591d39f58493d80ec4f4f898b3d1c6&amp;t=6a690171"
+          width="1300"
+          height="2450"
+          alt="Work detail image 29"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdc83771u4sqtb3x4967.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=7a7a3095b92d1458d8e5b4deb95dc26e&amp;t=6a690171"
+          width="1300"
+          height="4870"
+          alt="Work detail image 30"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdbff35kl4p7bxg58406.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=221471d28602b896b60e2b5ffc42d2da&amp;t=6a690171"
+          width="1300"
+          height="2230"
+          alt="Work detail image 31"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe23437lei1pbgaz763.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=ce2e2a82de37b7cc9231aba7473852e4&amp;t=6a690171"
+          width="1300"
+          height="5331"
+          alt="Work detail image 32"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdc8f50nyxk2x36i3717.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=18e82ca61903e4a642064d701be3cb39&amp;t=6a690171"
+          width="1300"
+          height="6680"
+          alt="Work detail image 33"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdd5028wcdpdvhtj5187.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=5a7da71a446a995661d1d32295e34ad4&amp;t=6a690171"
+          width="1300"
+          height="1737"
+          alt="Work detail image 34"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe25d32pc0ldpymt8906.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=3822c1dd42aa725f5448f3d0e0ad8c02&amp;t=6a690171"
+          width="1300"
+          height="3414"
+          alt="Work detail image 35"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe39419t2jhn7pz55802.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=448e961ed80f92c4c8507ab95b1e1fd1&amp;t=6a690171"
+          width="1300"
+          height="5363"
+          alt="Work detail image 36"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdd65b7548rdl9pc2530.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=7b0ff0934d372b9ca2b00ef690769dce&amp;t=6a690171"
+          width="1300"
+          height="4809"
+          alt="Work detail image 37"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdcf46bl1xzc3h7b3154.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=4318130ac831eca52b1afe7acc02501b&amp;t=6a690171"
+          width="1300"
+          height="7527"
+          alt="Work detail image 38"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fddd0e916o5ohto7451.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=de7d45397668061e0f68da3182fef096&amp;t=6a690171"
+          width="1300"
+          height="4531"
+          alt="Work detail image 39"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdddac4vqqwyxpxd5055.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=87ef90bb396de234c86058c561f92570&amp;t=6a690171"
+          width="1300"
+          height="7198"
+          alt="Work detail image 40"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fddd6e5h20lg1s5y60.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=fb6ae8a092286e75c006f7f9150b5b7c&amp;t=6a690171"
+          width="1300"
+          height="1850"
+          alt="Work detail image 41"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe26166doxeac22b656.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=48d58c53a0d53ceda9750e0a165f89eb&amp;t=6a690171"
+          width="1300"
+          height="1958"
+          alt="Work detail image 42"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fde5be9rab103o975366.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=62d2ba3eb367c42f4ad4decca37d6633&amp;t=6a690171"
+          width="1300"
+          height="5637"
+          alt="Work detail image 43"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fde6ed0qse2lire98015.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=2d557e21832aa21d7e944676a1fdc1b7&amp;t=6a690171"
+          width="1300"
+          height="6435"
+          alt="Work detail image 44"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fdf11f48vofjrn059541.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=b26b69b7cd7e26bec946d8c764b7749c&amp;t=6a690171"
+          width="1300"
+          height="3268"
+          alt="Work detail image 45"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe00bb369gqd21e74691.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=ccd4fc34462cdd4263ad618ac9536846&amp;t=6a690171"
+          width="1300"
+          height="5418"
+          alt="Work detail image 46"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe07d69k34hvtvxy9135.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=4753b3cedc0ad27516c69ec2e8d9bb4c&amp;t=6a690171"
+          width="1300"
+          height="4871"
+          alt="Work detail image 47"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe01f11ugmchhql01680.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=5e390a7538ef04028a5e82d08ce1d81f&amp;t=6a690171"
+          width="1300"
+          height="2842"
+          alt="Work detail image 48"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe07d52pfpymi6as1827.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=70ca02b93b1440fc03947914bb5ac519&amp;t=6a690171"
+          width="1300"
+          height="3483"
+          alt="Work detail image 49"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe0f726alvv50geh6616.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=1be1ae26956c96ed540eb59f687aaf91&amp;t=6a690171"
+          width="1300"
+          height="3126"
+          alt="Work detail image 50"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe0fb02wfn05ojso3238.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=a0bbabda2ca431dafd4e4f68ae4a2478&amp;t=6a690171"
+          width="1300"
+          height="3704"
+          alt="Work detail image 51"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe17c5aey4fpkqwd6008.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=4d9ea302738f22246fc1785026104f85&amp;t=6a690171"
+          width="1300"
+          height="1683"
+          alt="Work detail image 52"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      <figure class="work-detail__item">
+        <img
+          src="https://img.zcool.cn/community/681b22fe1858crii6m28dw6167.jpg?x-oss-process=image/saveexif,1/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/quality,q_100/format,webp&amp;k=7b4b0b9203a025752f9c492525781882&amp;t=6a690171"
+          width="1300"
+          height="3228"
+          alt="Work detail image 53"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
