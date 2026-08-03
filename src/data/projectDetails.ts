@@ -72,7 +72,7 @@ export const detailedProjectsData: Record<string, DetailedProject> = {
       }
     },
     videoUrl: '/work-cards/Starmap/Video.mp4',
-    images: Array.from({ length: 30 }, (_, i) => `/work-cards/Starmap/${i + 1}.webp`)
+    images: Array.from({ length: 10 }, (_, i) => `/work-cards/Starmap/${i + 1}.webp`)
   },
   w2: {
     id: 'w2',

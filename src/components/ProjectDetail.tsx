@@ -1,6 +1,6 @@
 import { Language, WorkItem } from '../types';
 import { getProjectDetail } from '../data/projectDetails';
-import { StarmapDetail } from './project-details/StarmapDetail';
+import { ContouraDetail } from './project-details/ContouraDetail';
 import { AlfasDetail } from './project-details/AlfasDetail';
 import { FabilDetail } from './project-details/FabilDetail';
 import { FatSportDetail } from './project-details/FatSportDetail';
@@ -17,7 +17,7 @@ export function ProjectDetail({ work, lang, onBack }: ProjectDetailProps) {
 
   switch (work.id) {
     case 'w1':
-      return <StarmapDetail work={work} lang={lang} detail={detail} onBack={onBack} />;
+      return <ContouraDetail work={work} lang={lang} detail={detail} onBack={onBack} />;
     case 'w2':
       return <AlfasDetail work={work} lang={lang} detail={detail} onBack={onBack} />;
     case 'w3':
