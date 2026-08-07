@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowUp, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Play, X, Sparkles, Layers, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ArrowUp, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Play, X, Check } from 'lucide-react';
 import { ProjectDetailPageProps } from './SharedTypes';
 
 export type CreatorVideo = {
@@ -35,158 +35,274 @@ export const CONTOURA_SKUS: ContouraSku[] = [
     title:
       'Contoura - Bra Cup 3D Seamless Tali Bling Harum bunga unik BH Sport Wanita Menaikkan memadatkan Tanpa Kawat Adem Nyaman Dipakai',
     category: 'Bra',
-    cover: '/work-cards/Starmap/pdp/1.jpg',
+    cover: '/work-cards/Starmap/pdp 1/1.jpg',
     gallery: [
       {
         id: 'bra-1-video',
         type: 'video' as const,
-        src: '/work-cards/Starmap/Video.mp4',
-        poster: '/work-cards/Starmap/pdp/1.jpg',
-        thumbnail: '/work-cards/Starmap/pdp/1.jpg',
+        src: '/work-cards/Starmap/pdp 1/Detail page 1/Video.mp4',
+        poster: '/work-cards/Starmap/pdp 1/1.jpg',
+        thumbnail: '/work-cards/Starmap/pdp 1/1.jpg',
         alt: 'Contoura Bra 3D Seamless product video',
       },
       ...Array.from({ length: 9 }, (_, i) => ({
         id: `bra-1-img-${i + 1}`,
         type: 'image' as const,
-        src: `/work-cards/Starmap/pdp/${i + 1}.jpg`,
-        thumbnail: `/work-cards/Starmap/pdp/${i + 1}.jpg`,
+        src: `/work-cards/Starmap/pdp 1/${i + 1}.jpg`,
+        thumbnail: `/work-cards/Starmap/pdp 1/${i + 1}.jpg`,
         alt: `Contoura Bra 3D Seamless visual ${String(i + 1).padStart(2, '0')}`,
       })),
     ],
-    detailMedia: Array.from({ length: 10 }, (_, i) => `/work-cards/Starmap/${i + 1}.webp`),
+    detailMedia: Array.from({ length: 30 }, (_, i) => `/work-cards/Starmap/pdp 1/Detail page 1/${i + 1}.webp`),
   },
   {
     id: 'underwear-seamless-comfort',
     title:
       'Contoura - Seamless Ultra-Comfort Women Underwear Ergonomic Fit High-Breathability Seamless Fabric',
     category: 'Underwear',
-    cover: '/work-cards/Starmap/pdp/3.jpg',
-    gallery: [
-      {
-        id: 'und-1-video',
-        type: 'video' as const,
-        src: '/work-cards/Starmap/Video.mp4',
-        poster: '/work-cards/Starmap/pdp/3.jpg',
-        thumbnail: '/work-cards/Starmap/pdp/3.jpg',
-        alt: 'Contoura Underwear product video',
-      },
-      ...[3, 4, 5, 6, 7, 8, 9, 1, 2].map((num, i) => ({
-        id: `und-1-img-${i + 1}`,
-        type: 'image' as const,
-        src: `/work-cards/Starmap/pdp/${num}.jpg`,
-        thumbnail: `/work-cards/Starmap/pdp/${num}.jpg`,
-        alt: `Contoura Underwear visual ${String(i + 1).padStart(2, '0')}`,
-      })),
-    ],
-    detailMedia: Array.from({ length: 8 }, (_, i) => `/work-cards/Starmap/${i + 11}.webp`),
-  },
-  {
-    id: 'corset-contour-shaper',
-    title:
-      'Contoura - Contour Sculpting Waist Shaper Corset Breathable Flexible Boning Posture Support',
-    category: 'Corset',
-    cover: '/work-cards/Starmap/pdp/6.jpg',
-    gallery: [
-      {
-        id: 'cor-1-video',
-        type: 'video' as const,
-        src: '/work-cards/Starmap/Video.mp4',
-        poster: '/work-cards/Starmap/pdp/6.jpg',
-        thumbnail: '/work-cards/Starmap/pdp/6.jpg',
-        alt: 'Contoura Corset product video',
-      },
-      ...[6, 7, 8, 9, 1, 2, 3, 4, 5].map((num, i) => ({
-        id: `cor-1-img-${i + 1}`,
-        type: 'image' as const,
-        src: `/work-cards/Starmap/pdp/${num}.jpg`,
-        thumbnail: `/work-cards/Starmap/pdp/${num}.jpg`,
-        alt: `Contoura Corset visual ${String(i + 1).padStart(2, '0')}`,
-      })),
-    ],
-    detailMedia: Array.from({ length: 8 }, (_, i) => `/work-cards/Starmap/${i + 19}.webp`),
-  },
-  {
-    id: 'bra-pushup-jelly-strap',
-    title:
-      'Contoura - Soft Jelly Strap Pushup Bra Floral Kamelia Aroma Wireless Ergonomic Support',
-    category: 'Bra',
-    cover: '/work-cards/Starmap/pdp/8.jpg',
-    gallery: [
-      {
-        id: 'bra-2-video',
-        type: 'video' as const,
-        src: '/work-cards/Starmap/Video.mp4',
-        poster: '/work-cards/Starmap/pdp/8.jpg',
-        thumbnail: '/work-cards/Starmap/pdp/8.jpg',
-        alt: 'Jelly Strap Bra product video',
-      },
-      ...[8, 9, 1, 2, 3, 4, 5, 6, 7].map((num, i) => ({
-        id: `bra-2-img-${i + 1}`,
-        type: 'image' as const,
-        src: `/work-cards/Starmap/pdp/${num}.jpg`,
-        thumbnail: `/work-cards/Starmap/pdp/${num}.jpg`,
-        alt: `Jelly Strap Bra visual ${String(i + 1).padStart(2, '0')}`,
-      })),
-    ],
-    detailMedia: Array.from({ length: 6 }, (_, i) => `/work-cards/Starmap/${i + 5}.webp`),
-  },
-  {
-    id: 'underwear-organic-brief',
-    title:
-      'Contoura - Organic Cotton Light Seamless Brief Ergonomic Daily Comfort Underwear',
-    category: 'Underwear',
-    cover: '/work-cards/Starmap/pdp/4.jpg',
-    gallery: [
-      {
-        id: 'und-2-video',
-        type: 'video' as const,
-        src: '/work-cards/Starmap/Video.mp4',
-        poster: '/work-cards/Starmap/pdp/4.jpg',
-        thumbnail: '/work-cards/Starmap/pdp/4.jpg',
-        alt: 'Organic Brief product video',
-      },
-      ...[4, 5, 6, 7, 8, 9, 1, 2, 3].map((num, i) => ({
-        id: `und-2-img-${i + 1}`,
-        type: 'image' as const,
-        src: `/work-cards/Starmap/pdp/${num}.jpg`,
-        thumbnail: `/work-cards/Starmap/pdp/${num}.jpg`,
-        alt: `Organic Brief visual ${String(i + 1).padStart(2, '0')}`,
-      })),
-    ],
-    detailMedia: Array.from({ length: 8 }, (_, i) => `/work-cards/Starmap/${i + 21}.webp`),
-  },
-  {
-    id: 'bra-sport-airflow',
-    title:
-      'Contoura - Sport Airflow High-Impact Activewear Bra Moisture-Wicking Seamless Structure',
-    category: 'Bra',
-    cover: '/work-cards/Starmap/pdp/2.jpg',
-    gallery: [
-      {
-        id: 'bra-3-video',
-        type: 'video' as const,
-        src: '/work-cards/Starmap/Video.mp4',
-        poster: '/work-cards/Starmap/pdp/2.jpg',
-        thumbnail: '/work-cards/Starmap/pdp/2.jpg',
-        alt: 'Sport Airflow Bra product video',
-      },
-      ...[2, 3, 4, 5, 6, 7, 8, 9, 1].map((num, i) => ({
-        id: `bra-3-img-${i + 1}`,
-        type: 'image' as const,
-        src: `/work-cards/Starmap/pdp/${num}.jpg`,
-        thumbnail: `/work-cards/Starmap/pdp/${num}.jpg`,
-        alt: `Sport Airflow Bra visual ${String(i + 1).padStart(2, '0')}`,
-      })),
-    ],
-    detailMedia: Array.from({ length: 8 }, (_, i) => `/work-cards/Starmap/${i + 1}.webp`),
+    cover: '/work-cards/Starmap/pdp 2/1.jpg',
+    gallery: Array.from({ length: 8 }, (_, i) => ({
+      id: `und-1-img-${i + 1}`,
+      type: 'image' as const,
+      src: `/work-cards/Starmap/pdp 2/${i + 1}.jpg`,
+      thumbnail: `/work-cards/Starmap/pdp 2/${i + 1}.jpg`,
+      alt: `Contoura Underwear visual ${String(i + 1).padStart(2, '0')}`,
+    })),
+    detailMedia: Array.from({ length: 10 }, (_, i) => `/work-cards/Starmap/pdp 2/detail page/${i + 1}.webp`),
   },
 ];
+
+export type ServiceId =
+  | 'pdp-images'
+  | 'long-form-pdp'
+  | 'creator-videos'
+  | 'campaign-assets'
+  | 'complete-system';
+
+export type ContinuationMethod = 'free-chat' | 'consultation' | null;
+
+interface ServiceOption {
+  id: ServiceId;
+  title: string;
+  description: string;
+}
+
+const SERVICES_LIST: ServiceOption[] = [
+  {
+    id: 'pdp-images',
+    title: 'PDP Product Images',
+    description: 'Product-focused visuals for the main marketplace gallery.',
+  },
+  {
+    id: 'long-form-pdp',
+    title: 'Long-form Product Detail Page',
+    description: 'A structured visual story for benefits, features, and product education.',
+  },
+  {
+    id: 'creator-videos',
+    title: 'AI Creator Videos',
+    description: 'Vertical creator-style videos for marketplace and social content.',
+  },
+  {
+    id: 'campaign-assets',
+    title: 'Campaign & Marketplace Assets',
+    description: 'Adapted visual formats for launches, promotions, and platform campaigns.',
+  },
+  {
+    id: 'complete-system',
+    title: 'Complete Commerce Visual System',
+    description: 'A connected system combining gallery images, long-form details, creator videos, and multi-SKU content.',
+  },
+];
+
+interface WayToWork {
+  title: string;
+  description: string;
+  price: string;
+}
+
+const WAYS_TO_WORK: WayToWork[] = [
+  {
+    title: 'Paid Pilot',
+    description: 'Start with one product and a controlled scope before scaling.',
+    price: 'Custom quote',
+  },
+  {
+    title: 'Fixed Project',
+    description: 'For clearly defined deliverables, quantities, and deadlines.',
+    price: 'Custom quote',
+  },
+  {
+    title: 'Hourly',
+    description: 'For flexible production, visual iteration, revisions, creative direction, and ongoing support.',
+    price: 'USD 10 / hour',
+  },
+  {
+    title: 'Monthly Production',
+    description: 'For brands with recurring SKUs, campaigns, and marketplace content needs.',
+    price: 'Custom quote',
+  },
+];
+
+interface AccordionItem {
+  id: string;
+  title: string;
+  content: React.ReactNode;
+}
+
+const ACCORDION_ITEMS: AccordionItem[] = [
+  {
+    id: 'whats-included',
+    title: "WHAT’S INCLUDED",
+    content: (
+      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        The final deliverables, file formats, dimensions, and approved scope are confirmed before production begins.
+      </p>
+    ),
+  },
+  {
+    id: 'process',
+    title: 'PROCESS',
+    content: (
+      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-mono">
+        Product references → Visual direction → Production → Review → Final delivery
+      </p>
+    ),
+  },
+  {
+    id: 'product-accuracy',
+    title: 'PRODUCT ACCURACY',
+    content: (
+      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        Outputs are reviewed against the supplied references for product shape, colour, visible construction, material appearance, and brand details.
+      </p>
+    ),
+  },
+  {
+    id: 'revisions',
+    title: 'REVISIONS',
+    content: (
+      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        The number of revision rounds is confirmed in the approved quotation before production begins.
+      </p>
+    ),
+  },
+  {
+    id: 'usage-rights',
+    title: 'USAGE RIGHTS & CONFIDENTIALITY',
+    content: (
+      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        Usage rights, confidentiality, source-file access, and white-label requirements are confirmed before production begins.
+      </p>
+    ),
+  },
+  {
+    id: 'payment-delivery',
+    title: 'PAYMENT & DELIVERY',
+    content: (
+      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        Payment milestones, final delivery formats, and delivery timing are confirmed after scope approval.
+      </p>
+    ),
+  },
+  {
+    id: 'faq',
+    title: 'FAQ',
+    content: (
+      <div className="space-y-3 text-xs">
+        <div>
+          <p className="font-semibold text-neutral-900 dark:text-neutral-100">What do you need from me?</p>
+          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
+            Product references, brand assets, target platforms, and required deliverables.
+          </p>
+        </div>
+        <div>
+          <p className="font-semibold text-neutral-900 dark:text-neutral-100">Can this support multiple SKUs?</p>
+          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
+            Yes. Each SKU can use its own gallery, long-form details, and video content within one consistent system.
+          </p>
+        </div>
+        <div>
+          <p className="font-semibold text-neutral-900 dark:text-neutral-100">Can content be adapted for different marketplaces?</p>
+          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
+            Yes. Final formats are confirmed based on the selected platforms and approved scope.
+          </p>
+        </div>
+        <div>
+          <p className="font-semibold text-neutral-900 dark:text-neutral-100">How is the price calculated?</p>
+          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
+            Pricing depends on the selected deliverables, production volume, complexity, and timeline.
+          </p>
+        </div>
+        <div>
+          <p className="font-semibold text-neutral-900 dark:text-neutral-100">Can the project remain confidential?</p>
+          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
+            Confidential or white-label production can be discussed before the project begins.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+];
+
+const WHATSAPP_PHONE = '6283897317974';
 
 export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPageProps) {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [selectedSkuId, setSelectedSkuId] = useState<string>('bra-cup-3d-seamless');
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<'videos' | 'description' | 'details'>('videos');
+
+  // Sidebar Commerce Configuration State
+  const [selectedServices, setSelectedServices] = useState<ServiceId[]>([]);
+  const [continuationMethod, setContinuationMethod] = useState<ContinuationMethod>(null);
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
+
+  const toggleService = (id: ServiceId) => {
+    setSelectedServices((prev) =>
+      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
+    );
+  };
+
+  const selectContinuation = (method: ContinuationMethod) => {
+    setContinuationMethod(method);
+  };
+
+  const toggleAccordion = (id: string) => {
+    setOpenAccordion((prev) => (prev === id ? null : id));
+  };
+
+  // WhatsApp CTA Calculation
+  const isServiceEmpty = selectedServices.length === 0;
+  const isContinuationEmpty = continuationMethod === null;
+  const isCtaDisabled = isServiceEmpty || isContinuationEmpty;
+
+  let ctaHelperText: string | null = null;
+  if (isServiceEmpty) {
+    ctaHelperText = 'Select at least one service.';
+  } else if (isContinuationEmpty) {
+    ctaHelperText = 'Choose Free Chat or Consultation.';
+  }
+
+  const ctaButtonLabel =
+    continuationMethod === 'consultation'
+      ? 'REQUEST CONSULTATION ON WHATSAPP'
+      : 'CONTINUE ON WHATSAPP';
+
+  const selectedServiceLabels = selectedServices
+    .map((id) => SERVICES_LIST.find((s) => s.id === id)?.title)
+    .filter(Boolean)
+    .map((title) => `- ${title}`)
+    .join('\n');
+
+  let whatsAppMessageText = '';
+  if (continuationMethod === 'free-chat') {
+    whatsAppMessageText = `Hi Gusti, I’m interested in your AI commerce visual services.\n\nSelected services:\n${selectedServiceLabels}\n\nI would like to ask a few questions and receive an initial estimate.\n\nProject details:\n[Continue typing here]`;
+  } else if (continuationMethod === 'consultation') {
+    whatsAppMessageText = `Hi Gusti, I would like to request a 30-minute consultation.\n\nConsultation fee:\nUSD 5\n\nSelected services:\n${selectedServiceLabels}\n\nI would like to discuss:\n- Product and brand requirements\n- Recommended project scope\n- Timeline and estimated budget\n\nProject details:\n[Continue typing here]`;
+  }
+
+  const whatsAppUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsAppMessageText)}`;
 
   // Multi-SKU selection handler
   const selectedSku = CONTOURA_SKUS.find((sku) => sku.id === selectedSkuId) ?? CONTOURA_SKUS[0];
@@ -410,7 +526,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
       <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
         
         {/* ── 1. Back to Gallery Control ── */}
-        <div className="mb-6">
+        <div className="mb-4">
           <button
             onClick={onBack}
             className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
@@ -490,7 +606,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                       loop
                       playsInline
                       preload="metadata"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <div
@@ -507,7 +623,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                         alt={currentMedia.alt}
                         loading="eager"
                         draggable={false}
-                        className="productGalleryImage w-full h-full object-contain"
+                        className="productGalleryImage w-full h-full object-cover"
                         style={{
                           transformOrigin: zoomOrigin,
                           transform: isImageZoomed ? 'scale(1.8)' : 'scale(1)',
@@ -632,9 +748,11 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
               </div>
 
               {/* ── SECTION 1 (TOP): Creator Videos Section ── */}
-              <section id="creator-videos" className="creatorVideosSection space-y-4 pt-2">
+              <section id="creator-videos" className="creatorVideosSection space-y-4 pt-4 pb-2 border-t border-neutral-200 dark:border-neutral-800/80">
                 <div className="creatorVideosHeader">
-                  <h2>{lang === 'id' ? 'Video dari Kreator (30+)' : 'Creator Videos (30+)'}</h2>
+                  <h2 className="text-base font-bold text-neutral-900 dark:text-white">
+                    {lang === 'id' ? 'Video dari Kreator (30+)' : 'Creator Videos (30+)'}
+                  </h2>
                 </div>
 
                 <div className="creatorVideosCarouselWrapper">
@@ -792,13 +910,13 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
             </div>
 
-            {/* ── 4. Right Information Panel ── */}
-            <aside className="productPurchasePanel h-full flex flex-col">
-              <div className="flex flex-col justify-between h-full space-y-6">
+            {/* ── 4. Right Information Panel (Integrated Commerce Configuration System) ── */}
+            <aside className="contouraServiceSidebar">
+              <div className="contouraServiceSidebar__scroll space-y-6 text-neutral-900 dark:text-neutral-100">
                 
-                {/* Brand Identity Header */}
+                {/* 1. CONTOURA Identity */}
                 <div className="flex items-center gap-3.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <div className="w-11 h-11 rounded-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 shrink-0">
+                  <div className="w-10 h-10 rounded-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 shrink-0">
                     <img
                       src={work.image || '/starmap.jpg'}
                       alt="CONTOURA logo"
@@ -807,7 +925,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                     />
                   </div>
                   <div>
-                    <h2 className="text-base sm:text-lg font-bold tracking-tight text-neutral-900 dark:text-white leading-tight">
+                    <h2 className="text-base font-bold tracking-tight text-neutral-900 dark:text-white leading-tight">
                       CONTOURA
                     </h2>
                     <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 mt-0.5">
@@ -817,64 +935,319 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                     </div>
                   </div>
                 </div>
-                
-                {/* About CONTOURA & Brand Profile */}
-                <div className="space-y-2">
-                  <h2 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-[#0057ff]" />
-                    <span>About CONTOURA</span>
-                  </h2>
-                  <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                    CONTOURA is a modern women's underwear brand focused on ergonomic comfort, smooth silhouettes, and premium fabric aesthetics.
+
+                {/* 2. Project Story */}
+                <div className="space-y-3.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800 text-xs">
+                  <div>
+                    <span className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-0.5">
+                      01 — Challenge
+                    </span>
+                    <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                      Present multiple underwear SKUs through one consistent e-commerce experience.
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
+                    <span className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-0.5">
+                      02 — Idea
+                    </span>
+                    <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                      Connect PDP images, long-form product details, and AI creator videos in one reusable visual system.
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
+                    <span className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-0.5">
+                      03 — My Role
+                    </span>
+                    <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                      AI e-commerce design, product visualization, creator-video production, and interaction direction.
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
+                    <span className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1">
+                      04 — Delivered
+                    </span>
+                    <ul className="space-y-0.5 font-medium text-neutral-800 dark:text-neutral-200">
+                      <li>09 PDP Images</li>
+                      <li>01 Long-form Product Detail Page</li>
+                      <li>30+ AI Creator Videos</li>
+                      <li>Multi-SKU Visual System</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* 3. Shown in This Project */}
+                <div className="space-y-2 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
+                  <h3 className="text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
+                    Shown in This Project
+                  </h3>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 font-medium text-neutral-800 dark:text-neutral-200">
+                      09 PDP Images
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 font-medium text-neutral-800 dark:text-neutral-200">
+                      01 Long-form PDP
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 font-medium text-neutral-800 dark:text-neutral-200">
+                      30+ AI Creator Videos
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 font-medium text-neutral-800 dark:text-neutral-200">
+                      Multi-SKU Visual System
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. Build a Similar System */}
+                <div className="space-y-1.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
+                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                    BUILD A SIMILAR SYSTEM
+                  </h3>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    Choose the visual outputs that match your product, marketplace, and content needs.
                   </p>
                 </div>
 
-                {/* Scope of Production Services */}
-                <div className="space-y-2.5 pt-4 border-t border-neutral-200/80 dark:border-neutral-800">
-                  <h2 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-[#0057ff]" />
-                    <span>Project Scope</span>
-                  </h2>
-                  <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-300">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#0057ff] shrink-0 mt-0.5" />
-                      <span>E-Commerce Product Detail Page (PDP) Visual System</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#0057ff] shrink-0 mt-0.5" />
-                      <span>AI Product Photography &amp; Model Visual Direction</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#0057ff] shrink-0 mt-0.5" />
-                      <span>Creator Videos (30+) Production Showcase System</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#0057ff] shrink-0 mt-0.5" />
-                      <span>High-Conversion Marketplace &amp; Social Campaign Imagery</span>
-                    </li>
-                  </ul>
+                {/* 5. What Do You Need? (Multi-select Services) */}
+                <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
+                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                    What Do You Need?
+                  </h3>
+                  <div className="space-y-2">
+                    {SERVICES_LIST.map((service) => {
+                      const isSelected = selectedServices.includes(service.id);
+                      return (
+                        <button
+                          key={service.id}
+                          type="button"
+                          aria-pressed={isSelected}
+                          onClick={() => toggleService(service.id)}
+                          className={`w-full text-left p-3 rounded-xl border transition-all cursor-pointer flex items-start justify-between gap-3 ${
+                            isSelected
+                              ? 'border-[#0057ff] bg-blue-50/40 dark:bg-blue-950/20 ring-1 ring-[#0057ff]'
+                              : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-neutral-300 dark:hover:border-neutral-700'
+                          }`}
+                        >
+                          <div className="space-y-0.5 min-w-0 pr-1">
+                            <span className="text-xs font-bold text-neutral-900 dark:text-white block">
+                              {service.title}
+                            </span>
+                            <span className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed block">
+                              {service.description}
+                            </span>
+                          </div>
+                          <div
+                            className={`w-4 h-4 rounded shrink-0 flex items-center justify-center mt-0.5 transition-colors ${
+                              isSelected
+                                ? 'bg-[#0057ff] text-white'
+                                : 'border border-neutral-300 dark:border-neutral-700 bg-transparent'
+                            }`}
+                          >
+                            {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {selectedServices.length > 0 && (
+                    <p className="text-[11px] text-neutral-500 dark:text-neutral-400 italic pt-1">
+                      You can share more project details in the next step.
+                    </p>
+                  )}
                 </div>
 
-                {/* Visual Direction Highlights */}
-                <div className="space-y-2 pt-4 border-t border-neutral-200/80 dark:border-neutral-800">
-                  <h2 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
-                    Visual Strategy
-                  </h2>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                    Clean, editorial photography highlighting seamless comfort and natural fit, structured for maximum e-commerce visual impact.
-                  </p>
-                </div>
-
-                {/* Portfolio Action CTA */}
-                <div className="pt-2 mt-auto">
+                {/* 6. How Would You Like to Continue? (Exclusive Selection) */}
+                <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
+                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                    How Would You Like to Continue?
+                  </h3>
+                  
+                  {/* Option A: Free WhatsApp Chat */}
                   <button
-                    onClick={scrollToDetails}
-                    className="w-full py-3.5 px-6 rounded-xl bg-[#0057ff] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-sm tracking-wide shadow-lg shadow-blue-500/20 transition-all duration-200 text-center cursor-pointer"
+                    type="button"
+                    onClick={() => selectContinuation('free-chat')}
+                    className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer ${
+                      continuationMethod === 'free-chat'
+                        ? 'border-[#0057ff] bg-blue-50/40 dark:bg-blue-950/20 ring-1 ring-[#0057ff]'
+                        : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-neutral-300 dark:hover:border-neutral-700'
+                    }`}
                   >
-                    View Full Visual Story
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="text-xs font-bold text-neutral-900 dark:text-white">
+                        Free WhatsApp Chat
+                      </span>
+                      <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800/60">
+                        Free
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      Have a quick question or need an initial estimate? Share your selected services and basic project details through WhatsApp.
+                    </p>
+                    <span className="text-[11px] text-neutral-400 dark:text-neutral-500 block mt-1.5">
+                      No booking required.
+                    </span>
+                  </button>
+
+                  {/* Option B: 30-Minute Consultation */}
+                  <button
+                    type="button"
+                    onClick={() => selectContinuation('consultation')}
+                    className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer ${
+                      continuationMethod === 'consultation'
+                        ? 'border-[#0057ff] bg-blue-50/40 dark:bg-blue-950/20 ring-1 ring-[#0057ff]'
+                        : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-neutral-300 dark:hover:border-neutral-700'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="text-xs font-bold text-neutral-900 dark:text-white">
+                        30-Minute Consultation
+                      </span>
+                      <span className="text-xs font-bold text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">
+                        USD 5
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      Discuss your product, visual needs, production scope, budget, and the most suitable way to structure the project.
+                    </p>
+                    <div className="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-800/80 text-[11px] text-neutral-500 dark:text-neutral-400 space-y-1">
+                      <p>Duration: 30 minutes</p>
+                      <p>You can share your project details in the next step. Payment instructions will be sent after the consultation request is accepted.</p>
+                    </div>
                   </button>
                 </div>
 
+                {/* 7. Ways to Work */}
+                <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
+                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                    Ways to Work
+                  </h3>
+                  <div className="space-y-2">
+                    {WAYS_TO_WORK.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="p-2.5 rounded-lg bg-neutral-50/60 dark:bg-neutral-900/60 border border-neutral-200/60 dark:border-neutral-800"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">
+                            {item.title}
+                          </span>
+                          <span className="text-[11px] font-semibold text-neutral-700 dark:text-neutral-300 whitespace-nowrap">
+                            {item.price}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed mt-0.5">
+                          {item.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 8. Your Interest (Dynamic Receipt-style Summary) */}
+                <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-3 text-xs">
+                  <h3 className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider border-b border-neutral-200/60 dark:border-neutral-800 pb-1.5">
+                    YOUR INTEREST
+                  </h3>
+                  
+                  <div className="space-y-1.5">
+                    <span className="text-[11px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-semibold block">
+                      Selected Services
+                    </span>
+                    {selectedServices.length > 0 ? (
+                      <ul className="space-y-1 font-medium text-neutral-900 dark:text-white">
+                        {selectedServices.map((id) => (
+                          <li key={id} className="flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#0057ff] shrink-0" />
+                            <span>{SERVICES_LIST.find((s) => s.id === id)?.title}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-neutral-400 dark:text-neutral-500 italic">
+                        No services selected yet.
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="pt-2 border-t border-neutral-200/60 dark:border-neutral-800 space-y-0.5">
+                    <span className="text-[11px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-semibold block">
+                      Next Step
+                    </span>
+                    <p className="font-bold text-neutral-900 dark:text-white">
+                      {continuationMethod === 'free-chat' && 'Free WhatsApp Chat'}
+                      {continuationMethod === 'consultation' && '30-Minute Consultation — USD 5'}
+                      {!continuationMethod && (
+                        <span className="text-neutral-400 dark:text-neutral-500 font-normal italic">
+                          Choose a continuation option.
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 9. Project Information Accordions (Loro Piana-style Progressive Disclosure) */}
+                <div className="space-y-1 pt-1 pb-2">
+                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider mb-2">
+                    Project Information
+                  </h3>
+                  <div className="border border-neutral-200/80 dark:border-neutral-800 rounded-xl overflow-hidden divide-y divide-neutral-200/80 dark:divide-neutral-800">
+                    {ACCORDION_ITEMS.map((item) => {
+                      const isOpen = openAccordion === item.id;
+                      return (
+                        <div key={item.id} className="bg-white dark:bg-neutral-900">
+                          <button
+                            type="button"
+                            onClick={() => toggleAccordion(item.id)}
+                            className="w-full py-3 px-3.5 text-left flex items-center justify-between gap-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors cursor-pointer"
+                          >
+                            <span className="text-xs font-bold tracking-tight text-neutral-900 dark:text-white">
+                              {item.title}
+                            </span>
+                            {isOpen ? (
+                              <ChevronUp className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+                            ) : (
+                              <ChevronDown className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+                            )}
+                          </button>
+                          {isOpen && (
+                            <div className="px-3.5 pb-3.5 pt-1 text-xs border-t border-neutral-100 dark:border-neutral-800/50 bg-neutral-50/40 dark:bg-neutral-900/40">
+                              {item.content}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* 10. Sticky WhatsApp CTA */}
+              <div className="contouraServiceSidebar__actions space-y-2">
+                {ctaHelperText && (
+                  <p className="text-center text-[11px] font-medium text-neutral-500 dark:text-neutral-400">
+                    {ctaHelperText}
+                  </p>
+                )}
+                {isCtaDisabled ? (
+                  <button
+                    type="button"
+                    disabled
+                    className="w-full py-3 px-4 rounded-xl bg-neutral-200 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 font-bold text-xs tracking-wider uppercase cursor-not-allowed text-center transition-colors"
+                  >
+                    {ctaButtonLabel}
+                  </button>
+                ) : (
+                  <a
+                    href={whatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full block py-3 px-4 rounded-xl bg-[#0057ff] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-xs tracking-wider uppercase shadow-lg shadow-blue-500/20 transition-all text-center cursor-pointer"
+                  >
+                    {ctaButtonLabel}
+                  </a>
+                )}
               </div>
             </aside>
 
