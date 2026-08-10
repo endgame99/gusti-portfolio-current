@@ -36,7 +36,7 @@ export function Library({ lang, items, searchQuery }: LibraryProps) {
             <div className="pt-2 pb-1">
               <h3 className="type-heading-md font-semibold text-neutral-900 dark:text-white line-clamp-1">{item.title}</h3>
               <div className="flex flex-wrap mt-0.5">
-                 <span className="type-body-sm font-normal text-neutral-500 dark:text-neutral-400">{item.category}</span>
+                 <span className="type-label-sm font-medium text-neutral-500 dark:text-neutral-400">{item.category}</span>
               </div>
             </div>
           </div>

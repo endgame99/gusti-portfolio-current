@@ -36,10 +36,10 @@ export function AlfasDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
         {/* MAIN TITLE */}
         <div className="flex items-center gap-2.5 flex-wrap pt-2">
           <h1 
-            className="type-display-xl font-bold text-neutral-900 dark:text-white"
-            title={`${detail.client} X AI Production - ${work.label}`}
+            className="type-display-xl text-neutral-900 dark:text-white"
+            title={`${detail.client} X ${work.id === 'w11' ? '草本初色' : 'AI Production'} - ${work.label}`}
           >
-            {detail.client} - {work.label}
+            {detail.client} {work.id === 'w11' ? 'X 草本初色' : ''} - {work.label}
           </h1>
         </div>
 
@@ -48,7 +48,7 @@ export function AlfasDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded bg-red-600 dark:bg-red-700 flex flex-col items-center justify-center font-bold text-white leading-none shrink-0 border border-red-500 shadow-sm select-none">
               <span className="type-label-xs tracking-tighter font-extrabold">GUSTI</span>
-              <span className="text-[5px] tracking-widest font-mono scale-90 mt-0.5">STUDIO</span>
+              <span className="text-[5px] tracking-widest font-bold scale-90 mt-0.5">STUDIO</span>
             </div>
 
             <div>
@@ -238,7 +238,7 @@ export function AlfasDetail({ work, lang, detail, onBack }: ProjectDetailPagePro
             <div className="absolute -bottom-16 -left-16 w-36 h-36 rounded-full bg-red-500/10 blur-[60px]" />
 
             <div className="relative z-10 space-y-4 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 bg-red-600/10 text-[#FF5134] px-3 py-1 rounded-full type-label-xs font-extrabold tracking-widest uppercase border border-red-500/20 shadow-xs mb-1">
+              <div className="inline-flex items-center gap-1.5 bg-red-600/10 text-[#FF5134] px-3 py-1 rounded-full type-label-sm font-bold tracking-widest uppercase border border-red-500/20 shadow-xs mb-1">
                 <span>⚡</span>
                 <span>{lang === 'id' ? 'KONSULTASI GRATIS' : lang === 'cn' ? '免费视觉咨询' : 'FREE DIRECT SCOPING'}</span>
               </div>

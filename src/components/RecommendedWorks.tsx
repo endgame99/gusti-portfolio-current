@@ -49,7 +49,7 @@ export function RecommendedWorks({
   return (
     <div className="py-0">
       {/* Behance-inspired Portfolio Grid Layout: 1 col Mobile, 2 cols Tablet, 3 cols Desktop (NEVER 4 cols) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 mt-4 sm:mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 card-gap mt-4 sm:mt-6">
         {displayWorks.map((work) => {
           const clientName =
             work.clientName || work.label.split('/')[0]?.trim() || 'Client Work';
@@ -96,7 +96,7 @@ export function RecommendedWorks({
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
 
                 <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 p-3.5 sm:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h3 className="type-display-md text-white font-semibold line-clamp-2 drop-shadow-sm leading-snug">
+                  <h3 className="type-display-md text-white line-clamp-2 drop-shadow-sm leading-snug">
                     {work.title}
                   </h3>
                 </div>
@@ -112,7 +112,7 @@ export function RecommendedWorks({
                     className="w-7 h-7 rounded-full object-cover shrink-0 border border-neutral-200 dark:border-neutral-800"
                   />
                 ) : (
-                  <div className="w-7 h-7 rounded-full bg-neutral-200/80 dark:bg-neutral-800 text-[10px] font-bold text-neutral-700 dark:text-neutral-300 flex items-center justify-center shrink-0 tracking-tight select-none">
+                  <div className="w-7 h-7 rounded-full bg-neutral-200/80 dark:bg-neutral-800 type-label-sm font-bold text-neutral-700 dark:text-neutral-300 flex items-center justify-center shrink-0 tracking-tight select-none">
                     {getInitials(clientName)}
                   </div>
                 )}

@@ -332,10 +332,10 @@ export function PdpVisualsPage() {
         <main className="pageContainer internalPageTop page-bottom-pb">
         {/* Title area */}
         <div className="mb-8 md:mb-12 max-w-5xl mx-auto w-full">
-          <h1 className="type-display-xl font-bold text-neutral-900 dark:text-white tracking-tight">
+          <h1 className="type-display-xl text-neutral-900 dark:text-white tracking-tight">
             E-commerce Visual Creative — PDP Visuals
           </h1>
-          <p className="mt-3 type-body-md font-normal leading-relaxed text-neutral-500 dark:text-neutral-400 max-w-2xl">
+          <p className="mt-3 type-lead text-neutral-500 dark:text-neutral-400 reading-lead">
             Prompt-based ecommerce visual system for product detail pages, marketplace assets, and sales-ready content.
           </p>
         </div>
@@ -425,10 +425,10 @@ export function PdpVisualsPage() {
                   </h3>
                   {/* Tool chips */}
                   <div className="flex items-center justify-center gap-1.5">
-                    <span className="type-label-xs font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+                    <span className="type-label-sm font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
                       GPT-image2
                     </span>
-                    <span className="type-label-xs font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+                    <span className="type-label-sm font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
                       Nano Banana 2
                     </span>
                   </div>
@@ -490,7 +490,7 @@ export function PdpVisualsPage() {
             <p className="sku-selector-eyebrow type-eyebrow text-neutral-400 mb-2">
               Interactive Catalog
             </p>
-            <h2 id="sku-selector-title" className="sku-selector-title type-display-lg font-bold text-neutral-900 dark:text-white tracking-tight mb-3">
+            <h2 id="sku-selector-title" className="sku-selector-title type-display-lg text-neutral-900 dark:text-white tracking-tight mb-3">
               Other SKU Visual Sets
             </h2>
             <p className="type-body-sm font-normal text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-2xl">

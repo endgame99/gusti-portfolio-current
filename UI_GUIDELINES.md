@@ -138,61 +138,153 @@ The following sections define system-wide design principles. They apply across a
 |---|---|---|
 | **Global Font** | `acumin-pro` | `"Helvetica Neue", Helvetica, Arial, sans-serif` |
 
-### Usage Rules
+### Core Rule
 
-**acumin-pro** — Used globally for ALL text elements across the entire website:
+Use `acumin-pro` for every product and marketing text role. Create hierarchy with size, weight, line height, letter spacing, color, and available width — not by introducing another font family.
 
-- Headlines, hero titles, and section headers
-- Navigation, sidebar, header menus
-- Buttons, action elements, forms
-- Body paragraphs, descriptions, and strategic narrative
-- Project metadata, labels, chips, and tags
-- Card titles, card metadata, and credits roll
+Do not use `font-mono` as a decorative style. Monospace is allowed only when the content is genuinely code, a technical identifier, or tabular machine data.
 
-Hierarchy is driven by size, weight (400, 500, 600, 700, 800), line height, and letter spacing — not by splitting display and body fonts.
+### Typography Decision Table
 
-### Typography Scale
+Choose type by semantic function, not by what merely looks good in one component.
 
-| Level | Min (mobile) | Max (desktop) | Weight | Line Height | Letter Spacing |
-|---|---|---|---|---|---|
-| **Hero / Display XL** | `1.5rem` (24px) | `2.25rem` (36px) | Semibold (600) | `leading-tight` | `tracking-[-0.025em]` |
-| **Section Header / Display LG** | `1.25rem` (20px) | `1.5rem` (24px) | Semibold (600) | `leading-tight` | `tracking-[-0.025em]` |
-| **Card Title / Display MD** | `1.125rem` (18px) | `1.25rem` (20px) | Semibold (600) | `leading-snug` | `tracking-[-0.02em]` |
-| **Heading LG** | `1.125rem` (18px) | `1.125rem` (18px) | Bold (700) | `leading-snug` | `tracking-[-0.025em]` |
-| **Body (Base)** | `0.875rem` (14px) | `0.875rem` (14px) | Regular (400) | `leading-relaxed` | — |
-| **UI / Buttons / Nav** | `0.75rem` (12px) | `0.875rem` (14px) | Semibold (600) | `leading-none` | — |
-| **Metadata / Chips** | `0.625rem` (10px) | `0.6875rem` (11px) | Medium (500) | `leading-none` | `tracking-wide` |
+| Semantic role | Use for | Mobile | Tablet | Desktop | Weight | Line height | Letter spacing | Existing utility |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| **Display XL / Page Title** | One primary page or project title | 24px | 30px | 36px | 600 | 1.15 | `-0.025em` | `.type-display-xl` |
+| **Display LG / Section Title** | Major section heading | 20px | 24px | 24px | 600 | 1.20 | `-0.025em` | `.type-display-lg` |
+| **Display MD / Card Title** | Featured card or content-block title | 18px | 20px | 20px | 600 | 1.25 | `-0.02em` | `.type-display-md` |
+| **Heading LG** | Subsection heading | 18px | 18px | 18px | 700 | 1.30 | `-0.025em` | `.type-heading-lg` |
+| **Heading MD** | Compact panel or grouped-content heading | 16px | 16px | 16px | 600 | 1.35 | `0` | `.type-heading-md` |
+| **Lead Body** | Short intro below a page title | 16px | 16px | 16px | 400 | 1.60 | `0` | `text-base leading-relaxed` |
+| **Body MD** | Standard paragraphs and descriptions | 14px | 14px | 14px | 400 | 1.60 | `0` | `.type-body-md` |
+| **Body SM** | Supporting explanation or compact helper copy | 12px | 12px | 12px | 400 | 1.60 | `0` | `.type-body-sm` |
+| **Navigation / Tab** | Navigation and filter labels | 13px | 14px | 15px | 600 | 1.20 | `0` | `.type-nav` / `.type-tab` |
+| **Label MD** | Buttons, compact UI labels, short status text | 12px | 12px | 12px | 600 | 1.20 | `0` | `.type-label-md` |
+| **Label SM** | Metadata and secondary labels | 11px | 11px | 11px | 500 | 1.30 | `0` | `.type-label-sm` |
+| **Eyebrow** | Client, category, or section context above a heading | 11px | 11px | 11px | 700 | 1.20 | `0.05em` | `.type-eyebrow` |
+
+### Role Mapping
+
+Use this hierarchy consistently across pages:
+
+1. **Client/category eyebrow** — `Eyebrow`
+2. **Page or project title** — `Display XL`
+3. **Short page introduction** — `Lead Body`
+4. **Major section heading** — `Display LG`
+5. **Subsection heading** — `Heading LG` or `Heading MD`
+6. **Standard narrative** — `Body MD`
+7. **Caption, helper copy, or metadata** — `Body SM` or `Label SM`
+8. **Action label** — `Label MD`
+
+### Hierarchy Rules
+
+- Use only one `Display XL` per page.
+- A content section should normally contain no more than three visible text levels: section heading, body, and metadata.
+- Do not make a subsection heading visually stronger than the page or section title above it.
+- Use weight 600 for display text; reserve weight 700 for compact headings, emphasis, and action labels.
+- Do not use weight 800 for normal page hierarchy. It creates unnecessary visual noise with Acumin Pro.
+- Avoid uppercase for sentences. Uppercase is limited to short eyebrows, metadata, and action labels.
+- Persistent readable text should not be smaller than 11px. Sizes below 11px are allowed only for non-essential media badges with sufficient contrast.
+- Do not use reduced opacity as the only way to distinguish hierarchy. Size, weight, and spacing must still communicate the relationship.
+
+### Reading Width
+
+| Content type | Maximum readable width |
+|---|---:|
+| Lead paragraph | 760px |
+| Standard narrative paragraph | 680px or approximately 65–75 characters |
+| Compact sidebar or card paragraph | 320–380px |
+| Caption | Match the media width, but keep each text line under 75 characters when possible |
+
+Long-form text must not stretch across the full page container.
 
 ---
 
 ## 5. SPACING & WHITE SPACE
 
-### Spacing Philosophy
+### Core Rule
 
-Spacing should create a premium, editorial rhythm. Follow the reference's proportions as a baseline, but allow individual components to define appropriate dimensions for their content.
+White space communicates relationships. Elements that belong together stay close; separate content groups receive visibly larger space. Do not choose margins independently for every element.
 
-### Page Container
+### Spacing Scale
 
-- **Max width:** Use a wide container that occupies most of the viewport while maintaining comfortable reading proportions. The reference uses approximately 1600px.
-- **Alignment:** Horizontally centered.
-- **Horizontal padding:** Scale down on smaller viewports. Use clamped or responsive padding that tightens on mobile without collapsing.
+Use the following values as the default spacing vocabulary:
 
-### Spacing Rhythm Principles
+| Token | Value | Typical use |
+|---|---:|---|
+| **2XS** | 4px | Icon-to-label adjustment, very tight metadata |
+| **XS** | 8px | Eyebrow-to-title, caption-to-meta, inline control gap |
+| **SM** | 12px | Closely related text or controls |
+| **MD** | 16px | Standard component padding and content stack |
+| **LG** | 20px | Compact panel padding, heading-to-small-content |
+| **XL** | 24px | Card padding, title-to-intro on wide layouts |
+| **2XL** | 32px | Heading-to-primary-content, major component padding |
+| **3XL** | 48px | Mobile section separation |
+| **4XL** | 64px | Desktop section separation |
+| **5XL** | 80px | Page ending or large editorial separation |
+| **6XL** | 96px | Exceptional feature break; use only when the visual composition needs it |
 
-| Context | Principle |
-|---|---|
-| **Section separation** | Generous vertical space between major sections. Sections should breathe. |
-| **Hero spacing** | Minimal top margin above hero. Comfortable bottom margin before the next section. |
-| **Grid gap** | Consistent gap between cards. Tight enough to feel cohesive, loose enough to feel clean. |
-| **Card inner padding** | Compact but not cramped. Content should not touch card edges. |
-| **Element gap** | Related elements (eyebrow + headline + paragraph) grouped tightly. Unrelated groups separated clearly. |
+Prefer values from this scale. Values outside the scale require component evidence or a task-specific reference.
 
-### White Space Rules
+### Container System
 
-- **Headline breathing room:** Always separate major headlines from surrounding content with generous vertical space.
-- **Content grouping:** Keep related elements tightly stacked, then surround the group with white space.
-- **Reading width:** Body text should not span the full container width. Restrict paragraphs to a comfortable reading measure (~65–75 characters).
-- **Consistent gutters:** All sections should sit inside the same container alignment. Do not mix different container widths or padding values on the same page.
+| Container | Maximum width | Horizontal gutter | Use for |
+|---|---:|---|---|
+| **Global / Application shell** | 1300px | 16px mobile / 24px tablet / 32px desktop | Homepage, Services, project details, header, navigation-aligned sections |
+| **Project detail inner** | 1300px | Inherits page gutter (single source of padding) | Visual case studies and commerce-detail layouts |
+| **Optional wide media container** | 1600px | 16px mobile / 24px tablet / 32px desktop | Optional wide-media showcase (requires task-specific evidence) |
+| **Reading column** | 680px | Inherits page gutter | Narrative paragraphs |
+| **Lead column** | 760px | Inherits page gutter | Introductory copy below a page title |
+| **Sidebar/panel** | 360–400px | 16px mobile / 20px desktop internal padding | Project metadata, service selection, compact actions |
+
+All major sections on the same page must share a consistent left and right axis. A narrower reading column may sit inside that axis, but it must not create a new arbitrary page gutter.
+
+### Vertical Rhythm Decision Table
+
+| Relationship | Mobile | Desktop |
+|---|---:|---:|
+| Eyebrow → title | 8px | 8px |
+| Title → lead paragraph | 12–16px | 16–24px |
+| Lead paragraph → primary media/content | 24px | 32px |
+| Section title → supporting paragraph | 12px | 16px |
+| Section heading group → primary content | 20px | 32px |
+| Paragraph → paragraph | 12–16px | 16px |
+| Media → caption | 8px | 8–12px |
+| Content group → content group | 24–32px | 32–48px |
+| Major section → major section | 48px | 64px |
+| Final section → page bottom | 48px | 80px |
+
+### Component Spacing
+
+| Component | Mobile | Desktop |
+|---|---:|---:|
+| Standard card inner padding | 16px | 20–24px |
+| Compact card/panel padding | 12–16px | 16–20px |
+| Sidebar inner padding | 16px | 20px |
+| Card grid gap | 16px | 24px |
+| Compact control group gap | 8–12px | 8–12px |
+| Button horizontal padding | 16px | 16–20px |
+| Button vertical padding | 12px | 12px |
+
+### Section Rhythm
+
+- A major section contains its heading group and content inside one spacing context.
+- Do not place borders between every small content group. Use white space first; use a divider only when it clarifies a real boundary.
+- Repeated sections must use the same heading-to-content and section-to-section spacing.
+- Hero spacing may be visually larger, but the hero must remain aligned to the same page gutter.
+- Dense commerce controls may use compact spacing inside the control itself. The surrounding case-study narrative must retain editorial section spacing.
+
+### White Space Checks
+
+Before approving a layout, verify:
+
+- Related text reads as one group without appearing cramped.
+- A user can identify where one section ends and the next begins without relying only on borders.
+- The page title has more visual breathing room than a card title.
+- Body copy does not span the full page width.
+- Left and right gutters remain consistent across hero, text, media, and grids.
+- Mobile spacing is reduced deliberately, not removed.
+- No single component introduces unrelated values such as 18px, 22px, or 28px without evidence.
 
 ---
 
@@ -416,11 +508,41 @@ The project card grid is independent of the hero. Redesigning the hero does not 
 - Clean CTA at the bottom (if applicable)
 - Minimal UI chrome, premium spacing
 
+### Required Text Hierarchy
+
+| Page element | Typography role | Notes |
+|---|---|---|
+| Client or project category | `Eyebrow` | Optional; place above the title and keep it short |
+| Project title | `Display XL` | One per page; do not reduce it to compact panel-title sizing |
+| Project introduction | `Lead Body` | Maximum width 760px; one or two short paragraphs |
+| Major narrative section | `Display LG` | Examples: Overview, Creative Direction, Deliverables |
+| Subsection or content-block title | `Heading LG` or `Heading MD` | Use only when the content needs another level |
+| Narrative paragraph | `Body MD` | Maximum width 680px |
+| Media caption | `Body SM` or `Label SM` | Descriptive and factual, never decorative filler |
+| CTA label | `Label MD` | Short, specific action text |
+
+### Required Page Rhythm
+
+| Relationship | Mobile | Desktop |
+|---|---:|---:|
+| Client/category → project title | 8px | 8px |
+| Project title → introduction | 16px | 24px |
+| Introduction → hero/primary gallery | 24px | 32px |
+| Major section → major section | 48px | 64px |
+| Section heading group → media or content | 20px | 32px |
+| Media → factual caption | 8px | 8–12px |
+
+The commerce/service sidebar may remain denser than the narrative column, but it must not determine the typography or spacing of the entire project page.
+
 ### Guidelines
 
 - Each project detail page can be independently customized
 - The `ProjectDetail.tsx` controller routes to per-project components
 - Detailed project data comes from `src/data/projectDetails.ts`
+- Use the 1300px project-detail container unless a task-specific reference proves another width is required
+- Keep narrative text inside the reading-width rules even when media spans the full content column
+- Use Acumin Pro for sidebar labels and metadata; monospace is not a substitute for hierarchy
+- Do not let repeated 11–12px labels become the dominant reading experience
 
 ---
 

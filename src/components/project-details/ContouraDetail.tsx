@@ -155,7 +155,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
     id: 'whats-included',
     title: "WHAT’S INCLUDED",
     content: (
-      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
         The final deliverables, file formats, dimensions, and approved scope are confirmed before production begins.
       </p>
     ),
@@ -164,7 +164,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
     id: 'process',
     title: 'PROCESS',
     content: (
-      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-mono">
+      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
         Product references → Visual direction → Production → Review → Final delivery
       </p>
     ),
@@ -173,7 +173,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
     id: 'product-accuracy',
     title: 'PRODUCT ACCURACY',
     content: (
-      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
         Outputs are reviewed against the supplied references for product shape, colour, visible construction, material appearance, and brand details.
       </p>
     ),
@@ -182,7 +182,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
     id: 'revisions',
     title: 'REVISIONS',
     content: (
-      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
         The number of revision rounds is confirmed in the approved quotation before production begins.
       </p>
     ),
@@ -191,7 +191,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
     id: 'usage-rights',
     title: 'USAGE RIGHTS & CONFIDENTIALITY',
     content: (
-      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
         Usage rights, confidentiality, source-file access, and white-label requirements are confirmed before production begins.
       </p>
     ),
@@ -200,7 +200,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
     id: 'payment-delivery',
     title: 'PAYMENT & DELIVERY',
     content: (
-      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
         Payment milestones, final delivery formats, and delivery timing are confirmed after scope approval.
       </p>
     ),
@@ -209,33 +209,33 @@ const ACCORDION_ITEMS: AccordionItem[] = [
     id: 'faq',
     title: 'FAQ',
     content: (
-      <div className="space-y-3 text-xs">
+      <div className="space-y-3 type-body-sm">
         <div>
-          <p className="font-semibold text-neutral-900 dark:text-neutral-100">What do you need from me?</p>
+          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">What do you need from me?</p>
           <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
             Product references, brand assets, target platforms, and required deliverables.
           </p>
         </div>
         <div>
-          <p className="font-semibold text-neutral-900 dark:text-neutral-100">Can this support multiple SKUs?</p>
+          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">Can this support multiple SKUs?</p>
           <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
             Yes. Each SKU can use its own gallery, long-form details, and video content within one consistent system.
           </p>
         </div>
         <div>
-          <p className="font-semibold text-neutral-900 dark:text-neutral-100">Can content be adapted for different marketplaces?</p>
+          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">Can content be adapted for different marketplaces?</p>
           <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
             Yes. Final formats are confirmed based on the selected platforms and approved scope.
           </p>
         </div>
         <div>
-          <p className="font-semibold text-neutral-900 dark:text-neutral-100">How is the price calculated?</p>
+          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">How is the price calculated?</p>
           <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
             Pricing depends on the selected deliverables, production volume, complexity, and timeline.
           </p>
         </div>
         <div>
-          <p className="font-semibold text-neutral-900 dark:text-neutral-100">Can the project remain confidential?</p>
+          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">Can the project remain confidential?</p>
           <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
             Confidential or white-label production can be discussed before the project begins.
           </p>
@@ -523,18 +523,25 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
       id={`project-detail-${work.id}`}
       className="contouraProductDetail w-full min-h-screen bg-white dark:bg-[#0A0A0A] text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative font-sans pb-24"
     >
-      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
+      <div className="detail-container pt-6 sm:pt-8">
         
         {/* ── 1. Back to Gallery Control ── */}
         <div className="mb-4">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 type-label-sm font-semibold text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
             aria-label="Back to gallery"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to gallery</span>
           </button>
+        </div>
+
+        {/* ── Page-Level Single H1 Title ── */}
+        <div className="mb-6 pt-1">
+          <h1 className="type-display-xl text-neutral-900 dark:text-white tracking-tight">
+            {work.title}
+          </h1>
         </div>
 
         {/* ── 2. Top-Level Shell & Main Layout ── */}
@@ -584,7 +591,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                               <div className="w-5 h-5 rounded-full bg-black/60 backdrop-blur-xs flex items-center justify-center text-white">
                                 <Play className="w-2.5 h-2.5 fill-white translate-x-[0.5px]" />
                               </div>
-                              <span className="text-[9px] font-bold tracking-wider text-white uppercase leading-none">Video</span>
+                              <span className="type-label-xs font-bold tracking-wider text-white uppercase leading-none">Video</span>
                             </div>
                           )}
                         </button>
@@ -672,18 +679,18 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                 </div>
               </div>
 
-              {/* Active SKU Title */}
+              {/* Active SKU Title (H2, Display LG, 600 weight) */}
               <div className="pt-2 pb-1">
-                <h1 className="text-base sm:text-lg font-bold tracking-tight text-neutral-900 dark:text-white leading-snug">
+                <h2 className="type-display-lg text-neutral-900 dark:text-white tracking-tight leading-tight">
                   {selectedSku.title}
-                </h1>
+                </h2>
               </div>
 
               {/* SKU Recommendation Section */}
               <section className="space-y-3 pt-4 pb-2 border-t border-neutral-200/80 dark:border-neutral-800">
-                <h2 className="text-sm font-bold text-neutral-900 dark:text-white">
+                <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white">
                   Direkomendasikan oleh toko ini
-                </h2>
+                </h3>
 
                 <div className="recommendedSkuGrid">
                   {CONTOURA_SKUS.slice(0, 6).map((sku) => (
@@ -703,9 +710,9 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                         />
                       </div>
 
-                      <h3 className="recommendedSkuCard__title text-neutral-900 dark:text-neutral-100">
+                      <p className="recommendedSkuCard__title type-label-sm font-semibold text-neutral-900 dark:text-neutral-100">
                         {sku.title}
-                      </h3>
+                      </p>
                     </button>
                   ))}
                 </div>
@@ -713,7 +720,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
               {/* Product Content Tabs Navigation */}
               <div className="border-b border-neutral-200 dark:border-neutral-800 mt-2">
-                <nav className="flex items-center gap-6 text-sm font-semibold overflow-x-auto">
+                <nav className="flex items-center gap-6 type-tab overflow-x-auto">
                   <button
                     onClick={() => scrollToSection('creator-videos', 'videos')}
                     className={`py-3 border-b-2 transition-colors whitespace-nowrap ${
@@ -750,9 +757,9 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
               {/* ── SECTION 1 (TOP): Creator Videos Section ── */}
               <section id="creator-videos" className="creatorVideosSection space-y-4 pt-4 pb-2 border-t border-neutral-200 dark:border-neutral-800/80">
                 <div className="creatorVideosHeader">
-                  <h2 className="text-base font-bold text-neutral-900 dark:text-white">
+                  <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white">
                     {lang === 'id' ? 'Video dari Kreator (30+)' : 'Creator Videos (30+)'}
-                  </h2>
+                  </h3>
                 </div>
 
                 <div className="creatorVideosCarouselWrapper">
@@ -848,9 +855,9 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
               {/* ── SECTION 2: Product Description ── */}
               <section id="product-description" className="space-y-4 pt-6 border-t border-neutral-100 dark:border-neutral-800/50">
-                <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white">Product Description</h3>
+                <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white">Product Description</h3>
                 
-                <div className="space-y-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                <div className="space-y-4 type-body-md leading-relaxed text-neutral-700 dark:text-neutral-300 reading-narrative">
                   <p className="font-medium text-neutral-900 dark:text-neutral-100">
                     Bra dengan wangi bunga berkelas dengan tali tipis berkilau seperti permata yang bisa pancarkan cantikmu.
                   </p>
@@ -878,8 +885,8 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                   </ul>
 
                   <div className="pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
-                    <h4 className="font-bold text-neutral-900 dark:text-white mb-2">Warna:</h4>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                    <h4 className="type-heading-md font-bold text-neutral-900 dark:text-white mb-2">Warna:</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 type-label-sm font-semibold">
                       <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/80 text-neutral-800 dark:text-neutral-200 border border-neutral-200/50 dark:border-neutral-700/50">Dream Black</div>
                       <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/80 text-neutral-800 dark:text-neutral-200 border border-neutral-200/50 dark:border-neutral-700/50">Sky Blue</div>
                       <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/80 text-neutral-800 dark:text-neutral-200 border border-neutral-200/50 dark:border-neutral-700/50">Frost Milk</div>
@@ -891,7 +898,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
               {/* ── SECTION 4: Long-Form Product Details ── */}
               <section id="product-details" className="space-y-4 pt-6 border-t border-neutral-100 dark:border-neutral-800/50">
-                <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Product Details</h3>
+                <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white">Product Details</h3>
                 
                 {/* Seamless Long-Form Media Stack */}
                 <div className="productDetailSequence">
@@ -925,10 +932,10 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                     />
                   </div>
                   <div>
-                    <h2 className="text-base font-bold tracking-tight text-neutral-900 dark:text-white leading-tight">
+                    <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white leading-tight">
                       CONTOURA
-                    </h2>
-                    <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 mt-0.5">
+                    </h3>
+                    <div className="flex items-center gap-1.5 type-label-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
                       <span>Client Work</span>
                       <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-700">/</span>
                       <span>Product Commerce Visuals</span>
@@ -937,39 +944,39 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                 </div>
 
                 {/* 2. Project Story */}
-                <div className="space-y-3.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800 text-xs">
+                <div className="space-y-3.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
                   <div>
-                    <span className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-0.5">
+                    <span className="type-eyebrow text-neutral-400 dark:text-neutral-500 block mb-1">
                       01 — Challenge
                     </span>
-                    <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                    <p className="type-body-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
                       Present multiple underwear SKUs through one consistent e-commerce experience.
                     </p>
                   </div>
 
                   <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
-                    <span className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-0.5">
+                    <span className="type-eyebrow text-neutral-400 dark:text-neutral-500 block mb-1">
                       02 — Idea
                     </span>
-                    <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                    <p className="type-body-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
                       Connect PDP images, long-form product details, and AI creator videos in one reusable visual system.
                     </p>
                   </div>
 
                   <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
-                    <span className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-0.5">
+                    <span className="type-eyebrow text-neutral-400 dark:text-neutral-500 block mb-1">
                       03 — My Role
                     </span>
-                    <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                    <p className="type-body-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
                       AI e-commerce design, product visualization, creator-video production, and interaction direction.
                     </p>
                   </div>
 
                   <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
-                    <span className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1">
+                    <span className="type-eyebrow text-neutral-400 dark:text-neutral-500 block mb-1">
                       04 — Delivered
                     </span>
-                    <ul className="space-y-0.5 font-medium text-neutral-800 dark:text-neutral-200">
+                    <ul className="space-y-0.5 type-body-sm font-medium text-neutral-800 dark:text-neutral-200">
                       <li>09 PDP Images</li>
                       <li>01 Long-form Product Detail Page</li>
                       <li>30+ AI Creator Videos</li>
@@ -980,20 +987,20 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
                 {/* 3. Shown in This Project */}
                 <div className="space-y-2 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
+                  <h3 className="type-eyebrow text-neutral-400 dark:text-neutral-500">
                     Shown in This Project
                   </h3>
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 font-medium text-neutral-800 dark:text-neutral-200">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 type-label-sm font-medium text-neutral-800 dark:text-neutral-200">
                       09 PDP Images
                     </div>
-                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 font-medium text-neutral-800 dark:text-neutral-200">
+                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 type-label-sm font-medium text-neutral-800 dark:text-neutral-200">
                       01 Long-form PDP
                     </div>
-                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 font-medium text-neutral-800 dark:text-neutral-200">
+                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 type-label-sm font-medium text-neutral-800 dark:text-neutral-200">
                       30+ AI Creator Videos
                     </div>
-                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 font-medium text-neutral-800 dark:text-neutral-200">
+                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 type-label-sm font-medium text-neutral-800 dark:text-neutral-200">
                       Multi-SKU Visual System
                     </div>
                   </div>
@@ -1001,17 +1008,17 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
                 {/* 4. Build a Similar System */}
                 <div className="space-y-1.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
                     BUILD A SIMILAR SYSTEM
                   </h3>
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                  <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                     Choose the visual outputs that match your product, marketplace, and content needs.
                   </p>
                 </div>
 
                 {/* 5. What Do You Need? (Multi-select Services) */}
                 <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white">
                     What Do You Need?
                   </h3>
                   <div className="space-y-2">
@@ -1030,10 +1037,10 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                           }`}
                         >
                           <div className="space-y-0.5 min-w-0 pr-1">
-                            <span className="text-xs font-bold text-neutral-900 dark:text-white block">
+                            <span className="type-label-md font-bold text-neutral-900 dark:text-white block">
                               {service.title}
                             </span>
-                            <span className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed block">
+                            <span className="type-body-sm text-neutral-500 dark:text-neutral-400 leading-relaxed block">
                               {service.description}
                             </span>
                           </div>
@@ -1051,7 +1058,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                     })}
                   </div>
                   {selectedServices.length > 0 && (
-                    <p className="text-[11px] text-neutral-500 dark:text-neutral-400 italic pt-1">
+                    <p className="type-body-sm text-neutral-500 dark:text-neutral-400 italic pt-1">
                       You can share more project details in the next step.
                     </p>
                   )}
@@ -1059,7 +1066,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
                 {/* 6. How Would You Like to Continue? (Exclusive Selection) */}
                 <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white">
                     How Would You Like to Continue?
                   </h3>
                   
@@ -1074,17 +1081,17 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className="text-xs font-bold text-neutral-900 dark:text-white">
+                      <span className="type-label-md font-bold text-neutral-900 dark:text-white">
                         Free WhatsApp Chat
                       </span>
-                      <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800/60">
+                      <span className="type-label-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800/60">
                         Free
                       </span>
                     </div>
-                    <p className="text-[11px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                       Have a quick question or need an initial estimate? Share your selected services and basic project details through WhatsApp.
                     </p>
-                    <span className="text-[11px] text-neutral-400 dark:text-neutral-500 block mt-1.5">
+                    <span className="type-label-sm text-neutral-400 dark:text-neutral-500 block mt-1.5">
                       No booking required.
                     </span>
                   </button>
@@ -1100,17 +1107,17 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className="text-xs font-bold text-neutral-900 dark:text-white">
+                      <span className="type-label-md font-bold text-neutral-900 dark:text-white">
                         30-Minute Consultation
                       </span>
-                      <span className="text-xs font-bold text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">
+                      <span className="type-label-sm font-bold text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">
                         USD 5
                       </span>
                     </div>
-                    <p className="text-[11px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                       Discuss your product, visual needs, production scope, budget, and the most suitable way to structure the project.
                     </p>
-                    <div className="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-800/80 text-[11px] text-neutral-500 dark:text-neutral-400 space-y-1">
+                    <div className="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-800/80 type-body-sm text-neutral-500 dark:text-neutral-400 space-y-1">
                       <p>Duration: 30 minutes</p>
                       <p>You can share your project details in the next step. Payment instructions will be sent after the consultation request is accepted.</p>
                     </div>
@@ -1119,7 +1126,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
                 {/* 7. Ways to Work */}
                 <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
+                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
                     Ways to Work
                   </h3>
                   <div className="space-y-2">
@@ -1129,14 +1136,14 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                         className="p-2.5 rounded-lg bg-neutral-50/60 dark:bg-neutral-900/60 border border-neutral-200/60 dark:border-neutral-800"
                       >
                         <div className="flex items-center justify-between gap-2">
-                          <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">
+                          <span className="type-label-md font-bold text-neutral-900 dark:text-neutral-100">
                             {item.title}
                           </span>
-                          <span className="text-[11px] font-semibold text-neutral-700 dark:text-neutral-300 whitespace-nowrap">
+                          <span className="type-label-sm font-semibold text-neutral-700 dark:text-neutral-300 whitespace-nowrap">
                             {item.price}
                           </span>
                         </div>
-                        <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed mt-0.5">
+                        <p className="type-body-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-0.5">
                           {item.description}
                         </p>
                       </div>
@@ -1145,17 +1152,17 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                 </div>
 
                 {/* 8. Your Interest (Dynamic Receipt-style Summary) */}
-                <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-3 text-xs">
-                  <h3 className="font-mono text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider border-b border-neutral-200/60 dark:border-neutral-800 pb-1.5">
+                <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-3">
+                  <h3 className="type-eyebrow text-neutral-400 dark:text-neutral-500 border-b border-neutral-200/60 dark:border-neutral-800 pb-1.5">
                     YOUR INTEREST
                   </h3>
                   
                   <div className="space-y-1.5">
-                    <span className="text-[11px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-semibold block">
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400 font-semibold block">
                       Selected Services
                     </span>
                     {selectedServices.length > 0 ? (
-                      <ul className="space-y-1 font-medium text-neutral-900 dark:text-white">
+                      <ul className="space-y-1 type-body-sm font-medium text-neutral-900 dark:text-white">
                         {selectedServices.map((id) => (
                           <li key={id} className="flex items-center gap-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#0057ff] shrink-0" />
@@ -1164,21 +1171,21 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-neutral-400 dark:text-neutral-500 italic">
+                      <p className="type-body-sm text-neutral-400 dark:text-neutral-500 italic">
                         No services selected yet.
                       </p>
                     )}
                   </div>
 
                   <div className="pt-2 border-t border-neutral-200/60 dark:border-neutral-800 space-y-0.5">
-                    <span className="text-[11px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-semibold block">
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400 font-semibold block">
                       Next Step
                     </span>
-                    <p className="font-bold text-neutral-900 dark:text-white">
+                    <p className="type-label-md font-bold text-neutral-900 dark:text-white">
                       {continuationMethod === 'free-chat' && 'Free WhatsApp Chat'}
                       {continuationMethod === 'consultation' && '30-Minute Consultation — USD 5'}
                       {!continuationMethod && (
-                        <span className="text-neutral-400 dark:text-neutral-500 font-normal italic">
+                        <span className="type-body-sm text-neutral-400 dark:text-neutral-500 font-normal italic">
                           Choose a continuation option.
                         </span>
                       )}
@@ -1188,7 +1195,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
                 {/* 9. Project Information Accordions (Loro Piana-style Progressive Disclosure) */}
                 <div className="space-y-1 pt-1 pb-2">
-                  <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider mb-2">
+                  <h3 className="type-eyebrow text-neutral-400 dark:text-neutral-500 mb-2">
                     Project Information
                   </h3>
                   <div className="border border-neutral-200/80 dark:border-neutral-800 rounded-xl overflow-hidden divide-y divide-neutral-200/80 dark:divide-neutral-800">
@@ -1201,7 +1208,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                             onClick={() => toggleAccordion(item.id)}
                             className="w-full py-3 px-3.5 text-left flex items-center justify-between gap-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors cursor-pointer"
                           >
-                            <span className="text-xs font-bold tracking-tight text-neutral-900 dark:text-white">
+                            <span className="type-label-md font-bold tracking-tight text-neutral-900 dark:text-white">
                               {item.title}
                             </span>
                             {isOpen ? (
@@ -1211,7 +1218,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                             )}
                           </button>
                           {isOpen && (
-                            <div className="px-3.5 pb-3.5 pt-1 text-xs border-t border-neutral-100 dark:border-neutral-800/50 bg-neutral-50/40 dark:bg-neutral-900/40">
+                            <div className="px-3.5 pb-3.5 pt-1 border-t border-neutral-100 dark:border-neutral-800/50 bg-neutral-50/40 dark:bg-neutral-900/40">
                               {item.content}
                             </div>
                           )}
@@ -1226,7 +1233,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
               {/* 10. Sticky WhatsApp CTA */}
               <div className="contouraServiceSidebar__actions space-y-2">
                 {ctaHelperText && (
-                  <p className="text-center text-[11px] font-medium text-neutral-500 dark:text-neutral-400">
+                  <p className="text-center type-label-sm font-medium text-neutral-500 dark:text-neutral-400">
                     {ctaHelperText}
                   </p>
                 )}
@@ -1234,7 +1241,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                   <button
                     type="button"
                     disabled
-                    className="w-full py-3 px-4 rounded-xl bg-neutral-200 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 font-bold text-xs tracking-wider uppercase cursor-not-allowed text-center transition-colors"
+                    className="w-full py-3 px-4 rounded-xl bg-neutral-200 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 type-label-md font-bold tracking-wider uppercase cursor-not-allowed text-center transition-colors"
                   >
                     {ctaButtonLabel}
                   </button>
@@ -1243,7 +1250,7 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                     href={whatsAppUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full block py-3 px-4 rounded-xl bg-[#0057ff] hover:bg-blue-600 active:scale-[0.99] text-white font-bold text-xs tracking-wider uppercase shadow-lg shadow-blue-500/20 transition-all text-center cursor-pointer"
+                    className="w-full block py-3 px-4 rounded-xl bg-[#0057ff] hover:bg-blue-600 active:scale-[0.99] text-white type-label-md font-bold tracking-wider uppercase shadow-lg shadow-blue-500/20 transition-all text-center cursor-pointer"
                   >
                     {ctaButtonLabel}
                   </a>

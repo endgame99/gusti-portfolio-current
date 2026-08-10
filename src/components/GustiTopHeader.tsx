@@ -63,7 +63,7 @@ export function GustiTopHeader({
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="flex h-8 items-center rounded-full bg-neutral-950 px-4 type-label-sm font-semibold text-white transition hover:scale-[1.03] active:scale-95 dark:bg-white dark:text-neutral-950"
+            className="flex h-8 items-center rounded-full bg-neutral-950 px-4 type-label-md font-semibold text-white transition hover:scale-[1.03] active:scale-95 dark:bg-white dark:text-neutral-950"
           >
             Hire Me
           </a>
@@ -102,7 +102,7 @@ export function GustiTopHeader({
             <button
               type="button"
               onClick={() => setProfileOpen((value) => !value)}
-              className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-neutral-200 type-label-xs font-semibold text-neutral-700 ring-1 ring-neutral-300 transition hover:scale-105 dark:bg-neutral-800 dark:text-white dark:ring-neutral-700"
+              className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-neutral-200 type-label-sm font-semibold text-neutral-700 ring-1 ring-neutral-300 transition hover:scale-105 dark:bg-neutral-800 dark:text-white dark:ring-neutral-700"
               aria-label="Open profile"
             >
               G
