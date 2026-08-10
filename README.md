@@ -1,20 +1,30 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# GUSTI Portfolio
 
-# Run and deploy your AI Studio app
+Frontend portfolio and service showcase for GUSTI, built with React, TypeScript, Vite, and Tailwind CSS.
 
-This contains everything you need to run your app locally.
+## Local development
 
-View your app in AI Studio: https://ai.studio/apps/0e90f6fe-3048-4c9c-afc9-1743731c4650
+```bash
+npm install
+npm run dev
+```
 
-## Run Locally
+The development server runs on `http://localhost:3000` by default.
 
-**Prerequisites:**  Node.js
+## Verification
 
+```bash
+npm run build
+npm run lint
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Repository guide
+
+- `src/`: application code and content data
+- `public/`: production media and fonts
+- `AGENTS.md`: agent behavior and repository guardrails
+- `UI_GUIDELINES.md`: active UI policy
+- `PROJECT_CONTEXT.md`: current architecture map
+- `agent-resources/`: optional task-specific references and legacy prompt material
+
+Reference files are not production dependencies and do not override repository code or explicit task instructions.

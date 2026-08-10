@@ -1,8 +1,6 @@
 # UI_GUIDELINES.md — GUSTI Portfolio Design System
 
-Primary Reference: [comfy.org/workflows](https://comfy.org/workflows/)
-
-Adapted from the reference's UI/UX system. Does NOT copy Comfy branding, business terminology, company identity, logos, or content. Future tasks may use different references — this guideline adapts, not restricts.
+This is the single active default UI policy for the repository. It provides scoped defaults, not permission for unsolicited redesign or global cleanup.
 
 ---
 
@@ -17,7 +15,7 @@ When making any UI decision, follow this priority order:
 
 ### Key Principles
 
-- This guideline is **not permanently bound to Comfy.org**. It was initially derived from that reference, but any task may introduce a different reference for a specific page or component.
+- This guideline is **not permanently bound to any external reference**. A task may introduce a different reference for a specific page or component.
 - A task-specific reference overrides this guideline **only for the scope of that task**. It does not retroactively change other pages or components.
 - Never force every page to follow the same reference forever.
 - Never reject a redesign request because it deviates from this document.
@@ -460,8 +458,9 @@ New components should be added to Part B as they are designed. Each entry should
 |---|---|
 | `AGENTS.md` | Agent behavior, forbidden files, workflow, anti-hallucination |
 | `UI_GUIDELINES.md` (this file) | Visual design system for consistency |
-| `UI_GUIDELINES.DISABLED.md` | Previous preservation-focused guideline (archived) |
+| `PROJECT_CONTEXT.md` | Current architecture orientation; code remains authoritative |
+| `agent-resources/README.md` | Index of optional task-specific references and legacy prompts |
 
-This guideline works alongside `AGENTS.md`. Neither overrides the other.
+This guideline works under the scope and factual-integrity rules in `AGENTS.md`.
 
 **If a conflict arises between any guideline and an explicit user instruction, the user instruction wins.**

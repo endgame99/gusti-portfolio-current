@@ -8,10 +8,10 @@ This document presents the factual, production-verified UI specification extract
 
 | Raw Source File (Read-Only Evidence) | Clean GUSTI Reference File | Purpose & Contents |
 |---|---|---|
-| `agent-references/behance-production-css/raw/BEHANCE.networki-main.css` | `agent-references/behance-production-css/clean/BEHANCE.networki-main.clean.css` | Design tokens, typography hierarchy, primary/secondary/danger buttons, cards, form inputs, navigation strip, search field, overlay backdrops. |
-| `agent-references/behance-production-css/raw/BEHANCE.networki-modules.css` | `agent-references/behance-production-css/clean/BEHANCE.networki-modules.clean.css` | Popup surfaces, modals, divided lists, menus, generic chips, tooltips, form notices, loading overlays, card header/footer metadata hierarchy. |
-| `agent-references/behance-production-css/raw/BEHANCE.responsive.css` | `agent-references/behance-production-css/clean/BEHANCE.responsive.clean.css` | Responsive media query evidence (phone <=603px, tablet 604-1024px, desktop nav transition ~1080px), visibility utilities, responsive drawer, mobile full-width cards. |
-| `agent-references/behance-production-css/raw/BEHANCE.activity.css` | `agent-references/behance-production-css/clean/BEHANCE.activity.clean.css` | Visual gallery grid, masonry item surfaces, card selection states, hover elevation, skeleton loading state, mobile gallery card behavior. |
+| `css/raw/BEHANCE.networki-main.css` | `css/clean/BEHANCE.networki-main.clean.css` | Design tokens, typography hierarchy, primary/secondary/danger buttons, cards, form inputs, navigation strip, search field, overlay backdrops. |
+| `css/raw/BEHANCE.networki-modules.css` | `css/clean/BEHANCE.networki-modules.clean.css` | Popup surfaces, modals, divided lists, menus, generic chips, tooltips, form notices, loading overlays, card header/footer metadata hierarchy. |
+| `css/raw/BEHANCE.responsive.css` | `css/clean/BEHANCE.responsive.clean.css` | Responsive media query evidence (phone <=603px, tablet 604-1024px, desktop nav transition ~1080px), visibility utilities, responsive drawer, mobile full-width cards. |
+| `css/raw/BEHANCE.activity.css` | `css/clean/BEHANCE.activity.clean.css` | Visual gallery grid, masonry item surfaces, card selection states, hover elevation, skeleton loading state, mobile gallery card behavior. |
 
 ---
 

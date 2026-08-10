@@ -636,7 +636,7 @@ Never carry these elements from the supplied Taobao HTML into the portfolio impl
 For the final CONTOURA page:
 
 1. Existing GUSTI architecture is the source of truth.
-2. `UI_GUIDELINES.md` is the visual source of truth.
+2. Root-level `UI_GUIDELINES.md` is the active default UI policy.
 3. Local files under `public/work-cards/Starmap/` remain the temporary media source.
 4. Only verified CONTOURA copy may be displayed.
 5. This file provides structure, not marketplace content.
