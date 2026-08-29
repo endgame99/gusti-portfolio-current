@@ -1,588 +1,987 @@
-# UI_GUIDELINES.md — GUSTI Portfolio Design System
+# UI_GUIDELINES.md — GUSTI Portfolio UI Contract
 
-This is the single active default UI policy for the repository. It provides scoped defaults, not permission for unsolicited redesign or global cleanup.
+This is the single active UI policy for the canonical repository `endgame99/gusti-portfolio-current`.
 
----
-
-## 0. REFERENCE PRIORITY
-
-When making any UI decision, follow this priority order:
-
-1. **Current Active Task** — The user's explicit instruction always wins.
-2. **Current Task Reference** — If the task provides a specific design reference (e.g., Apple, Stripe, Linear, Framer, Notion, Shopify, Comfy, etc.), that reference overrides this guideline for the scope of that task.
-3. **UI_GUIDELINES.md** — This document provides defaults when no task-specific reference exists.
-4. **Existing Implementation** — The current codebase is the fallback when no guideline or reference addresses the situation.
-
-### Key Principles
-
-- This guideline is **not permanently bound to any external reference**. A task may introduce a different reference for a specific page or component.
-- A task-specific reference overrides this guideline **only for the scope of that task**. It does not retroactively change other pages or components.
-- Never force every page to follow the same reference forever.
-- Never reject a redesign request because it deviates from this document.
+The document converts `PRD.md` into visual, interaction, responsive, and quality-control rules. It is not permission to invent product facts, redesign unrelated surfaces, or copy another brand.
 
 ---
 
-## 1. TASK SCOPE PROTECTION
+## 0. Document status
 
-### Core Rule
-
-Each task operates within its declared scope. Changes must not leak into unrelated areas.
-
-### Scope Boundary Examples
-
-| If the task is about... | Do NOT also change... |
+| Field | Value |
 |---|---|
-| Hero carousel | Library, Sidebar, Footer, Routing |
-| Services section | Project Detail, Homepage grid, Navigation |
-| Project Detail page | Homepage, Hero, Services, Library |
-| Card UI / grid | Data structure, Routing, Detail pages |
-| Navigation / Sidebar | Homepage content, Project data, Services |
-| Library section | Hero, Services, Card grid, Navigation |
-| Typography system | Individual component layouts (unless requested) |
+| Product | GUSTI Portfolio |
+| Status | Active foundation draft v0.2 |
+| Product source | `PRD.md` |
+| Homepage structural reference | ZCOOL homepage — owner-confirmed |
+| Quality-evaluation reference | GDWEB official judging criteria |
+| Default product language | English |
+| Theme requirement | Dark mode is mandatory |
+| Last updated | 2026-08-29 |
 
-### Exceptions
+### Requirement status vocabulary
 
-Scope expansion is allowed **only** when the user explicitly requests it. Example:
+- `CONFIRMED` — explicitly supplied by the owner or required by `PRD.md`.
+- `VERIFIED_CURRENT_STATE` — measured or directly verified in the repository or rendered application.
+- `PROVISIONAL_IMPLEMENTATION_BASELINE` — an existing value that may be used until better owner-approved evidence replaces it.
+- `DESIGN_DERIVATION` — a design rule required to make a confirmed product requirement usable; it is not a business fact.
+- `MISSING_DATA_REQUIRED` — implementation must not invent the missing decision or asset.
+- `FORBIDDEN` — must not be introduced.
 
-> "Redesign the hero AND update the card grid to match."
-
-In this case, both hero and card grid are in scope.
-
----
-
-## 2. REFERENCE ANALYSIS WORKFLOW
-
-Before implementing any UI redesign that involves a visual reference, the agent must follow this workflow. Do not skip any step.
-
-### Step 1 — Analyze the Reference
-
-Study the provided reference URL or screenshot. Identify what makes the reference effective.
-
-### Step 2 — Extract Design Patterns
-
-Identify and document:
-
-- Typography (fonts, sizes, weights, line-height, letter-spacing)
-- Visual hierarchy (information stack, emphasis, contrast)
-- Spacing & white space (section rhythm, padding, breathing room)
-- Grid & layout (columns, alignment, container behavior)
-- Components (cards, buttons, chips, forms, navigation)
-- Interaction (hover, focus, transitions, animations)
-- Responsive behavior (breakpoints, stacking, scaling)
-- Motion philosophy (speed, easing, purpose)
-
-### Step 3 — Separate Adoptable from Non-Adoptable
-
-**Adopt:** Design patterns, spacing rhythm, typography system, component architecture, interaction quality.
-
-**Do NOT copy:**
-
-- Business copy or marketing text
-- Brand identity (logos, brand colors, brand names)
-- Product names or terminology
-- Company-specific labels
-- Platform-specific UI that doesn't apply to a portfolio
-
-### Step 4 — Map to Existing Architecture
-
-Identify which existing files, components, and data structures are affected. Plan the minimum changes needed.
-
-### Step 5 — Implement Within Task Scope
-
-Execute only within the boundaries of the current task. Do not redesign unrelated sections.
+Rules marked `CONFIRMED` or `DESIGN_DERIVATION` are implementable. A `PROVISIONAL_IMPLEMENTATION_BASELINE` may be implemented but must remain easy to revise. A `MISSING_DATA_REQUIRED` item must not be silently resolved by an agent.
 
 ---
 
-## 3. NEVER ASSUME DATA
+## 1. Authority and conflict resolution
 
-### Rule
+Use this order when UI instructions conflict:
 
-Never invent, generate, or assume content that does not already exist in the project data files or is not explicitly provided by the user.
+1. The owner's explicit instruction for the current task.
+2. Verified repository code, data, and local assets.
+3. `PRD.md`.
+4. This document.
+5. A reference explicitly named for the current task.
+6. Optional material in `agent-resources/`.
 
-### Never Invent
+### Non-negotiable boundaries
 
-- Project names
-- Project descriptions
-- Client names
-- Client logos or images
-- Service categories
-- Statistics, metrics, or numbers
-- Testimonials or quotes
-- CTA text or marketing copy
-- Dates or timelines
-- Images or video URLs
-- Awards, badges, or rankings
-- Pricing or ROI claims
-
-### Always Reuse
-
-Use the existing project data from `src/data.ts` and `src/data/projectDetails.ts` unless the current task explicitly changes it.
-
-### If Data Is Missing
-
-State `MISSING_DATA_REQUIRED` and explain what data is needed. Do not fill gaps with plausible-sounding content. Refer to `AGENTS.md` anti-hallucination rules.
+- A reference supplies design evidence, not business truth.
+- An award supplies evaluation criteria, not automatic design authority.
+- A current implementation value is not automatically a permanent product decision.
+- Page-specific art direction may vary, but navigation, content truth, accessibility, and global interaction behavior must remain coherent.
+- No UI rule may authorize fabricated claims, awards, metrics, testimonials, pricing, project facts, or impact.
 
 ---
 
-# PART A — GLOBAL DESIGN SYSTEM
+## 2. Product intent translated into UI behavior
 
-The following sections define system-wide design principles. They apply across all pages and components unless a task-specific reference overrides them.
+The website is a commercial proof and pitching system, not a passive gallery.
 
----
-
-## 4. TYPOGRAPHY SYSTEM
-
-### Font Stack
-
-| Role | Font | Fallback |
+| PRD requirement | Required UI consequence | Acceptance evidence |
 |---|---|---|
-| **Global Font** | `acumin-pro` | `"Helvetica Neue", Helvetica, Arial, sans-serif` |
+| Generate paid projects | A qualified visitor can find a real contact action without searching through decorative content | A visible CTA has a valid destination and works with keyboard and pointer input |
+| Increase bargaining power | Work is presented as deliberate, legible proof rather than an undifferentiated image dump | Project identity, context, and verified ownership are understandable |
+| Build trust and reputation | Visual confidence is supported by factual content and consistent behavior | No unsupported claim; no broken route; no fake badge or award |
+| Outcome before tool | Services and conversion surfaces lead with completed work or buyer-relevant results | Tool names do not replace the primary outcome statement |
+| Proof before persuasion | Media and supported context appear before strong claims | Every commercial claim maps to visible or documented evidence |
+| Visual work is primary evidence | Text adds context without overpowering the work | Media remains dominant; text hierarchy is concise and readable |
+| Independent destinations | Home, Work, Services, Library, and published projects are real pages | Direct URL, refresh, Back, Forward, bookmark, and sharing work |
+| English is default | First load uses English | No language mismatch on initial render |
+| Dark mode mandatory | Every production page supports the same dark-theme system | No standalone page remains visually or behaviorally disconnected |
 
-### Core Rule
+### Commercial hierarchy
 
-Use `acumin-pro` for every product and marketing text role. Create hierarchy with size, weight, line height, letter spacing, color, and available width — not by introducing another font family.
+Conversion-focused surfaces should normally present information in this order:
 
-Do not use `font-mono` as a decorative style. Monospace is allowed only when the content is genuinely code, a technical identifier, or tabular machine data.
+1. Desired outcome or buyer problem.
+2. Finished visual proof.
+3. Commercial or operational relevance supported by evidence.
+4. Verified deliverables and scope.
+5. Working method.
+6. Tools or models, only when useful.
+7. A real next action.
 
-### Typography Decision Table
+Library reports may lead with a release or tool when the release itself is the subject. They must still show applied output rather than repeat announcements.
 
-Choose type by semantic function, not by what merely looks good in one component.
+---
 
-| Semantic role | Use for | Mobile | Tablet | Desktop | Weight | Line height | Letter spacing | Existing utility |
-|---|---|---:|---:|---:|---:|---:|---:|---|
-| **Display XL / Page Title** | One primary page or project title | 24px | 30px | 36px | 600 | 1.15 | `-0.025em` | `.type-display-xl` |
-| **Display LG / Section Title** | Major section heading | 20px | 24px | 24px | 600 | 1.20 | `-0.025em` | `.type-display-lg` |
-| **Display MD / Card Title** | Featured card or content-block title | 18px | 20px | 20px | 600 | 1.25 | `-0.02em` | `.type-display-md` |
-| **Heading LG** | Subsection heading | 18px | 18px | 18px | 700 | 1.30 | `-0.025em` | `.type-heading-lg` |
-| **Heading MD** | Compact panel or grouped-content heading | 16px | 16px | 16px | 600 | 1.35 | `0` | `.type-heading-md` |
-| **Lead Body** | Short intro below a page title | 16px | 16px | 16px | 400 | 1.60 | `0` | `text-base leading-relaxed` |
-| **Body MD** | Standard paragraphs and descriptions | 14px | 14px | 14px | 400 | 1.60 | `0` | `.type-body-md` |
-| **Body SM** | Supporting explanation or compact helper copy | 12px | 12px | 12px | 400 | 1.60 | `0` | `.type-body-sm` |
-| **Navigation / Tab** | Navigation and filter labels | 13px | 14px | 15px | 600 | 1.20 | `0` | `.type-nav` / `.type-tab` |
-| **Label MD** | Buttons, compact UI labels, short status text | 12px | 12px | 12px | 600 | 1.20 | `0` | `.type-label-md` |
-| **Label SM** | Metadata and secondary labels | 11px | 11px | 11px | 500 | 1.30 | `0` | `.type-label-sm` |
-| **Eyebrow** | Client, category, or section context above a heading | 11px | 11px | 11px | 700 | 1.20 | `0.05em` | `.type-eyebrow` |
+## 3. Reference contract
 
-### Role Mapping
+### 3.1 ZCOOL homepage
 
-Use this hierarchy consistently across pages:
+`CONFIRMED`
 
-1. **Client/category eyebrow** — `Eyebrow`
-2. **Page or project title** — `Display XL`
-3. **Short page introduction** — `Lead Body`
-4. **Major section heading** — `Display LG`
-5. **Subsection heading** — `Heading LG` or `Heading MD`
-6. **Standard narrative** — `Body MD`
-7. **Caption, helper copy, or metadata** — `Body SM` or `Label SM`
-8. **Action label** — `Label MD`
+The owner identifies [ZCOOL](https://www.zcool.com.cn/) as the large-scale structural reference for the GUSTI homepage. The current application already implements a related content-platform skeleton.
 
-### Hierarchy Rules
+#### Adopted structural principles
 
-- Use only one `Display XL` per page.
-- A content section should normally contain no more than three visible text levels: section heading, body, and metadata.
-- Do not make a subsection heading visually stronger than the page or section title above it.
-- Use weight 600 for display text; reserve weight 700 for compact headings, emphasis, and action labels.
-- Do not use weight 800 for normal page hierarchy. It creates unnecessary visual noise with Acumin Pro.
-- Avoid uppercase for sentences. Uppercase is limited to short eyebrows, metadata, and action labels.
-- Persistent readable text should not be smaller than 11px. Sizes below 11px are allowed only for non-essential media badges with sufficient contrast.
-- Do not use reduced opacity as the only way to distinguish hierarchy. Size, weight, and spacing must still communicate the relationship.
+- Utility header with search and account/action controls.
+- A prominent highlight or featured-work area.
+- Clear content-mode navigation below the highlight area.
+- A dense, media-first work feed.
+- Repeated card anatomy that supports fast scanning.
+- Persistent navigation outside the work grid.
 
-### Reading Width
+#### Adaptation required for GUSTI
 
-| Content type | Maximum readable width |
+- ZCOOL is a multi-creator discovery platform; GUSTI is a single-owner commercial proof system.
+- Creator-discovery metadata must become project identity, verified client/ownership context, work type, or commercial relevance.
+- Engagement counts, rankings, popularity signals, recommendation badges, and creator status must not appear without verified GUSTI data.
+- Search, filters, and recommendation behavior must not be copied unless the GUSTI content inventory makes them useful.
+- ZCOOL brand assets, Chinese copy, proprietary visual identity, and platform-specific behavior must not be copied.
+
+#### Fidelity boundary
+
+The current live ZCOOL page has not yet been captured at matched desktop and mobile viewports in this repository. Therefore:
+
+- Broad structure is approved.
+- Exact ZCOOL font sizes, gaps, padding, radii, and breakpoint behavior remain `MISSING_DATA_REQUIRED` until measured from accepted captures.
+- Existing GUSTI values listed as `PROVISIONAL_IMPLEMENTATION_BASELINE` remain the implementation baseline in the meantime.
+- No agent may describe the current homepage as a pixel-accurate ZCOOL reproduction without side-by-side evidence.
+
+### 3.2 GDWEB
+
+GDWEB is a quality-evaluation source, not a visual template. Its official criteria are translated into the quality gate in Section 19.
+
+Primary sources:
+
+- [GDWEB judging process and criteria](https://www.gdweb.co.kr/sub/process.asp)
+- [GDWEB jury context](https://www.gdweb.co.kr/sub/judge.asp)
+
+### 3.3 Reference usage rule
+
+For every reference-driven task:
+
+1. Name the exact page, state, and viewport.
+2. Capture or inspect the reference.
+3. Separate structural principles from brand-specific expression.
+4. Map each adopted principle to a GUSTI product requirement.
+5. Define measurable acceptance criteria.
+6. Compare implementation and reference at the same viewport.
+7. Keep the change inside the approved task scope.
+
+`FORBIDDEN`: collecting award screenshots or fashionable patterns and injecting them globally without a requirement-level mapping.
+
+---
+
+## 4. Global experience architecture
+
+### 4.1 Required independent surfaces
+
+`CONFIRMED`
+
+- Home
+- Work
+- Services
+- Library
+- Each published project detail
+
+A tab, modal, or state switch is not a replacement for a durable page when the PRD requires an independent destination.
+
+### 4.2 Global shell
+
+The shell owns:
+
+- Primary navigation.
+- Theme behavior.
+- Language behavior when enabled.
+- Shared content axis.
+- Shared focus and interaction treatment.
+- Shared conversion access.
+
+Standalone pages may have unique art direction, but they must not create a different theme engine, navigation logic, or accessibility policy.
+
+### 4.3 Page hierarchy
+
+Every independent page must contain:
+
+1. One semantic page-level heading.
+2. A visible or programmatically clear page purpose.
+3. Primary content.
+4. A real navigation path to related destinations.
+5. A real next action when the page has a commercial job.
+
+Do not use a visually large sentence as a substitute for semantic page structure.
+
+---
+
+## 5. Foundations
+
+### 5.1 Font family
+
+`VERIFIED_CURRENT_STATE`
+
+The repository includes Acumin Pro Regular, Italic, Bold, and Bold Italic files.
+
+Use:
+
+```css
+font-family: "acumin-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+```
+
+Rules:
+
+- Acumin Pro is the global product font.
+- Use the available weights honestly. Do not request an unprovided intermediate font file and rely on browser synthesis without checking the result.
+- Do not introduce another decorative font to manufacture hierarchy.
+- Monospace is limited to actual code, identifiers, or tabular machine data.
+- Chinese text must be visually tested with the actual fallback font before CN can be treated as production-ready.
+
+### 5.2 Type roles
+
+These roles replace ad hoc component sizing.
+
+| Role | Mobile | Tablet | Desktop | Weight | Line height | Primary use |
+|---|---:|---:|---:|---:|---:|---|
+| Page title | 24px | 30px | 36px | 600 or available bold | 1.15 | One page-level title |
+| Major section title | 20px | 24px | 24px | 600 or available bold | 1.20 | Major page section |
+| Subsection title | 16px | 18px | 18px | 600 or available bold | 1.30 | Group inside a section |
+| Work-card title | 14px | 14px | 14px | 600 | 1.35 | Persistent project title below or beside media |
+| Lead body | 16px | 16px | 16px | 400 | 1.60 | Short introduction |
+| Body | 14px | 14px | 14px | 400 | 1.60 | Narrative and descriptions |
+| Supporting body | 12px | 12px | 12px | 400 | 1.50 | Captions and helper copy |
+| Navigation / tab | 14px | 14px | 15px | 600 | 1.20 | Primary navigation and content modes |
+| CTA label | 12px | 12px | 12px | 600 | 1.20 | Hire Me and compact actions |
+| Utility label | 11px | 11px | 11px | 500 | 1.30 | Language, metadata, compact controls |
+
+`DESIGN_DERIVATION`: the Work-card title uses 14px instead of the previous 18–20px display role because the homepage is a dense scanning surface. A card title is not a section heading.
+
+### 5.3 Type hierarchy rules
+
+- Use one Page title per independent page.
+- Do not place more than three visible text levels inside one compact card.
+- Work-card title must be persistently visible; essential project identity must not depend on hover.
+- Client or ownership context must be visually secondary to the project title.
+- Metadata must not become the dominant reading experience.
+- Uppercase is reserved for short labels, not sentences.
+- Reduced opacity cannot be the only hierarchy signal.
+- Truncation must not remove the only available project identity. Provide a full title at the destination and an accessible name on the card.
+
+### 5.4 Reading widths
+
+| Content | Maximum width |
 |---|---:|
 | Lead paragraph | 760px |
-| Standard narrative paragraph | 680px or approximately 65–75 characters |
-| Compact sidebar or card paragraph | 320–380px |
-| Caption | Match the media width, but keep each text line under 75 characters when possible |
+| Narrative paragraph | 680px or approximately 65–75 characters |
+| Compact card copy | 320–380px |
+| Caption | Match media width; avoid long unbroken lines |
 
-Long-form text must not stretch across the full page container.
+### 5.5 Spacing vocabulary
 
----
+Use this scale unless accepted reference evidence requires another value:
 
-## 5. SPACING & WHITE SPACE
-
-### Core Rule
-
-White space communicates relationships. Elements that belong together stay close; separate content groups receive visibly larger space. Do not choose margins independently for every element.
-
-### Spacing Scale
-
-Use the following values as the default spacing vocabulary:
-
-| Token | Value | Typical use |
+| Token | Value | Use |
 |---|---:|---|
-| **2XS** | 4px | Icon-to-label adjustment, very tight metadata |
-| **XS** | 8px | Eyebrow-to-title, caption-to-meta, inline control gap |
-| **SM** | 12px | Closely related text or controls |
-| **MD** | 16px | Standard component padding and content stack |
-| **LG** | 20px | Compact panel padding, heading-to-small-content |
-| **XL** | 24px | Card padding, title-to-intro on wide layouts |
-| **2XL** | 32px | Heading-to-primary-content, major component padding |
-| **3XL** | 48px | Mobile section separation |
-| **4XL** | 64px | Desktop section separation |
-| **5XL** | 80px | Page ending or large editorial separation |
-| **6XL** | 96px | Exceptional feature break; use only when the visual composition needs it |
+| `space-1` | 4px | Optical adjustment only |
+| `space-2` | 8px | Tight metadata, icon-label gap |
+| `space-3` | 12px | Related controls or text |
+| `space-4` | 16px | Standard mobile gutter and component space |
+| `space-6` | 24px | Desktop grid gap or grouped content |
+| `space-8` | 32px | Major component separation |
+| `space-12` | 48px | Mobile section separation |
+| `space-16` | 64px | Desktop section separation |
+| `space-20` | 80px | Page-ending separation |
 
-Prefer values from this scale. Values outside the scale require component evidence or a task-specific reference.
+Rules:
 
-### Container System
+- Component padding, grid gap, and distance between sections are different concepts. Do not call all three “padding.”
+- A media-first work card with metadata outside the media does not receive generic 16–24px inner card padding.
+- Repeated elements use the same gap token.
+- Values such as 18px, 22px, and 28px require reference evidence; do not introduce them casually.
 
-| Container | Maximum width | Horizontal gutter | Use for |
-|---|---:|---|---|
-| **Global / Application shell** | 1300px | 16px mobile / 24px tablet / 32px desktop | Homepage, Services, project details, header, navigation-aligned sections |
-| **Project detail inner** | 1300px | Inherits page gutter (single source of padding) | Visual case studies and commerce-detail layouts |
-| **Optional wide media container** | 1600px | 16px mobile / 24px tablet / 32px desktop | Optional wide-media showcase (requires task-specific evidence) |
-| **Reading column** | 680px | Inherits page gutter | Narrative paragraphs |
-| **Lead column** | 760px | Inherits page gutter | Introductory copy below a page title |
-| **Sidebar/panel** | 360–400px | 16px mobile / 20px desktop internal padding | Project metadata, service selection, compact actions |
+### 5.6 Container baseline
 
-All major sections on the same page must share a consistent left and right axis. A narrower reading column may sit inside that axis, but it must not create a new arbitrary page gutter.
+`PROVISIONAL_IMPLEMENTATION_BASELINE`
 
-### Vertical Rhythm Decision Table
+| Container | Maximum width | Gutter |
+|---|---:|---|
+| Global page container | 1300px | 16px mobile / 24px tablet / 32px desktop |
+| Reading column | 680px | Inherits page gutter |
+| Lead column | 760px | Inherits page gutter |
 
-| Relationship | Mobile | Desktop |
+All major sections on one page share the same left and right axis. A reading column may be narrower inside that axis; it must not invent a second page gutter.
+
+### 5.7 Semantic color system
+
+Components must consume semantic roles rather than scattering raw colors.
+
+Required roles:
+
+- `canvas`
+- `surface`
+- `surface-muted`
+- `surface-active`
+- `border-subtle`
+- `border-strong`
+- `text-primary`
+- `text-secondary`
+- `text-muted`
+- `action-primary`
+- `action-primary-text`
+- `focus-ring`
+- `success`
+- `warning`
+- `danger`
+
+Rules:
+
+- Every role must define light and dark values before implementation is called complete.
+- Dark mode must not be a mechanical inversion.
+- Media overlays may use black/white for legibility but require contrast checks.
+- Project-specific art direction must not redefine shell colors.
+- Raw client-brand colors may appear inside project media; they do not become global UI colors.
+
+---
+
+## 6. Homepage composition
+
+### 6.1 Required sequence
+
+`DESIGN_DERIVATION` from the PRD and owner-confirmed ZCOOL structure:
+
+1. Global header.
+2. Featured proof or highlight area.
+3. Content-mode navigation.
+4. Media-first content feed.
+5. A conversion path that does not interrupt proof inspection.
+
+### 6.2 Homepage job
+
+The homepage must help a visitor answer:
+
+- What kind of work is this?
+- Is the visible execution credible?
+- Which work, service, or Library item should I inspect next?
+- How do I start a paid project discussion?
+
+The homepage must not become a generic creator marketplace. ZCOOL-like density is used to make proof scannable, not to imitate platform scale.
+
+### 6.3 Search
+
+`VERIFIED_CURRENT_STATE`: a search control exists.
+
+`MISSING_DATA_REQUIRED`: final search scope, index, URL persistence, and empty/error behavior.
+
+Until search behavior is approved:
+
+- Do not expand search into a global product promise.
+- If the visible control remains, it must search the content actually available on the current surface.
+- The placeholder must describe its real scope when the scope is narrower than the whole website.
+
+---
+
+## 7. Global header
+
+### 7.1 Header roles
+
+`CONFIRMED` owner-required controls:
+
+- Theme toggle.
+- Language control.
+- Hire Me.
+- Download CV.
+
+`VERIFIED_CURRENT_STATE`:
+
+- Search exists.
+- Theme, language, Hire Me, and profile controls exist.
+- All current utility controls are approximately 32px high.
+- Download CV is absent.
+- No CV/resume asset currently exists in `public/` or `src/`.
+
+### 7.2 Target grouping
+
+```text
+[ Search / discovery ]                     [ Theme ] [ Language ] [ Download CV ] [ Hire Me ]
+```
+
+Hierarchy:
+
+1. `Hire Me` — primary commercial action.
+2. `Download CV` — secondary proof/action.
+3. Theme and language — utility controls.
+4. Search — discovery control, not a conversion CTA.
+
+### 7.3 Control treatment
+
+- Controls in one utility cluster share a common visual height and vertical center.
+- Icon-only controls use the same visual icon box.
+- Icon-plus-label controls use the same label type role and horizontal rhythm.
+- `Hire Me` may use the filled high-contrast treatment.
+- Theme, language, and Download CV must not compete with Hire Me through identical filled emphasis.
+- Hover and active states must not change control dimensions.
+- Do not use hover scale on persistent header controls; change color, surface, border, or elevation instead.
+- Every icon-only button requires a specific accessible name.
+
+### 7.4 Theme control
+
+- Current theme state must be programmatically exposed.
+- The icon represents the action or the state consistently; do not switch between those mental models across pages.
+- Animation is limited to opacity/rotation/translation inside a stable control box.
+- Theme behavior must be shared by all pages.
+
+### 7.5 Language control
+
+- English is the default state.
+- If multiple languages remain, the control must expose the current language and available choices.
+- Do not silently cycle through languages if the visitor cannot predict the next state.
+- Retaining ID and CN remains `MISSING_DATA_REQUIRED` in the PRD; the UI must not imply production-ready translations before content review.
+
+### 7.6 Download CV
+
+`MISSING_DATA_REQUIRED` before public implementation:
+
+- Approved CV file.
+- Public filename.
+- Language version or versions.
+- Update date.
+- Confirmation that the file is safe to publish.
+
+The header may reserve the component specification, but it must not expose a broken or placeholder download.
+
+### 7.7 Profile control
+
+The current circular `G` control is not part of the owner-confirmed header-control list.
+
+Target status: `MISSING_DATA_REQUIRED`.
+
+Do not remove, retain, or reinterpret it as Download CV without an explicit task decision. If retained, it needs a distinct product job that does not duplicate Hire Me, Email, WhatsApp, or Download CV.
+
+### 7.8 Responsive priority
+
+When width becomes constrained:
+
+1. Preserve a usable primary action.
+2. Preserve theme access.
+3. Preserve truthful language access if multiple languages are enabled.
+4. Keep Download CV reachable without creating a broken compressed row.
+5. Adapt search width or layout; do not clip the utility cluster.
+
+The exact one-row versus two-row mobile composition remains `MISSING_DATA_REQUIRED` until a matched ZCOOL/mobile target is accepted.
+
+---
+
+## 8. Navigation, sidebar, and iconography
+
+### 8.1 Required destinations
+
+- Home
+- Work
+- Services
+- Library
+- Contact path
+
+Navigation appearance must map to real navigation. State-only switching does not satisfy the independent-page PRD requirement.
+
+### 8.2 Desktop sidebar baseline
+
+`PROVISIONAL_IMPLEMENTATION_BASELINE`:
+
+- Compact width: 44px.
+- Expanded width: 160px.
+- Navigation icon: 18×18px.
+- Compact active surface: 32×32px.
+- Shared icon family: Lucide.
+
+These dimensions may be replaced only after reference measurement or owner approval.
+
+### 8.3 Icon harmonization rules
+
+- Use one icon family for global navigation.
+- Use the same nominal icon box for peer destinations.
+- Use a consistent stroke width of `2` for peer navigation icons.
+- Active state is communicated through surface, color, indicator, or label—not by increasing stroke width from `2` to `2.4`.
+- Choose icons by destination meaning, not visual novelty.
+- Icons with visibly different optical mass require visual comparison at actual size.
+- Brand, navigation, contact, and utility icons are separate semantic groups but must share alignment and rendering quality.
+- Do not use emoji, text glyphs, handcrafted SVG approximations, or mixed icon libraries as substitutes.
+
+### 8.4 Current icon issues
+
+`VERIFIED_CURRENT_STATE`:
+
+- Work uses `Flame`, which may communicate popularity/trending rather than a work archive.
+- The active icon has a heavier stroke than inactive peers.
+- The brand letter `G`, navigation icons, and WhatsApp occupy related positions without a documented optical-alignment rule.
+
+Target Work icon and final destination-to-icon mapping: `MISSING_DATA_REQUIRED`.
+
+### 8.5 Compact and expanded behavior
+
+- Expanded mode shows icon and text label.
+- Compact mode retains an accessible name and may show a tooltip on hover/focus.
+- Tooltip must not be the only way to understand an essential destination on touch devices.
+- Expand/collapse control must remain distinct from Home.
+- Width transitions must not shift the page into an unusable off-screen state.
+
+### 8.6 Mobile navigation
+
+- Mobile uses a bottom navigation or another owner-approved mobile pattern.
+- Mobile main content must not retain the desktop compact-sidebar left offset.
+- The same essential destinations remain available.
+- Labels must remain readable and must not depend on hover.
+
+---
+
+## 9. Homepage content tabs
+
+The current homepage exposes Recommended Works, Services, and Library as content modes.
+
+Rules:
+
+- Active and inactive states must be visually distinguishable without relying only on color.
+- Tab labels use the Navigation/Tab type role.
+- The tab row aligns with the main content grid.
+- Sticky behavior must be tested inside the actual scroll container.
+- Switching tabs must update meaningful navigation or route state when the destination is intended to be shareable.
+- A tab must not visually impersonate an independent page if refresh, sharing, and browser history cannot preserve it.
+
+---
+
+## 10. Work-card system
+
+### 10.1 Product job
+
+A Work card is a compact proof entry. It must let a visitor identify the project, inspect the media, and reach the correct destination.
+
+### 10.2 Required anatomy
+
+1. Primary media.
+2. Persistent project title.
+3. Verified client, owner, or project-status context.
+4. Optional verified category or work type.
+5. One real card-wide destination or action.
+
+Do not render data roles that are unavailable. Omit them or block publication with `MISSING_DATA_REQUIRED` in the content source.
+
+### 10.3 Grid baseline
+
+`PROVISIONAL_IMPLEMENTATION_BASELINE`:
+
+| View | Columns | Gap |
 |---|---:|---:|
-| Eyebrow → title | 8px | 8px |
-| Title → lead paragraph | 12–16px | 16–24px |
-| Lead paragraph → primary media/content | 24px | 32px |
-| Section title → supporting paragraph | 12px | 16px |
-| Section heading group → primary content | 20px | 32px |
-| Paragraph → paragraph | 12–16px | 16px |
-| Media → caption | 8px | 8–12px |
-| Content group → content group | 24–32px | 32–48px |
-| Major section → major section | 48px | 64px |
-| Final section → page bottom | 48px | 80px |
+| Mobile | 1 | 16px |
+| Tablet | 2 | 16px |
+| Desktop | 3 | 24px |
 
-### Component Spacing
+The current default feed slices to 12 items. Twelve is a `VERIFIED_CURRENT_STATE`, not a permanent design-system rule. Final Work inventory, pagination, and load-more behavior remain `MISSING_DATA_REQUIRED`.
 
-| Component | Mobile | Desktop |
-|---|---:|---:|
-| Standard card inner padding | 16px | 20–24px |
-| Compact card/panel padding | 12–16px | 16–20px |
-| Sidebar inner padding | 16px | 20px |
-| Card grid gap | 16px | 24px |
-| Compact control group gap | 8–12px | 8–12px |
-| Button horizontal padding | 16px | 16–20px |
-| Button vertical padding | 12px | 12px |
+### 10.4 Card geometry
 
-### Section Rhythm
+- Current cover baseline: `4:3`.
+- Current corner baseline: `12px`.
+- Metadata sits outside the media surface.
+- The media-first card has no generic body panel padding.
+- Use the grid gap for separation between cards; do not add arbitrary outer card padding.
+- `object-cover` is allowed only when the crop preserves the meaning of the source work.
+- Projects whose evidence depends on uncropped composition require another media treatment.
 
-- A major section contains its heading group and content inside one spacing context.
-- Do not place borders between every small content group. Use white space first; use a divider only when it clarifies a real boundary.
-- Repeated sections must use the same heading-to-content and section-to-section spacing.
-- Hero spacing may be visually larger, but the hero must remain aligned to the same page gutter.
-- Dense commerce controls may use compact spacing inside the control itself. The surrounding case-study narrative must retain editorial section spacing.
+### 10.5 Card text hierarchy
 
-### White Space Checks
+- Project title: Work-card title role, always visible.
+- Client/ownership context: Utility or Supporting role, visually secondary.
+- Category: optional and tertiary.
+- Initials or avatar are supporting identity, not a replacement for the title.
+- Card copy must not introduce unsupported outcome claims.
 
-Before approving a layout, verify:
+### 10.6 Interaction states
 
-- Related text reads as one group without appearing cramped.
-- A user can identify where one section ends and the next begins without relying only on borders.
-- The page title has more visual breathing room than a card title.
-- Body copy does not span the full page width.
-- Left and right gutters remain consistent across hero, text, media, and grids.
-- Mobile spacing is reduced deliberately, not removed.
-- No single component introduces unrelated values such as 18px, 22px, or 28px without evidence.
+Desktop:
 
----
+- Hover may add a subtle surface, border, elevation, or media zoom.
+- Hover must not reveal the only project title or essential action.
+- Hover must not change card dimensions.
 
-## 6. VISUAL HIERARCHY
+Keyboard:
 
-Sections follow a predictable information stack. Not every layer is required — use only what the content needs.
+- Entire card destination receives a visible focus indicator.
+- Enter activates links; Space support is required only for actual buttons.
+- Semantic element must match behavior: destination uses a link, in-place action uses a button.
 
-1. **Eyebrow** — Small uppercase text, muted color, wide letter-spacing
-2. **Headline** — Large display text (acumin-pro), tight leading, slight negative letter-spacing
-3. **Supporting Paragraph** — Restrained width, regular weight, muted color
-4. **Filters / Tabs** — Sticky bar below the header, horizontally scrollable on mobile
-5. **Primary Content** — Cards, grids, or media blocks
-6. **Secondary Metadata** — Chips, pagination, or small labels
+Touch:
+
+- No essential information depends on hover.
+- Card tap target does not overlap adjacent actions.
+- Media autoplay must not obstruct navigation or ignore reduced-motion preferences.
+
+### 10.7 Empty, missing, and broken states
+
+- Missing media must not silently display unrelated stock imagery.
+- Broken media needs a neutral factual fallback with project identity.
+- Empty search results explain the real filter/search scope.
+- Unpublished or unverified projects do not appear as convincing placeholder case studies.
 
 ---
 
-## 7. MOTION & INTERACTION
+## 11. Featured proof / hero carousel
 
-### Motion Philosophy
+### Product job
 
-- Transitions should feel **swift and purposeful**, not decorative
-- Standard interactions (hover, focus, tab): fast response, no perceived delay
-- Content transitions (carousel slides, page changes): smooth but not slow
-- Never animate layout dimensions in a way that causes content to jump or reflow
+The featured area prioritizes selected proof; it is not decoration.
 
-### Reduced Motion
+Rules:
 
-Respect `prefers-reduced-motion`. Provide instant state changes as fallback.
-
-### Layout Shift Prevention
-
-- All containers, buttons, and text elements must have stable dimensions
-- No size changes on hover/focus/active states
-- Use `object-cover` on all media to prevent reflow
-- Reserve space for lazy-loaded images with `aspect-ratio`
+- Every featured slide has a real destination.
+- Media fills a reserved aspect-ratio container to prevent layout shift.
+- Project identity remains legible without covering the most important part of the work.
+- Previous/next controls have visible labels for assistive technology.
+- Autoplay pauses or can be controlled when required for accessibility.
+- `prefers-reduced-motion` replaces sliding motion with an immediate state change.
+- Featured ordering requires owner-approved content priority; popularity must not be fabricated.
 
 ---
 
-## 8. RESPONSIVE BEHAVIOR
+## 12. Services
 
-### Breakpoint Philosophy
+Service UI must follow this information order:
 
-- **Mobile-first:** Base styles target small screens. Enhancements added via `sm:`, `md:`, `lg:` breakpoints.
-- **Fluid where possible:** Use `clamp()` for typography and padding to avoid hard jumps.
-- **Progressive disclosure:** Show fewer chips, shorter metadata, and simpler controls on mobile. Expand on desktop.
+1. Buyer problem or desired outcome.
+2. Visible example of completed output.
+3. Verified deliverables.
+4. Commercial use context supported by evidence.
+5. Working method and tools.
+6. Real contact action.
 
-### Responsive Principles by Element
+Rules:
 
-| Element | Desktop | Tablet | Mobile |
+- Do not lead with software/model logos as the primary value.
+- Do not show price, ROI, revenue, time-saving, or performance claims without approved evidence.
+- Interactive service cards require a real destination.
+- Independent service pages are defined per approved service; current standalone pages do not automatically define the global pattern.
+
+---
+
+## 13. Library
+
+Library is an applied-knowledge surface.
+
+Required content hierarchy:
+
+1. Entry type and date when verified.
+2. Release, question, or experiment subject.
+3. Visible GUSTI output.
+4. Test context and constraints.
+5. Source attribution.
+6. What was learned or demonstrated without unsupported business promises.
+
+Rules:
+
+- Separate Release Report, Applied Experiment, Visual Output, Video Output, and Original Exploration when the taxonomy is approved.
+- Tool/model version and release facts require authoritative sources.
+- Reference work from another creator must never be presented as GUSTI output.
+- Library density may relate to the homepage feed, but Library entries need enough context to distinguish research from client work.
+
+---
+
+## 14. Project-detail pages
+
+### Required information roles
+
+Use only roles supported by evidence:
+
+1. Project identity.
+2. Client or ownership context.
+3. Context or problem.
+4. Intended outcome.
+5. GUSTI's verified role.
+6. Media evidence.
+7. Verified deliverables.
+8. Process/tools when useful.
+9. Verified impact or explicit absence of impact data.
+10. Relevant next action.
+
+### Visual rules
+
+- One Page title.
+- Narrative text remains in the reading column.
+- Media may use the wider page axis.
+- Major sections use 48px mobile / 64px desktop separation as the provisional baseline.
+- Captions remain factual.
+- Project-specific art direction may vary without changing the global shell.
+- Commerce controls may be denser than narrative content but must not redefine typography for the entire page.
+
+### Interaction rules
+
+- A published project has a durable URL.
+- Back, refresh, direct opening, and sharing preserve the destination.
+- SKU or media selection exposes state and remains operable by keyboard.
+- Sticky elements are tested at supported widths and inside the real scroll container.
+
+---
+
+## 15. Buttons and actions
+
+### Hierarchy
+
+- Primary: one dominant action per local decision context.
+- Secondary: lower-emphasis alternative.
+- Utility: state or preference control.
+- Destructive: reserved for real destructive actions; not currently a portfolio pattern.
+
+Rules:
+
+- Use a link for navigation and download destinations.
+- Use a button for in-place state changes.
+- Every visible action has hover, focus-visible, active, and disabled behavior when applicable.
+- Disabled state must explain why when the reason is not obvious.
+- Do not use scale changes that alter layout or create jitter in persistent UI.
+- CTA labels describe the action; avoid vague decorative copy.
+
+---
+
+## 16. Motion and media behavior
+
+### Motion purpose
+
+Motion may:
+
+- Show change of state.
+- Preserve spatial context.
+- Confirm an action.
+- Support media browsing.
+
+Motion must not:
+
+- Delay access to content.
+- Hide essential information.
+- Compensate for weak hierarchy.
+- turn the site into a tool demonstration instead of a proof system.
+
+### Baseline
+
+- Compact interaction transitions: approximately 150–200ms.
+- Content transitions may be longer only when the movement remains understandable.
+- Use opacity and transform over layout-dimension animation.
+- Reserve image/video dimensions before loading.
+- Respect `prefers-reduced-motion` across every route.
+- Autoplay video must be muted and `playsinline`; provide controls when the content requires them.
+
+---
+
+## 17. Responsive behavior
+
+### Current implementation breakpoints
+
+`VERIFIED_CURRENT_STATE`:
+
+- `sm`: 640px.
+- `md`: 768px.
+- `lg`: 1024px.
+
+Do not add another breakpoint for one component without proving that content breaks between existing boundaries.
+
+### Required transformations
+
+| Surface | Mobile | Tablet | Desktop |
 |---|---|---|---|
-| Container | Wide max-width + clamped padding | Moderate padding | Compact padding |
-| Hero | Tall, immersive | Medium height | Compact, still readable |
-| Hero title | Largest clamp value | Mid | Smallest clamp value |
-| Hero controls | Larger, more spacing | Standard | Compact |
-| Hero chips | 2–3 visible | 1–2 visible | 1 visible |
-| Grid columns | 3–4 | 2 | 1 |
-| Card padding | Standard | Slightly reduced | Compact |
-| Sidebar | Visible (collapsible) | Visible (collapsible) | Bottom nav bar |
+| Navigation | Mobile navigation; no desktop left offset | Pattern chosen by available width | Compact/expanded sidebar baseline |
+| Header | No clipped utility controls | Search and utilities remain aligned | Search left, action cluster right |
+| Work grid | 1 column | 2 columns | 3 columns baseline |
+| Typography | Reduced by semantic role | Transitional role values | Full role values |
+| Hero | Meaning-preserving crop | Wider composition | Featured composition |
+| Project narrative | Single readable column | Readable column inside wide axis | Reading column plus wide media |
+
+### Responsive acceptance
+
+- No horizontal page scroll caused by the shell.
+- No desktop sidebar padding remains when the sidebar is hidden.
+- Header controls do not overlap, clip, or disappear without an alternative path.
+- Project titles remain visible.
+- Fixed navigation does not cover the final content or CTA.
+- Media crop preserves the evidence being shown.
 
 ---
 
-## 9. ACCESSIBILITY
+## 18. Accessibility baseline
 
-- All interactive elements must have visible focus indicators
-- Color contrast must meet WCAG AA minimum (4.5:1 for text, 3:1 for large text)
-- All images must have meaningful `alt` text
-- Videos should include `muted` and `playsinline` for autoplay compliance
-- Keyboard navigation must work for all interactive elements
-- Use semantic HTML elements (`<nav>`, `<main>`, `<section>`, `<button>`, `<a>`)
+Target baseline: WCAG 2.2 Level AA for applicable production UI. Reference: [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/).
 
----
+### Required checks
 
-## 10. CONTENT CONSISTENCY
+- Text contrast is at least 4.5:1 for normal text and 3:1 for qualifying large text.
+- Required non-text UI contrast is at least 3:1.
+- Pointer targets meet WCAG 2.2 Target Size Minimum: 24×24 CSS px or its defined spacing/equivalent exceptions.
+- Focus indicators are visible and not obscured by sticky UI.
+- Keyboard operation reaches every essential action.
+- Interactive appearance maps to a semantic interactive element.
+- Images have purpose-appropriate alternative text.
+- Decorative media uses an empty alternative.
+- Video meaning is not available only through audio or motion.
+- Page language and language-control state are exposed.
+- Motion respects reduced-motion preferences.
+- Zoom and text resize do not remove content or functionality.
 
-### Data Integrity
-
-- **Factual content only.** No fake testimonials, statistics, awards, rankings, or creator badges. (See `AGENTS.md` anti-hallucination rules.)
-- **Missing data:** If content is needed but unavailable, write `MISSING_DATA_REQUIRED`. Do not invent.
-
-### Cross-Component Consistency
-
-- **Project title** must be identical in: Hero slide → Work card → Project detail page
-- **Service categories** must match exactly across all occurrences
-- **Client/company name** must be consistent everywhere it appears
-
-### Purposeful UI
-
-- Every text element must serve a purpose
-- No decorative-only labels
-- No duplicated information within the same view
-- No fake metadata or placeholder badges
+Accessibility claims require testing; screenshots alone do not establish compliance.
 
 ---
 
-# PART B — COMPONENT GUIDELINES
+## 19. VISUAL QUALITY GATE — GDWEB-DERIVED
 
-The following sections define component-specific patterns. Each component may be redesigned independently as long as it follows the global design system above and the current task scope.
+### 19.1 Purpose
 
----
+This gate converts GDWEB's official evaluation themes into a GUSTI-specific review. It does not predict or claim an award.
 
-## 11. HERO CAROUSEL
+Use three outcomes:
 
-### Structure
+- `PASS` — requirement is visibly and functionally supported.
+- `NEEDS_WORK` — direction is present but quality or evidence is incomplete.
+- `BLOCK` — contradicts PRD, breaks an essential journey, fabricates data, or cannot be used.
 
-- Full container width, matching the page container
-- Large rounded corners with a thin visible border
-- Media fills the container with `object-cover`
-- Responsive height that scales proportionally (taller on desktop, compact on mobile)
+Do not create a numerical score without an approved weighting model.
 
-### Overlay
+### 19.2 Evaluation matrix
 
-- Dark transparent gradient from bottom upward, ensuring legible white text
-- **Bottom left:** Project title (large, acumin-pro), client/company circular avatar, service category chips
-- **Bottom right:** Previous/Next navigation buttons with semi-transparent backdrop
+| GDWEB-derived criterion | GUSTI evaluation question | Required evidence | Block condition |
+|---|---|---|---|
+| Concept and design strategy | Does the design express GUSTI as a commercial proof system rather than a generic gallery? | Page screenshot plus mapping to PRD purpose | Visual concept contradicts the page job |
+| Typography | Can a visitor identify page, section, project, context, and action in the intended order? | Screenshot at supported widths and computed type roles | Essential hierarchy depends on hover, tiny text, or arbitrary weight |
+| Creativity | Does the experience have a distinct GUSTI expression without copying the reference brand? | Reference/implementation comparison and originality review | Direct brand imitation or decorative novelty that obscures proof |
+| Component and icon composition | Do cards, pictograms, icons, controls, and metaphors look and behave as one system? | Component inventory and state screenshots | Mixed icon language, unclear meaning, broken alignment, or inconsistent state treatment |
+| Layout and interface | Is information arranged for fast proof discovery and concise access? | Desktop/mobile captures and grid measurements | Clipping, broken axes, arbitrary padding, or inaccessible destination |
+| Usability and readability | Can the intended buyer understand and operate the page without design knowledge? | Task walkthrough, keyboard check, readability check | Essential content/action is hidden, misleading, or unreadable |
+| Purposeful interaction | Does interaction explain state or support the journey? | Hover/focus/touch/motion state capture | Interaction is decorative, blocks content, or fails on touch/keyboard |
+| Current technology expression | Is technology used to improve media, responsiveness, accessibility, or performance? | Build/runtime evidence | Technology is presented as value while degrading the product job |
+| Visual identity | Do UI, color, type, image treatment, and motion express one GUSTI system? | Cross-page comparison in both themes | Each page appears to be a different product |
+| Verbal identity | Do labels, CTA, headings, and supporting copy express the outcome-first doctrine? | Copy review against evidence status | Tool-first or fabricated commercial language |
 
-### Carousel Behavior
+### 19.3 Mandatory gate sequence
 
-- Slides move horizontally, one full slide at a time
-- Autoplay on a timer interval
-- Pause on hover (optional)
-- After manual navigation, autoplay continues on the same interval
-- Entire slide clickable to the project detail page
-- No decorative badges
+Run in this order:
 
-### Clickable Slide
+1. **Product truth gate** — no fabricated or unauthorized content.
+2. **Journey gate** — the primary page job and destination work.
+3. **Responsive gate** — essential hierarchy survives supported widths.
+4. **Accessibility gate** — keyboard, focus, semantics, contrast, and motion baseline.
+5. **Visual-system gate** — type, spacing, icons, components, and identity are coherent.
+6. **Reference-fidelity gate** — scoped ZCOOL-derived structure is accurately translated.
+7. **Polish gate** — motion, micro-alignment, and finishing details.
 
-- An invisible anchor covers the entire slide at a lower z-index
-- Overlay buttons and links use higher z-index with `pointer-events-auto`
+A failure in steps 1–4 blocks polish approval.
 
----
+### 19.4 Header gate
 
-## 12. NAVIGATION & SIDEBAR
+The header passes only when:
 
-### Desktop Sidebar
+- Search and controls share a stable vertical axis.
+- Hire Me is the clear primary action.
+- Theme and language read as utilities.
+- Download CV has a real approved file.
+- No control is clipped at supported widths.
+- The profile control has an approved job or is absent by explicit decision.
+- Hover/focus does not alter layout dimensions.
 
-- Fixed left sidebar with collapse/expand toggle
-- Navigation items: icon + label when expanded, icon-only when collapsed
-- Active state visually distinct from inactive
-- Logo/brand mark at the top, doubles as home navigation
+### 19.5 Sidebar icon gate
 
-### Mobile Bottom Navigation
+The sidebar passes only when:
 
-- Fixed bottom bar replacing the sidebar
-- Horizontal icon + label layout
-- Active state visually distinct
-- Same navigation items as the sidebar
+- Peer icons use one family, nominal box, and stroke system.
+- Destination meaning is understandable.
+- Active state does not distort one icon's optical weight.
+- Compact alignment is centered.
+- Expanded labels align consistently.
+- Mobile navigation does not inherit desktop offsets.
 
-### Behavior
+### 19.6 Work-card gate
 
-- Navigation state is managed via application state, not URL routing
-- Clicking a nav item updates the active tab/section
-- Home click resets to homepage view and scrolls to top
+The Work grid passes only when:
 
----
-
-## 13. PROJECT CARDS
-
-### Grid Independence
-
-The project card grid is independent of the hero. Redesigning the hero does not automatically require redesigning the cards, and vice versa.
-
-### Card Architecture
-
-- Subtle background color differentiation from the page
-- Large rounded corners matching the overall design language
-- Image container with consistent aspect ratio and `object-cover`
-- Hover: subtle shadow lift and image scale
-
-### Card Metadata Hierarchy
-
-1. **Title** — Semibold, primary text color
-2. **Label/Subtitle** — Smaller, muted text color
-3. **Tags (if shown)** — Small chips
-
-### Card Interaction
-
-- Card-wide clickability via `<button>` or `<a>` wrapper
-- Smooth hover transitions (shadow, scale, background)
-- No layout shift on hover
+- Every published card has a real destination or is clearly non-interactive.
+- Project title is always available without hover.
+- Client/ownership context is factual.
+- Media crop preserves the work.
+- Grid columns, gaps, and axes repeat consistently.
+- Keyboard focus is visible.
+- Touch users receive the same essential information.
+- The feed does not fabricate ranking, engagement, or recommendation status.
 
 ---
 
-## 14. BUTTONS
+## 20. Visual QA procedure
 
-### Principles
+### 20.1 Before implementation
 
-- Consistent height across the interface (standard and large variants)
-- Highly rounded or capsule-shaped
-- Clear hover, focus, and disabled states
-- Fast transitions
-- Disabled state: reduced opacity, no pointer events
+1. Name the affected page and component.
+2. Name the PRD requirement.
+3. Name the accepted reference and viewport when applicable.
+4. State exact files in scope.
+5. Identify `MISSING_DATA_REQUIRED` items.
+
+### 20.2 During implementation
+
+- Preserve unrelated behavior.
+- Use semantic type, spacing, color, and interaction roles.
+- Do not introduce a second local design system inside one component.
+- Inspect actual rendered output; source code alone is not visual evidence.
+
+### 20.3 Reference comparison
+
+When matching ZCOOL or another approved reference:
+
+1. Capture reference and GUSTI at the same viewport and state.
+2. Compare structure, axes, density, type hierarchy, gap, padding, media ratio, radius, and interaction.
+3. Identify visible differences.
+4. Fix scoped differences.
+5. Capture again.
+
+Do not call a match accurate from memory or from two unmatched screenshots.
+
+### 20.4 Required responsive review
+
+At minimum, inspect:
+
+- Below 640px.
+- 640–767px.
+- 768–1023px.
+- 1024px and above.
+
+Use a specific viewport within each band based on where the content actually breaks; do not rely only on device labels.
+
+### 20.5 Engineering verification
+
+After UI implementation:
+
+1. Run `npm run build`.
+2. Run `npm run lint` when TypeScript or application code changed.
+3. Inspect browser console errors.
+4. Test essential pointer and keyboard flows.
+5. Report exact files changed and areas intentionally untouched.
 
 ---
 
-## 15. CHIPS & FILTERS
+## 21. Current unresolved UI decisions
 
-### Service/Category Chips
+The following must remain visible and must not be guessed:
 
-- Capsule-shaped (`rounded-full`)
-- Compact sizing
-- Semi-transparent backgrounds on dark overlays, subtle fills on light backgrounds
-- Interactive chips have hover state transitions
-
-### Filter Tabs
-
-- Horizontally scrollable on mobile
-- Clear active/inactive states
-- Sticky positioning below the header when scrolling
-
----
-
-## 16. PROJECT DETAIL PAGE
-
-### Structure
-
-- Long vertical scroll page
-- Visual-first: hero media at the top
-- Clean title and short intro
-- Flexible content blocks (images, videos, text)
-- Project narrative sections (overview, creative direction, scope)
-- Clean CTA at the bottom (if applicable)
-- Minimal UI chrome, premium spacing
-
-### Required Text Hierarchy
-
-| Page element | Typography role | Notes |
+| ID | Decision | Status |
 |---|---|---|
-| Client or project category | `Eyebrow` | Optional; place above the title and keep it short |
-| Project title | `Display XL` | One per page; do not reduce it to compact panel-title sizing |
-| Project introduction | `Lead Body` | Maximum width 760px; one or two short paragraphs |
-| Major narrative section | `Display LG` | Examples: Overview, Creative Direction, Deliverables |
-| Subsection or content-block title | `Heading LG` or `Heading MD` | Use only when the content needs another level |
-| Narrative paragraph | `Body MD` | Maximum width 680px |
-| Media caption | `Body SM` or `Label SM` | Descriptive and factual, never decorative filler |
-| CTA label | `Label MD` | Short, specific action text |
+| UI-001 | Matched full-page ZCOOL desktop capture and measured values | `MISSING_DATA_REQUIRED` |
+| UI-002 | ZCOOL mobile reference and target mobile header composition | `MISSING_DATA_REQUIRED` |
+| UI-003 | Approved CV asset, language, filename, and public permission | `MISSING_DATA_REQUIRED` |
+| UI-004 | Retain, remove, or redefine the circular profile control | `MISSING_DATA_REQUIRED` |
+| UI-005 | Final Work destination icon; current `Flame` is provisional | `MISSING_DATA_REQUIRED` |
+| UI-006 | Final search scope and search URL behavior | `MISSING_DATA_REQUIRED` |
+| UI-007 | Retain Indonesian and Chinese product languages | `MISSING_DATA_REQUIRED` |
+| UI-008 | Default theme, system preference, and theme persistence | `MISSING_DATA_REQUIRED` |
+| UI-009 | Final Work item count, ordering, filter, and pagination model | `MISSING_DATA_REQUIRED` |
+| UI-010 | Final conversion mechanism beyond the current WhatsApp path | `MISSING_DATA_REQUIRED` |
+| UI-011 | Final semantic light/dark color token values | `MISSING_DATA_REQUIRED` |
 
-### Required Page Rhythm
-
-| Relationship | Mobile | Desktop |
-|---|---:|---:|
-| Client/category → project title | 8px | 8px |
-| Project title → introduction | 16px | 24px |
-| Introduction → hero/primary gallery | 24px | 32px |
-| Major section → major section | 48px | 64px |
-| Section heading group → media or content | 20px | 32px |
-| Media → factual caption | 8px | 8–12px |
-
-The commerce/service sidebar may remain denser than the narrative column, but it must not determine the typography or spacing of the entire project page.
-
-### Guidelines
-
-- Each project detail page can be independently customized
-- The `ProjectDetail.tsx` controller routes to per-project components
-- Detailed project data comes from `src/data/projectDetails.ts`
-- Use the 1300px project-detail container unless a task-specific reference proves another width is required
-- Keep narrative text inside the reading-width rules even when media spans the full content column
-- Use Acumin Pro for sidebar labels and metadata; monospace is not a substitute for hierarchy
-- Do not let repeated 11–12px labels become the dominant reading experience
+These decisions do not block documenting the system. They block only the affected implementation or final-approval claim.
 
 ---
 
-## 17. FORMS & INPUTS
+## 22. Component scope and file mapping
 
-_(Reserved for future implementation)_
+This map is orientation, not automatic authorization to edit.
 
-Define styling for text inputs, selects, textareas, and form layouts when needed.
-
----
-
-## 18. FOOTER
-
-_(Reserved for future implementation)_
-
-Define footer structure, spacing, links, and responsive behavior when needed.
-
----
-
-## 19. FUTURE COMPONENTS
-
-New components should be added to Part B as they are designed. Each entry should define:
-
-- Structure and layout
-- Content hierarchy
-- Interaction behavior
-- Responsive adaptation
-- Relationship to the global design system
-
----
-
-## 20. RELATIONSHIP TO OTHER FILES
-
-| File | Purpose |
+| UI area | Primary implementation |
 |---|---|
-| `AGENTS.md` | Agent behavior, forbidden files, workflow, anti-hallucination |
-| `UI_GUIDELINES.md` (this file) | Visual design system for consistency |
-| `PROJECT_CONTEXT.md` | Current architecture orientation; code remains authoritative |
-| `agent-resources/README.md` | Index of optional task-specific references and legacy prompts |
+| Global shell and state | `src/App.tsx` |
+| Header controls | `src/components/GustiTopHeader.tsx` |
+| Sidebar and mobile navigation | `src/components/GustiSidebar.tsx` |
+| Work feed and cards | `src/components/RecommendedWorks.tsx` |
+| Featured proof | `src/components/HeroCarousel.tsx` |
+| Homepage content modes | `src/components/Tabs.tsx` |
+| Global tokens and layout utilities | `src/index.css` |
+| Product content | `src/data.ts`, `src/data/projectDetails.ts` |
 
-This guideline works under the scope and factual-integrity rules in `AGENTS.md`.
+High-risk files remain protected by `AGENTS.md`. A guideline requirement does not itself authorize editing those files.
 
-**If a conflict arises between any guideline and an explicit user instruction, the user instruction wins.**
+---
+
+## 23. Definition of UI-guideline compliance
+
+An implementation complies only when:
+
+- It supports the relevant PRD page job.
+- It uses factual content.
+- It stays inside the approved task scope.
+- It follows the semantic typography, spacing, color, icon, and interaction rules.
+- It preserves essential hierarchy across supported widths.
+- It provides real destinations and actions.
+- It passes the applicable GDWEB-derived quality gates.
+- It passes the accessibility baseline checks that can be tested.
+- It has rendered comparison evidence when a visual reference is involved.
+- Remaining uncertainty is explicitly reported as `MISSING_DATA_REQUIRED`.
+
+Visual polish cannot compensate for a broken product job, fabricated evidence, inaccessible interaction, or non-durable destination.

@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 import {
   Home,
-  Flame,
+  LayoutGrid,
   Layers,
   Bookmark,
   MessageCircle,
@@ -63,7 +63,7 @@ export function GustiSidebar({
     {
       id: "work" as const,
       label: "Work",
-      icon: Flame,
+      icon: LayoutGrid,
       action: () => {
         setActiveTab("recommended");
         setActiveNav("work");
@@ -151,7 +151,7 @@ export function GustiSidebar({
                 )}
                 aria-label={item.label}
               >
-                <Icon size={18} strokeWidth={isActive ? 2.4 : 2.0} className="shrink-0" />
+                <Icon size={18} strokeWidth={2.0} className="shrink-0" />
 
                 <span className="sidebarLabel truncate">{item.label}</span>
 
@@ -206,7 +206,7 @@ export function GustiSidebar({
                   : "text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-400"
               )}
             >
-              <Icon size={18} strokeWidth={isActive ? 2.5 : 2.0} />
+              <Icon size={18} strokeWidth={2.0} />
               <span className="type-label-sm font-semibold tracking-wide">{item.label}</span>
             </button>
           );
