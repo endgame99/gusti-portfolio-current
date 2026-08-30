@@ -101,6 +101,7 @@ export function GustiSidebar({
           "sidebar hidden md:flex md:flex-col shadow-[1px_0_10px_rgba(0,0,0,0.02)] dark:shadow-[1px_0_10px_rgba(0,0,0,0.2)] select-none",
           isSidebarExpanded ? "sidebarExpanded" : "sidebarCompact"
         )}
+        aria-label="Primary navigation"
       >
         {/* Sidebar Header */}
         {isSidebarExpanded ? (
@@ -111,7 +112,7 @@ export function GustiSidebar({
 
             <button
               type="button"
-              className="sidebarCloseButton flex h-8 w-8 items-center justify-center rounded-lg text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white transition"
+              className="sidebarCloseButton flex h-8 w-8 items-center justify-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white dark:focus-visible:outline-white"
               aria-label="Tutup sidebar"
               onClick={() => setIsSidebarExpanded(false)}
             >
@@ -122,7 +123,7 @@ export function GustiSidebar({
           <div className="flex h-12 w-full items-center justify-center">
             <button
               type="button"
-              className="sidebarLogoCompact flex h-8 w-8 items-center justify-center rounded-xl text-neutral-950 dark:text-white transition hover:bg-neutral-100 dark:hover:bg-neutral-800"
+              className="sidebarLogoCompact flex h-8 w-8 items-center justify-center rounded-xl text-neutral-950 transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 dark:text-white dark:hover:bg-neutral-800 dark:focus-visible:outline-white"
               aria-label="Buka sidebar"
               onClick={() => setIsSidebarExpanded(true)}
             >
@@ -143,13 +144,14 @@ export function GustiSidebar({
                 type="button"
                 onClick={item.action}
                 className={cx(
-                  "group relative flex items-center rounded-xl transition type-nav font-semibold",
+                  "group relative flex items-center rounded-xl transition type-nav font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 dark:focus-visible:outline-white",
                   isSidebarExpanded ? "w-full h-9 gap-3 px-2.5 justify-start" : "w-8 h-8 justify-center mx-auto",
                   isActive
                     ? "bg-neutral-100 text-neutral-950 dark:bg-neutral-800 dark:text-white"
                     : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white"
                 )}
                 aria-label={item.label}
+                aria-pressed={isActive}
               >
                 <Icon size={18} strokeWidth={2.0} className="shrink-0" />
 
@@ -157,7 +159,7 @@ export function GustiSidebar({
 
                 {/* Hover Tooltip when compact */}
                 {!isSidebarExpanded && (
-                  <span className="pointer-events-none absolute left-[48px] top-1/2 z-[120] -translate-y-1/2 whitespace-nowrap rounded-lg bg-neutral-950 px-2 py-1 type-label-sm font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 dark:bg-white dark:text-neutral-950">
+                  <span className="pointer-events-none absolute left-[48px] top-1/2 z-[120] -translate-y-1/2 whitespace-nowrap rounded-lg bg-neutral-950 px-2 py-1 type-label-sm font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 group-focus-visible:opacity-100 dark:bg-white dark:text-neutral-950">
                     {item.label}
                   </span>
                 )}
@@ -170,7 +172,7 @@ export function GustiSidebar({
             target="_blank"
             rel="noreferrer"
             className={cx(
-              "group relative mt-auto mb-4 flex items-center rounded-xl type-nav font-semibold text-neutral-500 transition hover:bg-emerald-50 hover:text-emerald-600 dark:text-neutral-400 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-400",
+              "group relative mt-auto mb-4 flex items-center rounded-xl type-nav font-semibold text-neutral-500 transition hover:bg-emerald-50 hover:text-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 dark:text-neutral-400 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-400 dark:focus-visible:outline-emerald-400",
               isSidebarExpanded ? "w-full h-9 gap-3 px-2.5 justify-start" : "w-8 h-8 justify-center mx-auto"
             )}
             aria-label="WhatsApp"
@@ -180,7 +182,7 @@ export function GustiSidebar({
             <span className="sidebarLabel truncate">WhatsApp</span>
 
             {!isSidebarExpanded && (
-              <span className="pointer-events-none absolute left-[48px] top-1/2 z-[120] -translate-y-1/2 whitespace-nowrap rounded-lg bg-neutral-950 px-2 py-1 type-label-sm font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 dark:bg-white dark:text-neutral-950">
+              <span className="pointer-events-none absolute left-[48px] top-1/2 z-[120] -translate-y-1/2 whitespace-nowrap rounded-lg bg-neutral-950 px-2 py-1 type-label-sm font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 group-focus-visible:opacity-100 dark:bg-white dark:text-neutral-950">
                 WhatsApp
               </span>
             )}
@@ -189,7 +191,7 @@ export function GustiSidebar({
       </aside>
 
       {/* Mobile Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 z-[100] flex h-[58px] items-center justify-around border-t border-neutral-100 bg-white/95 px-2 pb-safe shadow-[0_-4px_16px_rgba(0,0,0,0.03)] backdrop-blur-md dark:border-neutral-800/80 dark:bg-[#121212]/95 md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-[100] flex h-[58px] items-center justify-around border-t border-neutral-100 bg-white/95 px-2 pb-safe shadow-[0_-4px_16px_rgba(0,0,0,0.03)] backdrop-blur-md dark:border-neutral-800/80 dark:bg-[#121212]/95 md:hidden" aria-label="Primary mobile navigation">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = item.isActive;
@@ -200,11 +202,13 @@ export function GustiSidebar({
               type="button"
               onClick={item.action}
               className={cx(
-                "flex h-full flex-1 flex-col items-center justify-center gap-1 transition",
+                "flex h-full flex-1 flex-col items-center justify-center gap-1 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-neutral-950 dark:focus-visible:outline-white",
                 isActive
                   ? "text-neutral-950 dark:text-white"
                   : "text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-400"
               )}
+              aria-label={item.label}
+              aria-pressed={isActive}
             >
               <Icon size={18} strokeWidth={2.0} />
               <span className="type-label-sm font-semibold tracking-wide">{item.label}</span>
@@ -216,7 +220,8 @@ export function GustiSidebar({
           href={whatsappUrl}
           target="_blank"
           rel="noreferrer"
-          className="flex h-full flex-1 flex-col items-center justify-center gap-1 text-neutral-400 hover:text-emerald-600 dark:text-neutral-500 dark:hover:text-emerald-400 transition"
+          className="flex h-full flex-1 flex-col items-center justify-center gap-1 text-neutral-400 transition hover:text-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-emerald-600 dark:text-neutral-500 dark:hover:text-emerald-400 dark:focus-visible:outline-emerald-400"
+          aria-label="WhatsApp"
         >
           <MessageCircle size={18} strokeWidth={2.0} />
           <span className="type-label-sm font-semibold tracking-wide">WhatsApp</span>

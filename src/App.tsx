@@ -15,6 +15,32 @@ import { PdpVisualsPage } from './components/services/PdpVisualsPage';
 import { MarketplaceDisplayPage } from './components/services/MarketplaceDisplayPage';
 import { dictionary } from './i18n';
 
+type ActiveTab = 'recommended' | 'services' | 'library';
+type ActiveNav = 'home' | 'work' | 'services' | 'library';
+
+function getTabFromUrl(): ActiveTab {
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get('tab');
+  if (tab === 'services' || tab === 'library') return tab;
+  return 'recommended';
+}
+
+function getNavFromUrl(): ActiveNav {
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get('tab');
+  if (tab === 'services' || tab === 'library') return tab;
+  if (tab === 'recommended') return 'work';
+  return 'home';
+}
+
+function pushMainNavUrl(nav: ActiveNav) {
+  const nextPath = nav === 'home' ? '/' : `/?tab=${nav === 'work' ? 'recommended' : nav}`;
+  const currentPath = `${window.location.pathname}${window.location.search}`;
+  if (currentPath !== nextPath) {
+    window.history.pushState(null, '', nextPath);
+  }
+}
+
 export default function App() {
   // Standalone service pages — rendered without the main app shell
   const pathname = window.location.pathname;
@@ -29,33 +55,24 @@ export default function App() {
   const [theme, setTheme] = useState<Theme>('light');
   
   // Initialize tab/nav from URL query parameters
-  const [activeTab, setActiveTab] = useState<'recommended' | 'services' | 'library'>(() => {
-    const params = new URLSearchParams(window.location.search);
-    const tab = params.get('tab');
-    if (tab === 'services' || tab === 'library') return tab;
-    return 'recommended';
-  });
+  const [activeTab, setActiveTab] = useState<ActiveTab>(() => getTabFromUrl());
   
-  const [activeNav, setActiveNav] = useState<'home' | 'work' | 'services' | 'library'>(() => {
-    const params = new URLSearchParams(window.location.search);
-    const tab = params.get('tab');
-    if (tab === 'services' || tab === 'library') return tab as any;
-    if (tab === 'recommended') return 'work';
-    return 'home';
-  });
+  const [activeNav, setActiveNav] = useState<ActiveNav>(() => getNavFromUrl());
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [activeProject, setActiveProject] = useState<WorkItem | null>(null);
 
   // Sync tab clicks on the webpage with the sidebar activeNav
-  const handleTabChange = (tab: 'recommended' | 'services' | 'library') => {
+  const handleTabChange = (tab: ActiveTab) => {
     setActiveTab(tab);
     setActiveProject(null);
     if (tab === 'recommended') {
       setActiveNav('work');
+      pushMainNavUrl('work');
     } else {
-      setActiveNav(tab as any);
+      setActiveNav(tab);
+      pushMainNavUrl(tab);
     }
   };
 
@@ -75,6 +92,17 @@ export default function App() {
     }
   }, [searchQuery]);
 
+  useEffect(() => {
+    const syncStateFromHistory = () => {
+      setActiveTab(getTabFromUrl());
+      setActiveNav(getNavFromUrl());
+      setActiveProject(null);
+    };
+
+    window.addEventListener('popstate', syncStateFromHistory);
+    return () => window.removeEventListener('popstate', syncStateFromHistory);
+  }, []);
+
   return (
     <div className="appShell min-h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-white font-sans transition-colors duration-300 flex">
       
@@ -83,6 +111,7 @@ export default function App() {
         setActiveNav={(nav) => {
           setActiveNav(nav);
           setActiveProject(null);
+          pushMainNavUrl(nav);
         }}
         setActiveTab={(tab) => {
           setActiveTab(tab);
@@ -105,7 +134,7 @@ export default function App() {
         }}
       />
 
-      <main className={`mainArea flex-1 flex flex-col min-w-0 transition-all duration-200 ${isSidebarExpanded ? 'pl-[160px]' : 'pl-[44px]'}`}>
+      <main className={`mainArea flex-1 flex flex-col min-w-0 transition-all duration-200 ${isSidebarExpanded ? 'md:pl-[160px]' : 'md:pl-[44px]'}`}>
         <div className="pageContainer page-bottom-pb">
           <GustiTopHeader 
             searchQuery={searchQuery}
@@ -125,7 +154,7 @@ export default function App() {
             />
           ) : (
             <>
-              {!searchQuery && (
+              {!searchQuery && activeTab !== 'services' && (
                 <div className="heroSection mb-8 md:mb-12 pt-4 sm:pt-6">
                   <HeroCarousel works={worksData} onSlideClick={setActiveProject} />
                 </div>

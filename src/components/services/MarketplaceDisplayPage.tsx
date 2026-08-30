@@ -91,7 +91,7 @@ export function MarketplaceDisplayPage() {
         setActiveNav={(nav) => {
           setActiveNav(nav);
           if (window.location.pathname !== "/") {
-            window.location.href = `/?tab=${nav === 'work' ? 'recommended' : nav}`;
+            window.location.href = nav === 'home' ? '/' : `/?tab=${nav === 'work' ? 'recommended' : nav}`;
           }
         }}
         setActiveTab={(tab) => {
@@ -105,7 +105,7 @@ export function MarketplaceDisplayPage() {
         whatsappUrl={WHATSAPP_LINK}
       />
 
-      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-200 ${isSidebarExpanded ? 'pl-[160px]' : 'pl-[44px]'}`}>
+      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-200 ${isSidebarExpanded ? 'md:pl-[160px]' : 'md:pl-[44px]'}`}>
         <GustiTopHeader
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}

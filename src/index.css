@@ -368,10 +368,12 @@ input {
 
 .sidebarCompact {
   width: 44px;
+  overflow: visible;
 }
 
 .sidebarExpanded {
   width: 160px;
+  overflow: hidden;
 }
 
 .sidebarLogoCompact {
