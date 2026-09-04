@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowUp, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Play, X, Check } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, ArrowUp, ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
 import { ProjectDetailPageProps } from './SharedTypes';
 
 export type CreatorVideo = {
@@ -72,240 +72,13 @@ export const CONTOURA_SKUS: ContouraSku[] = [
   },
 ];
 
-export type ServiceId =
-  | 'pdp-images'
-  | 'long-form-pdp'
-  | 'creator-videos'
-  | 'campaign-assets'
-  | 'complete-system';
-
-export type ContinuationMethod = 'free-chat' | 'consultation' | null;
-
-interface ServiceOption {
-  id: ServiceId;
-  title: string;
-  description: string;
-}
-
-const SERVICES_LIST: ServiceOption[] = [
-  {
-    id: 'pdp-images',
-    title: 'PDP Product Images',
-    description: 'Product-focused visuals for the main marketplace gallery.',
-  },
-  {
-    id: 'long-form-pdp',
-    title: 'Long-form Product Detail Page',
-    description: 'A structured visual story for benefits, features, and product education.',
-  },
-  {
-    id: 'creator-videos',
-    title: 'AI Creator Videos',
-    description: 'Vertical creator-style videos for marketplace and social content.',
-  },
-  {
-    id: 'campaign-assets',
-    title: 'Campaign & Marketplace Assets',
-    description: 'Adapted visual formats for launches, promotions, and platform campaigns.',
-  },
-  {
-    id: 'complete-system',
-    title: 'Complete Commerce Visual System',
-    description: 'A connected system combining gallery images, long-form details, creator videos, and multi-SKU content.',
-  },
-];
-
-interface WayToWork {
-  title: string;
-  description: string;
-  price: string;
-}
-
-const WAYS_TO_WORK: WayToWork[] = [
-  {
-    title: 'Paid Pilot',
-    description: 'Start with one product and a controlled scope before scaling.',
-    price: 'Custom quote',
-  },
-  {
-    title: 'Fixed Project',
-    description: 'For clearly defined deliverables, quantities, and deadlines.',
-    price: 'Custom quote',
-  },
-  {
-    title: 'Hourly',
-    description: 'For flexible production, visual iteration, revisions, creative direction, and ongoing support.',
-    price: 'USD 10 / hour',
-  },
-  {
-    title: 'Monthly Production',
-    description: 'For brands with recurring SKUs, campaigns, and marketplace content needs.',
-    price: 'Custom quote',
-  },
-];
-
-interface AccordionItem {
-  id: string;
-  title: string;
-  content: React.ReactNode;
-}
-
-const ACCORDION_ITEMS: AccordionItem[] = [
-  {
-    id: 'whats-included',
-    title: "WHAT’S INCLUDED",
-    content: (
-      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-        The final deliverables, file formats, dimensions, and approved scope are confirmed before production begins.
-      </p>
-    ),
-  },
-  {
-    id: 'process',
-    title: 'PROCESS',
-    content: (
-      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
-        Product references → Visual direction → Production → Review → Final delivery
-      </p>
-    ),
-  },
-  {
-    id: 'product-accuracy',
-    title: 'PRODUCT ACCURACY',
-    content: (
-      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-        Outputs are reviewed against the supplied references for product shape, colour, visible construction, material appearance, and brand details.
-      </p>
-    ),
-  },
-  {
-    id: 'revisions',
-    title: 'REVISIONS',
-    content: (
-      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-        The number of revision rounds is confirmed in the approved quotation before production begins.
-      </p>
-    ),
-  },
-  {
-    id: 'usage-rights',
-    title: 'USAGE RIGHTS & CONFIDENTIALITY',
-    content: (
-      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-        Usage rights, confidentiality, source-file access, and white-label requirements are confirmed before production begins.
-      </p>
-    ),
-  },
-  {
-    id: 'payment-delivery',
-    title: 'PAYMENT & DELIVERY',
-    content: (
-      <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-        Payment milestones, final delivery formats, and delivery timing are confirmed after scope approval.
-      </p>
-    ),
-  },
-  {
-    id: 'faq',
-    title: 'FAQ',
-    content: (
-      <div className="space-y-3 type-body-sm">
-        <div>
-          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">What do you need from me?</p>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
-            Product references, brand assets, target platforms, and required deliverables.
-          </p>
-        </div>
-        <div>
-          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">Can this support multiple SKUs?</p>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
-            Yes. Each SKU can use its own gallery, long-form details, and video content within one consistent system.
-          </p>
-        </div>
-        <div>
-          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">Can content be adapted for different marketplaces?</p>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
-            Yes. Final formats are confirmed based on the selected platforms and approved scope.
-          </p>
-        </div>
-        <div>
-          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">How is the price calculated?</p>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
-            Pricing depends on the selected deliverables, production volume, complexity, and timeline.
-          </p>
-        </div>
-        <div>
-          <p className="type-label-md font-semibold text-neutral-900 dark:text-neutral-100">Can the project remain confidential?</p>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
-            Confidential or white-label production can be discussed before the project begins.
-          </p>
-        </div>
-      </div>
-    ),
-  },
-];
-
-const WHATSAPP_PHONE = '6283897317974';
-
-export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPageProps) {
+export function ContouraDetail({ work, lang, onBack }: ProjectDetailPageProps) {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [selectedSkuId, setSelectedSkuId] = useState<string>('bra-cup-3d-seamless');
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState<'videos' | 'description' | 'details'>('videos');
-
-  // Sidebar Commerce Configuration State
-  const [selectedServices, setSelectedServices] = useState<ServiceId[]>([]);
-  const [continuationMethod, setContinuationMethod] = useState<ContinuationMethod>(null);
-  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
-
-  const toggleService = (id: ServiceId) => {
-    setSelectedServices((prev) =>
-      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
-    );
-  };
-
-  const selectContinuation = (method: ContinuationMethod) => {
-    setContinuationMethod(method);
-  };
-
-  const toggleAccordion = (id: string) => {
-    setOpenAccordion((prev) => (prev === id ? null : id));
-  };
-
-  // WhatsApp CTA Calculation
-  const isServiceEmpty = selectedServices.length === 0;
-  const isContinuationEmpty = continuationMethod === null;
-  const isCtaDisabled = isServiceEmpty || isContinuationEmpty;
-
-  let ctaHelperText: string | null = null;
-  if (isServiceEmpty) {
-    ctaHelperText = 'Select at least one service.';
-  } else if (isContinuationEmpty) {
-    ctaHelperText = 'Choose Free Chat or Consultation.';
-  }
-
-  const ctaButtonLabel =
-    continuationMethod === 'consultation'
-      ? 'REQUEST CONSULTATION ON WHATSAPP'
-      : 'CONTINUE ON WHATSAPP';
-
-  const selectedServiceLabels = selectedServices
-    .map((id) => SERVICES_LIST.find((s) => s.id === id)?.title)
-    .filter(Boolean)
-    .map((title) => `- ${title}`)
-    .join('\n');
-
-  let whatsAppMessageText = '';
-  if (continuationMethod === 'free-chat') {
-    whatsAppMessageText = `Hi Gusti, I’m interested in your AI commerce visual services.\n\nSelected services:\n${selectedServiceLabels}\n\nI would like to ask a few questions and receive an initial estimate.\n\nProject details:\n[Continue typing here]`;
-  } else if (continuationMethod === 'consultation') {
-    whatsAppMessageText = `Hi Gusti, I would like to request a 30-minute consultation.\n\nConsultation fee:\nUSD 5\n\nSelected services:\n${selectedServiceLabels}\n\nI would like to discuss:\n- Product and brand requirements\n- Recommended project scope\n- Timeline and estimated budget\n\nProject details:\n[Continue typing here]`;
-  }
-
-  const whatsAppUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsAppMessageText)}`;
-
   // Multi-SKU selection handler
   const selectedSku = CONTOURA_SKUS.find((sku) => sku.id === selectedSkuId) ?? CONTOURA_SKUS[0];
+  const selectedSkuIndex = CONTOURA_SKUS.findIndex((sku) => sku.id === selectedSku.id);
 
   // Desktop Hover Zoom State & Handler
   const [isImageZoomed, setIsImageZoomed] = useState(false);
@@ -485,25 +258,6 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const scrollToDetails = () => {
-    setActiveTab('details');
-    const el = document.getElementById('product-details');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToSection = (
-    sectionId: string,
-    tab: 'videos' | 'description' | 'details'
-  ) => {
-    setActiveTab(tab);
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const currentMedia = selectedSku.gallery[activeMediaIndex] || selectedSku.gallery[0];
   const activeVideoItem = activeCreatorIndex !== null ? creatorVideos[activeCreatorIndex] : null;
 
@@ -537,16 +291,9 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
           </button>
         </div>
 
-        {/* ── Page-Level Single H1 Title ── */}
-        <div className="mb-6 pt-1">
-          <h1 className="type-display-xl text-neutral-900 dark:text-white tracking-tight">
-            {work.title}
-          </h1>
-        </div>
-
         {/* ── 2. Top-Level Shell & Main Layout ── */}
         <section className="productDetailShell">
-          <div className="productDetailMain grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-stretch">
+          <div className="productDetailMain">
             
             {/* ── 3. Left Dominant Column (Gallery & Content) ── */}
             <div className="productDetailLeft flex flex-col gap-6 min-w-0">
@@ -679,18 +426,23 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                 </div>
               </div>
 
-              {/* Active SKU Title (H2, Display LG, 600 weight) */}
-              <div className="pt-2 pb-1">
-                <h2 className="type-display-lg text-neutral-900 dark:text-white tracking-tight leading-tight">
-                  {selectedSku.title}
-                </h2>
-              </div>
-
               {/* SKU Recommendation Section */}
-              <section className="space-y-3 pt-4 pb-2 border-t border-neutral-200/80 dark:border-neutral-800">
-                <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white">
-                  Direkomendasikan oleh toko ini
-                </h3>
+              <section className="contouraSkuSwitcher">
+                <div className="contouraSectionHeading">
+                  <div>
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
+                      {lang === 'id' ? 'Koleksi klien' : 'Client collection'}
+                    </span>
+                    <h2 className="type-heading-lg font-bold text-neutral-900 dark:text-white">
+                      {lang === 'id' ? 'Karya Contoura lainnya' : 'More from Contoura'}
+                    </h2>
+                  </div>
+                  <p className="type-body-sm text-neutral-500 dark:text-neutral-400">
+                    {lang === 'id'
+                      ? 'Ganti karya tanpa meninggalkan halaman ini.'
+                      : 'Switch work without leaving this page.'}
+                  </p>
+                </div>
 
                 <div className="recommendedSkuGrid">
                   {CONTOURA_SKUS.slice(0, 6).map((sku) => (
@@ -718,48 +470,20 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                 </div>
               </section>
 
-              {/* Product Content Tabs Navigation */}
-              <div className="border-b border-neutral-200 dark:border-neutral-800 mt-2">
-                <nav className="flex items-center gap-6 type-tab overflow-x-auto">
-                  <button
-                    onClick={() => scrollToSection('creator-videos', 'videos')}
-                    className={`py-3 border-b-2 transition-colors whitespace-nowrap ${
-                      activeTab === 'videos'
-                        ? 'border-[#0057ff] text-[#0057ff]'
-                        : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
-                    }`}
-                  >
-                    {lang === 'id' ? 'Video dari Kreator (30+)' : 'Creator Videos (30+)'}
-                  </button>
-                  <button
-                    onClick={() => scrollToSection('product-description', 'description')}
-                    className={`py-3 border-b-2 transition-colors whitespace-nowrap ${
-                      activeTab === 'description'
-                        ? 'border-[#0057ff] text-[#0057ff]'
-                        : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
-                    }`}
-                  >
-                    Product Description
-                  </button>
-                  <button
-                    onClick={() => scrollToSection('product-details', 'details')}
-                    className={`py-3 border-b-2 transition-colors whitespace-nowrap ${
-                      activeTab === 'details'
-                        ? 'border-[#0057ff] text-[#0057ff]'
-                        : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
-                    }`}
-                  >
-                    Product Details
-                  </button>
-                </nav>
-              </div>
-
-              {/* ── SECTION 1 (TOP): Creator Videos Section ── */}
-              <section id="creator-videos" className="creatorVideosSection space-y-4 pt-4 pb-2 border-t border-neutral-200 dark:border-neutral-800/80">
-                <div className="creatorVideosHeader">
-                  <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white">
-                    {lang === 'id' ? 'Video dari Kreator (30+)' : 'Creator Videos (30+)'}
-                  </h3>
+              {/* ── Creator Video Output ── */}
+              <section id="creator-videos" className="creatorVideosSection contouraEvidenceSection">
+                <div className="creatorVideosHeader contouraSectionHeading">
+                  <div>
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
+                      {lang === 'id' ? 'Output bergerak' : 'Motion output'}
+                    </span>
+                    <h2 className="type-heading-lg font-bold text-neutral-900 dark:text-white">
+                      {lang === 'id' ? 'Video kreator' : 'Creator video output'}
+                    </h2>
+                  </div>
+                  <p className="type-body-sm text-neutral-500 dark:text-neutral-400">
+                    {creatorVideos.length} {lang === 'id' ? 'video tersedia' : 'videos available'}
+                  </p>
                 </div>
 
                 <div className="creatorVideosCarouselWrapper">
@@ -853,52 +577,21 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
                 </div>
               </section>
 
-              {/* ── SECTION 2: Product Description ── */}
-              <section id="product-description" className="space-y-4 pt-6 border-t border-neutral-100 dark:border-neutral-800/50">
-                <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white">Product Description</h3>
-                
-                <div className="space-y-4 type-body-md leading-relaxed text-neutral-700 dark:text-neutral-300 reading-narrative">
-                  <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                    Bra dengan wangi bunga berkelas dengan tali tipis berkilau seperti permata yang bisa pancarkan cantikmu.
-                  </p>
-                  <p>
-                    Bisa nopang dan naikin payudara biar looksnya lebih kencang serta berisi lebih bulat dan bisa tampil jauh lebih percaya diri. Tidak bikin sesak, natural bikin tampil montok, bikin body nampak proporsional.
-                  </p>
-
-                  <ul className="space-y-2.5 pt-3 border-t border-neutral-100 dark:border-neutral-800/60 font-medium">
-                    <li className="flex items-start gap-2.5">
-                      <span className="text-[#0057ff] font-bold text-base leading-none">•</span>
-                      <span>Bra beraroma bunga kamelia berkelas antibakteri</span>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="text-[#0057ff] font-bold text-base leading-none">•</span>
-                      <span>Pad bra memiliki banyak pori-pori 0,01 mm yang breathable— sirkulasi udara 1,5x lebih sejuk</span>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="text-[#0057ff] font-bold text-base leading-none">•</span>
-                      <span>Tali bra bling-bling bagai permata—didesain dengan kilauan cantik</span>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="text-[#0057ff] font-bold text-base leading-none">•</span>
-                      <span>Cup 3D+Jelly Strap Melingkar di Bawah Cup</span>
-                    </li>
-                  </ul>
-
-                  <div className="pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
-                    <h4 className="type-heading-md font-bold text-neutral-900 dark:text-white mb-2">Warna:</h4>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 type-label-sm font-semibold">
-                      <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/80 text-neutral-800 dark:text-neutral-200 border border-neutral-200/50 dark:border-neutral-700/50">Dream Black</div>
-                      <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/80 text-neutral-800 dark:text-neutral-200 border border-neutral-200/50 dark:border-neutral-700/50">Sky Blue</div>
-                      <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/80 text-neutral-800 dark:text-neutral-200 border border-neutral-200/50 dark:border-neutral-700/50">Frost Milk</div>
-                      <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/80 text-neutral-800 dark:text-neutral-200 border border-neutral-200/50 dark:border-neutral-700/50">Foundation Skin</div>
-                    </div>
+              {/* ── Long-form Visual Output ── */}
+              <section id="long-form-output" className="contouraEvidenceSection">
+                <div className="contouraSectionHeading">
+                  <div>
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
+                      {lang === 'id' ? 'Output visual' : 'Visual output'}
+                    </span>
+                    <h2 className="type-heading-lg font-bold text-neutral-900 dark:text-white">
+                      {lang === 'id' ? 'Rangkaian visual panjang' : 'Long-form visual sequence'}
+                    </h2>
                   </div>
+                  <p className="type-body-sm text-neutral-500 dark:text-neutral-400">
+                    {selectedSku.detailMedia.length} {lang === 'id' ? 'frame tersedia' : 'frames available'}
+                  </p>
                 </div>
-              </section>
-
-              {/* ── SECTION 4: Long-Form Product Details ── */}
-              <section id="product-details" className="space-y-4 pt-6 border-t border-neutral-100 dark:border-neutral-800/50">
-                <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white">Product Details</h3>
                 
                 {/* Seamless Long-Form Media Stack */}
                 <div className="productDetailSequence">
@@ -917,344 +610,94 @@ export function ContouraDetail({ work, lang, detail, onBack }: ProjectDetailPage
 
             </div>
 
-            {/* ── 4. Right Information Panel (Integrated Commerce Configuration System) ── */}
-            <aside className="contouraServiceSidebar">
-              <div className="contouraServiceSidebar__scroll space-y-6 text-neutral-900 dark:text-neutral-100">
-                
-                {/* 1. CONTOURA Identity */}
-                <div className="flex items-center gap-3.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <div className="w-10 h-10 rounded-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 shrink-0">
+            {/* ── 4. Sticky Project Context ── */}
+            <aside
+              className="contouraProjectPanel"
+              aria-label={lang === 'id' ? 'Ringkasan proyek Contoura' : 'Contoura project summary'}
+            >
+              <div className="contouraProjectPanel__inner">
+                <header className="contouraProjectPanel__identity">
+                  <div className="contouraProjectPanel__avatar">
                     <img
                       src={work.image || '/starmap.jpg'}
-                      alt="CONTOURA logo"
+                      alt=""
                       className="w-full h-full object-cover"
                       draggable={false}
                     />
                   </div>
                   <div>
-                    <h3 className="type-heading-lg font-bold text-neutral-900 dark:text-white leading-tight">
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
+                      {lang === 'id' ? 'Karya klien' : 'Client work'}
+                    </span>
+                    <p className="type-heading-lg font-bold text-neutral-900 dark:text-white leading-tight">
                       CONTOURA
-                    </h3>
-                    <div className="flex items-center gap-1.5 type-label-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-                      <span>Client Work</span>
-                      <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-700">/</span>
-                      <span>Product Commerce Visuals</span>
-                    </div>
+                    </p>
+                  </div>
+                </header>
+
+                <div className="contouraProjectPanel__title">
+                  <h1 className="contouraProjectTitle text-neutral-900 dark:text-white">
+                    {work.title}
+                  </h1>
+                  <div className="contouraProjectPanel__activeWork">
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
+                      {lang === 'id' ? 'Karya aktif' : 'Selected work'} · {selectedSku.category}
+                    </span>
+                    <h2 className="contouraActiveSkuTitle text-neutral-900 dark:text-neutral-100">
+                      {selectedSku.title}
+                    </h2>
                   </div>
                 </div>
 
-                {/* 2. Project Story */}
-                <div className="space-y-3.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <div>
-                    <span className="type-eyebrow text-neutral-400 dark:text-neutral-500 block mb-1">
+                <div className="contouraProjectPanel__story">
+                  <article>
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
                       01 — Challenge
                     </span>
-                    <p className="type-body-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                      Present multiple underwear SKUs through one consistent e-commerce experience.
-                    </p>
-                  </div>
-
-                  <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
-                    <span className="type-eyebrow text-neutral-400 dark:text-neutral-500 block mb-1">
+                    <p>Present multiple underwear SKUs through one consistent e-commerce experience.</p>
+                  </article>
+                  <article>
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
                       02 — Idea
                     </span>
-                    <p className="type-body-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                      Connect PDP images, long-form product details, and AI creator videos in one reusable visual system.
-                    </p>
-                  </div>
-
-                  <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
-                    <span className="type-eyebrow text-neutral-400 dark:text-neutral-500 block mb-1">
-                      03 — My Role
+                    <p>Connect gallery visuals, long-form sequences, and creator videos in one reusable system.</p>
+                  </article>
+                  <article>
+                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
+                      03 — My role
                     </span>
-                    <p className="type-body-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                      AI e-commerce design, product visualization, creator-video production, and interaction direction.
-                    </p>
-                  </div>
-
-                  <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
-                    <span className="type-eyebrow text-neutral-400 dark:text-neutral-500 block mb-1">
-                      04 — Delivered
-                    </span>
-                    <ul className="space-y-0.5 type-body-sm font-medium text-neutral-800 dark:text-neutral-200">
-                      <li>09 PDP Images</li>
-                      <li>01 Long-form Product Detail Page</li>
-                      <li>30+ AI Creator Videos</li>
-                      <li>Multi-SKU Visual System</li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* 3. Shown in This Project */}
-                <div className="space-y-2 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="type-eyebrow text-neutral-400 dark:text-neutral-500">
-                    Shown in This Project
-                  </h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 type-label-sm font-medium text-neutral-800 dark:text-neutral-200">
-                      09 PDP Images
-                    </div>
-                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 type-label-sm font-medium text-neutral-800 dark:text-neutral-200">
-                      01 Long-form PDP
-                    </div>
-                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 type-label-sm font-medium text-neutral-800 dark:text-neutral-200">
-                      30+ AI Creator Videos
-                    </div>
-                    <div className="p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800 type-label-sm font-medium text-neutral-800 dark:text-neutral-200">
-                      Multi-SKU Visual System
-                    </div>
-                  </div>
-                </div>
-
-                {/* 4. Build a Similar System */}
-                <div className="space-y-1.5 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
-                    BUILD A SIMILAR SYSTEM
-                  </h3>
-                  <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                    Choose the visual outputs that match your product, marketplace, and content needs.
-                  </p>
-                </div>
-
-                {/* 5. What Do You Need? (Multi-select Services) */}
-                <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white">
-                    What Do You Need?
-                  </h3>
-                  <div className="space-y-2">
-                    {SERVICES_LIST.map((service) => {
-                      const isSelected = selectedServices.includes(service.id);
-                      return (
-                        <button
-                          key={service.id}
-                          type="button"
-                          aria-pressed={isSelected}
-                          onClick={() => toggleService(service.id)}
-                          className={`w-full text-left p-3 rounded-xl border transition-all cursor-pointer flex items-start justify-between gap-3 ${
-                            isSelected
-                              ? 'border-[#0057ff] bg-blue-50/40 dark:bg-blue-950/20 ring-1 ring-[#0057ff]'
-                              : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-neutral-300 dark:hover:border-neutral-700'
-                          }`}
-                        >
-                          <div className="space-y-0.5 min-w-0 pr-1">
-                            <span className="type-label-md font-bold text-neutral-900 dark:text-white block">
-                              {service.title}
-                            </span>
-                            <span className="type-body-sm text-neutral-500 dark:text-neutral-400 leading-relaxed block">
-                              {service.description}
-                            </span>
-                          </div>
-                          <div
-                            className={`w-4 h-4 rounded shrink-0 flex items-center justify-center mt-0.5 transition-colors ${
-                              isSelected
-                                ? 'bg-[#0057ff] text-white'
-                                : 'border border-neutral-300 dark:border-neutral-700 bg-transparent'
-                            }`}
-                          >
-                            {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {selectedServices.length > 0 && (
-                    <p className="type-body-sm text-neutral-500 dark:text-neutral-400 italic pt-1">
-                      You can share more project details in the next step.
-                    </p>
-                  )}
-                </div>
-
-                {/* 6. How Would You Like to Continue? (Exclusive Selection) */}
-                <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white">
-                    How Would You Like to Continue?
-                  </h3>
-                  
-                  {/* Option A: Free WhatsApp Chat */}
-                  <button
-                    type="button"
-                    onClick={() => selectContinuation('free-chat')}
-                    className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer ${
-                      continuationMethod === 'free-chat'
-                        ? 'border-[#0057ff] bg-blue-50/40 dark:bg-blue-950/20 ring-1 ring-[#0057ff]'
-                        : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-neutral-300 dark:hover:border-neutral-700'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className="type-label-md font-bold text-neutral-900 dark:text-white">
-                        Free WhatsApp Chat
+                    <p>Commerce visual direction, product visualization, creator-video production, and interaction direction.</p>
+                  </article>
+                  <article className="contouraProjectPanel__draft">
+                    <div className="contouraProjectPanel__draftLabel">
+                      <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
+                        04 — Project note
                       </span>
-                      <span className="type-label-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800/60">
-                        Free
+                      <span className="contouraDraftBadge">
+                        {lang === 'id' ? 'DUMMY' : 'PLACEHOLDER'}
                       </span>
                     </div>
-                    <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                      Have a quick question or need an initial estimate? Share your selected services and basic project details through WhatsApp.
+                    <p>
+                      {lang === 'id'
+                        ? 'Bagian ini sengaja dibuat dummy. Isi final mengikuti materi Contoura yang sudah disetujui.'
+                        : 'This fourth note is intentionally a placeholder until the final Contoura material is approved.'}
                     </p>
-                    <span className="type-label-sm text-neutral-400 dark:text-neutral-500 block mt-1.5">
-                      No booking required.
+                  </article>
+                </div>
+
+                <div className="contouraProjectPanel__selection" aria-live="polite">
+                  <span className="type-eyebrow text-neutral-500 dark:text-neutral-400">
+                    {lang === 'id' ? 'Status tampilan' : 'Viewing status'}
+                  </span>
+                  <div className="contouraProjectPanel__selectionMeta">
+                    <span>
+                      {lang === 'id' ? 'Karya' : 'Work'} {selectedSkuIndex + 1} / {CONTOURA_SKUS.length}
                     </span>
-                  </button>
-
-                  {/* Option B: 30-Minute Consultation */}
-                  <button
-                    type="button"
-                    onClick={() => selectContinuation('consultation')}
-                    className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer ${
-                      continuationMethod === 'consultation'
-                        ? 'border-[#0057ff] bg-blue-50/40 dark:bg-blue-950/20 ring-1 ring-[#0057ff]'
-                        : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-neutral-300 dark:hover:border-neutral-700'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className="type-label-md font-bold text-neutral-900 dark:text-white">
-                        30-Minute Consultation
-                      </span>
-                      <span className="type-label-sm font-bold text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">
-                        USD 5
-                      </span>
-                    </div>
-                    <p className="type-body-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                      Discuss your product, visual needs, production scope, budget, and the most suitable way to structure the project.
-                    </p>
-                    <div className="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-800/80 type-body-sm text-neutral-500 dark:text-neutral-400 space-y-1">
-                      <p>Duration: 30 minutes</p>
-                      <p>You can share your project details in the next step. Payment instructions will be sent after the consultation request is accepted.</p>
-                    </div>
-                  </button>
-                </div>
-
-                {/* 7. Ways to Work */}
-                <div className="space-y-3 pb-4 border-b border-neutral-200/80 dark:border-neutral-800">
-                  <h3 className="type-heading-md font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
-                    Ways to Work
-                  </h3>
-                  <div className="space-y-2">
-                    {WAYS_TO_WORK.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="p-2.5 rounded-lg bg-neutral-50/60 dark:bg-neutral-900/60 border border-neutral-200/60 dark:border-neutral-800"
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="type-label-md font-bold text-neutral-900 dark:text-neutral-100">
-                            {item.title}
-                          </span>
-                          <span className="type-label-sm font-semibold text-neutral-700 dark:text-neutral-300 whitespace-nowrap">
-                            {item.price}
-                          </span>
-                        </div>
-                        <p className="type-body-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-0.5">
-                          {item.description}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 8. Your Interest (Dynamic Receipt-style Summary) */}
-                <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-3">
-                  <h3 className="type-eyebrow text-neutral-400 dark:text-neutral-500 border-b border-neutral-200/60 dark:border-neutral-800 pb-1.5">
-                    YOUR INTEREST
-                  </h3>
-                  
-                  <div className="space-y-1.5">
-                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400 font-semibold block">
-                      Selected Services
+                    <span>
+                      {lang === 'id' ? 'Media' : 'Media'} {activeMediaIndex + 1} / {selectedSku.gallery.length}
                     </span>
-                    {selectedServices.length > 0 ? (
-                      <ul className="space-y-1 type-body-sm font-medium text-neutral-900 dark:text-white">
-                        {selectedServices.map((id) => (
-                          <li key={id} className="flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0057ff] shrink-0" />
-                            <span>{SERVICES_LIST.find((s) => s.id === id)?.title}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="type-body-sm text-neutral-400 dark:text-neutral-500 italic">
-                        No services selected yet.
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="pt-2 border-t border-neutral-200/60 dark:border-neutral-800 space-y-0.5">
-                    <span className="type-eyebrow text-neutral-500 dark:text-neutral-400 font-semibold block">
-                      Next Step
-                    </span>
-                    <p className="type-label-md font-bold text-neutral-900 dark:text-white">
-                      {continuationMethod === 'free-chat' && 'Free WhatsApp Chat'}
-                      {continuationMethod === 'consultation' && '30-Minute Consultation — USD 5'}
-                      {!continuationMethod && (
-                        <span className="type-body-sm text-neutral-400 dark:text-neutral-500 font-normal italic">
-                          Choose a continuation option.
-                        </span>
-                      )}
-                    </p>
                   </div>
                 </div>
-
-                {/* 9. Project Information Accordions (Loro Piana-style Progressive Disclosure) */}
-                <div className="space-y-1 pt-1 pb-2">
-                  <h3 className="type-eyebrow text-neutral-400 dark:text-neutral-500 mb-2">
-                    Project Information
-                  </h3>
-                  <div className="border border-neutral-200/80 dark:border-neutral-800 rounded-xl overflow-hidden divide-y divide-neutral-200/80 dark:divide-neutral-800">
-                    {ACCORDION_ITEMS.map((item) => {
-                      const isOpen = openAccordion === item.id;
-                      return (
-                        <div key={item.id} className="bg-white dark:bg-neutral-900">
-                          <button
-                            type="button"
-                            onClick={() => toggleAccordion(item.id)}
-                            className="w-full py-3 px-3.5 text-left flex items-center justify-between gap-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors cursor-pointer"
-                          >
-                            <span className="type-label-md font-bold tracking-tight text-neutral-900 dark:text-white">
-                              {item.title}
-                            </span>
-                            {isOpen ? (
-                              <ChevronUp className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
-                            ) : (
-                              <ChevronDown className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
-                            )}
-                          </button>
-                          {isOpen && (
-                            <div className="px-3.5 pb-3.5 pt-1 border-t border-neutral-100 dark:border-neutral-800/50 bg-neutral-50/40 dark:bg-neutral-900/40">
-                              {item.content}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-              </div>
-
-              {/* 10. Sticky WhatsApp CTA */}
-              <div className="contouraServiceSidebar__actions space-y-2">
-                {ctaHelperText && (
-                  <p className="text-center type-label-sm font-medium text-neutral-500 dark:text-neutral-400">
-                    {ctaHelperText}
-                  </p>
-                )}
-                {isCtaDisabled ? (
-                  <button
-                    type="button"
-                    disabled
-                    className="w-full py-3 px-4 rounded-xl bg-neutral-200 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 type-label-md font-bold tracking-wider uppercase cursor-not-allowed text-center transition-colors"
-                  >
-                    {ctaButtonLabel}
-                  </button>
-                ) : (
-                  <a
-                    href={whatsAppUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full block py-3 px-4 rounded-xl bg-[#0057ff] hover:bg-blue-600 active:scale-[0.99] text-white type-label-md font-bold tracking-wider uppercase shadow-lg shadow-blue-500/20 transition-all text-center cursor-pointer"
-                  >
-                    {ctaButtonLabel}
-                  </a>
-                )}
               </div>
             </aside>
 

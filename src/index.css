@@ -699,6 +699,11 @@ input {
 }
 
 /* ── CONTOURA Desktop Product Detail Showcase ── */
+.appShell:has(.contouraProductDetail) {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
 .productDetailShell,
 .contouraDetailShell {
   width: 100%;
@@ -707,17 +712,47 @@ input {
 .productDetailMain,
 .contouraDetailMain {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 32px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1.35fr) minmax(420px, 0.85fr);
+  column-gap: 24px;
+  row-gap: 32px;
+  align-items: start;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1179px) {
   .productDetailMain,
   .contouraDetailMain {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 32px;
   }
+}
+
+.productDetailLeft {
+  display: contents;
+}
+
+.productDetailLeft > * {
+  width: 100%;
+  min-width: 0;
+}
+
+.productDetailLeft > .productGallery {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.productDetailLeft > .contouraSkuSwitcher {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.productDetailLeft > .creatorVideosSection {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.productDetailLeft > #long-form-output {
+  grid-column: 1;
+  grid-row: 4;
 }
 
 .productGalleryInner,
@@ -926,8 +961,7 @@ input {
 }
 
 .productPurchasePanel,
-.contouraPurchasePanel,
-.contouraServiceSidebar {
+.contouraPurchasePanel {
   position: sticky;
   top: 80px;
   max-height: calc(100vh - 104px);
@@ -939,52 +973,272 @@ input {
   overflow: hidden;
 }
 
-.dark .contouraServiceSidebar {
-  background: #111111;
-  border-color: rgba(255, 255, 255, 0.08);
+.contouraProjectPanel {
+  grid-column: 2;
+  grid-row: 1 / 5;
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  min-width: 0;
+  padding-left: 32px;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.contouraServiceSidebar__scroll {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 20px;
-  scrollbar-width: thin;
+.dark .contouraProjectPanel {
+  border-left-color: rgba(255, 255, 255, 0.12);
 }
 
-.contouraServiceSidebar__actions {
-  flex-shrink: 0;
-  padding: 16px 20px;
-  background: #ffffff;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+.contouraProjectPanel__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0 16px;
 }
 
-.dark .contouraServiceSidebar__actions {
-  background: #111111;
-  border-color: rgba(255, 255, 255, 0.08);
+.contouraProjectPanel__identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-@media (max-width: 1023px) {
-  .contouraServiceSidebar {
+.contouraProjectPanel__avatar {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background: #f5f5f5;
+}
+
+.dark .contouraProjectPanel__avatar {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #1e1e1e;
+}
+
+.contouraProjectPanel__title {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contouraProjectTitle {
+  max-width: none;
+  font-size: clamp(28px, 2.2vw, 36px);
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.contouraProjectPanel__activeWork {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contouraActiveSkuTitle {
+  font-size: 16px;
+  line-height: 1.38;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.contouraProjectPanel__story {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .contouraProjectPanel__story {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.contouraProjectPanel__story article {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.contouraProjectPanel__story article:nth-child(odd) {
+  padding-right: 16px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.contouraProjectPanel__story article:nth-child(even) {
+  padding-left: 16px;
+}
+
+.dark .contouraProjectPanel__story article {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .contouraProjectPanel__story article:nth-child(odd) {
+  border-right-color: rgba(255, 255, 255, 0.08);
+}
+
+.contouraProjectPanel__story article p {
+  margin-top: 4px;
+  color: #525252;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.dark .contouraProjectPanel__story article p {
+  color: #b3b3b3;
+}
+
+.contouraProjectPanel__draft {
+  background: rgba(0, 87, 255, 0.04);
+}
+
+.dark .contouraProjectPanel__draft {
+  background: rgba(0, 87, 255, 0.1);
+}
+
+.contouraProjectPanel__draftLabel,
+.contouraProjectPanel__selectionMeta,
+.contouraSectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.contouraDraftBadge {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border: 1px solid rgba(0, 87, 255, 0.28);
+  border-radius: 999px;
+  color: #0057ff;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.contouraProjectPanel__selection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contouraProjectPanel__selectionMeta {
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.contouraProjectPanel__selectionMeta span {
+  padding: 8px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.dark .contouraProjectPanel__selectionMeta span {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.contouraSkuSwitcher,
+.contouraEvidenceSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .contouraSkuSwitcher,
+.dark .contouraEvidenceSection {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.contouraSectionHeading {
+  align-items: flex-end;
+}
+
+.contouraSectionHeading > p {
+  max-width: 240px;
+  text-align: right;
+}
+
+@media (max-width: 1179px) {
+  .contouraProjectPanel {
+    grid-column: 1;
+    grid-row: 2;
     position: static;
-    max-height: none;
-    overflow: visible;
+    padding: 0 0 32px;
+    border-left: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
 
-  .contouraServiceSidebar__scroll {
-    overflow-y: visible;
-    padding: 16px;
+  .dark .contouraProjectPanel {
+    border-left: 0;
+    border-bottom-color: rgba(255, 255, 255, 0.12);
   }
 
-  .contouraServiceSidebar__actions {
-    padding: 16px;
+  .productDetailLeft > .productGallery {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .productDetailLeft > .contouraSkuSwitcher {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .productDetailLeft > .creatorVideosSection {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .productDetailLeft > #long-form-output {
+    grid-column: 1;
+    grid-row: 5;
+  }
+
+  .contouraProjectTitle {
+    max-width: 20ch;
+  }
+}
+
+@media (max-width: 639px) {
+  .contouraProjectPanel__inner,
+  .contouraProjectPanel__title {
+    gap: 16px;
+  }
+
+  .contouraProjectTitle {
+    max-width: none;
+    font-size: 30px;
+  }
+
+  .contouraProjectPanel__story {
+    grid-template-columns: 1fr;
+  }
+
+  .contouraProjectPanel__story article:nth-child(odd),
+  .contouraProjectPanel__story article:nth-child(even) {
+    padding-inline: 0;
+    border-right: 0;
+  }
+
+  .contouraSectionHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contouraSectionHeading > p {
+    max-width: none;
+    text-align: left;
   }
 }
 
 .recommendedSkuGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .recommendedSkuCard {

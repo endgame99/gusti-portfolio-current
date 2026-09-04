@@ -687,6 +687,25 @@ Use only roles supported by evidence:
 - SKU or media selection exposes state and remains operable by keyboard.
 - Sticky elements are tested at supported widths and inside the real scroll container.
 
+### 14.1 Contoura project detail execution
+
+`TASK_SPECIFIC_RULE` — applies only to the Contoura project detail.
+
+The supplied Taobao DOM is approved as structural evidence for this page. It establishes a wide left content area and a separate viewport-anchored right information area. Because the supplied source does not include its stylesheets, exact Taobao padding, type sizes, and computed column widths remain `MISSING_DATA_REQUIRED`; do not present guessed values as a measured match.
+
+The Contoura translation follows these rules:
+
+- Preserve the marketplace exploration model: vertical thumbnails, one active media surface, and same-page switching between other Contoura works.
+- Translate commerce structure into portfolio proof. Do not reproduce price, quantity, purchase, review, sales-count, service-selection, consultation, payment, or WhatsApp controls inside the project page.
+- Desktop uses a substantial right context column rather than a compact card or checkout widget. Its width is proportional to the available page axis and is not fixed to `380px`.
+- The right context column contains project identity, the single Page title, the active work title, concise Challenge/Idea/Role notes, one explicitly marked placeholder fourth note until approved copy exists, and factual viewing status.
+- The right context column is sticky on supported desktop widths but does not create a second scrolling page inside itself.
+- On narrower layouts the context column becomes static and appears before the gallery.
+- Other Contoura works stay in the current page. Selection updates the active gallery and factual status without navigating away.
+- Long-form imagery and creator videos remain visible as produced output. Generic marketplace labels such as “Product Description” and “Product Details” are not used as portfolio hierarchy.
+- Use the established spacing vocabulary. Major evidence sections use the `space-16` relationship; component padding and grid gaps remain distinct.
+- Validate the result at matched desktop and mobile states, including sticky behavior, active SKU switching, media navigation, modal video playback, focus visibility, and absence of nested-page scrolling.
+
 ---
 
 ## 15. Buttons and actions
